@@ -36,3 +36,36 @@ h2{color:#e2e8f0}
 a{color:#93c5fd}
 @media (max-width:860px){.case{grid-template-columns:1fr}}
 @media (max-width:640px){h1{font-size:32px}}
+
+/* Case study layout */
+.result{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:24px;
+    padding:18px;
+    background:#0f172a;
+    border:1px solid #1f2937;
+    border-radius:14px;
+    align-items:center;
+    margin-top:12px;
+  }
+  .result-visual img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    border:1px solid #1f2937;
+    box-shadow:0 6px 24px rgba(0,0,0,.25);
+  }
+  .result-visual figcaption{
+    text-align:center;
+    margin-top:8px;
+    font-size:14px;
+    color:#94a3b8;
+  }
+  
+  /* mobile stack */
+  @media (max-width:900px){
+    .result{ grid-template-columns:1fr; }
+  }
+  
