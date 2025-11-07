@@ -69,3 +69,5 @@ a{color:#93c5fd}
     .result{ grid-template-columns:1fr; }
   }
   
+.brand img{height:36px;width:auto;display:block}
+.nav{align-items:center}

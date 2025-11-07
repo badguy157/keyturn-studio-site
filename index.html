@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Keyturn Studio — Hospitality Website Makeovers</title>
@@ -11,7 +14,11 @@
 <body>
 <header class="container">
   <div class="nav">
-    <div class="brand">Keyturn Studio</div>
+    <div class="brand">
+  <a href="/">
+    <img src="logo.svg" alt="Keyturn Studio" width="220" height="70">
+  </a>
+</div>
     <a class="cta" href="#contact">Get a 10‑min audit</a>
   </div>
   <div class="hero">
@@ -102,9 +109,12 @@
 </main>
 
 <footer class="container footer">
-  <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality • “Staged lifestyle” imagery may be used for demos.</p>
-  <p class="small">Operated by Ridgeway Labs LLC. DBA: Keyturn Studio.</p>
+  <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
+  <p class="small">
+    <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  </p>
 </footer>
+
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>
 </html>
