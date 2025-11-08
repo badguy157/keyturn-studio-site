@@ -71,3 +71,12 @@ a{color:#93c5fd}
   
 .brand img{height:36px;width:auto;display:block}
 .nav{align-items:center}
+
+/* --- Pricing --- */
+.card-title{font-size:1.25rem;font-weight:700;margin:.25rem 0 .5rem}
+.price{font-size:1.75rem;font-weight:700;margin:.25rem 0 .5rem;color:#e2e8f0}
+.features{margin:.5rem 0 1rem;padding-left:1.1rem}
+.features li{margin:.25rem 0}
+.tiny{font-size:.85rem;color:#94a3b8;margin-top:.5rem}
+.policies h4{margin:.25rem 0 .25rem;font-weight:700;color:#e2e8f0}
+.policies ul{margin:.25rem 0 0 1.1rem}
