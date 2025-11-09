@@ -80,3 +80,29 @@ a{color:#93c5fd}
 .tiny{font-size:.85rem;color:#94a3b8;margin-top:.5rem}
 .policies h4{margin:.25rem 0 .25rem;font-weight:700;color:#e2e8f0}
 .policies ul{margin:.25rem 0 0 1.1rem}
+
+/* Gallery */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+  margin-top:12px;
+}
+.gallery figure{
+  background:#0f172a;
+  border:1px solid #1f2937;
+  border-radius:14px;
+  padding:10px;
+  margin:0;
+}
+.gallery img{
+  width:100%; height:auto; display:block;
+  border-radius:10px;
+  border:1px solid #1f2937;
+}
+.gallery figcaption{
+  text-align:center;
+  font-size:14px;
+  color:#94a3b8;
+  margin-top:6px;
+}
