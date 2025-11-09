@@ -14,12 +14,12 @@
   --w:1120px;
 
   /* type & space scale */
-  --s-1:.5rem;   /* 8px  */
-  --s-2:.75rem;  /* 12px */
-  --s-3:1rem;    /* 16px */
-  --s-4:1.25rem; /* 20px */
-  --s-5:1.75rem; /* 28px */
-  --s-6:2.25rem; /* 36px */
+  --s-1:.5rem;
+  --s-2:.75rem;
+  --s-3:1rem;
+  --s-4:1.25rem;
+  --s-5:1.75rem;
+  --s-6:2.25rem;
 
   --gap:16px;
 }
@@ -90,7 +90,7 @@ p{color:var(--muted-2);font-size:var(--s-3);margin:.25rem 0 .75rem}
 .proof-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px}
 .proof-card h5{margin:.25rem 0 .25rem}
 
-/* metrics grid (NEW) */
+/* metrics grid */
 .metrics-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
