@@ -1,26 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
-  <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Keyturn Studio — Hospitality Website Makeovers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="We rebuild 8–40 room inn & small-hotel websites to increase direct bookings and reduce OTA commissions.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/logo-mark.svg?v=2">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
 <header class="container">
-  <div class="nav">
-    <div class="brand">
-      <a href="/">
-        <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70">
-      </a>
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="/" aria-label="Keyturn Studio home">
+      <img src="/logo.svg?v=2" alt="Keyturn Studio" width="220" height="40" decoding="async">
+    </a>
+    <div class="nav-links">
+      <a href="#services">How it works</a>
+      <a href="#results">Proof</a>
+      <a href="#pricing">Pricing</a>
+      <a class="cta" href="#audit">Get a 10-min audit</a>
     </div>
-    <a class="cta" href="#audit">Get a 10-min audit</a>
-  </div>
+  </nav>
 
   <div class="hero">
     <h1>More <span class="accent">direct bookings</span>, fewer OTA fees.</h1>
@@ -41,9 +47,9 @@
   </div>
 </header>
 
-<main>
-  <section id="services" class="container grid">
-    <div class="card">
+<main id="main">
+  <section id="services" class="container grid section">
+    <article class="card">
       <h3>Makeover Sprint</h3>
       <p>3–4 weeks to rebuild your site on modern tech with clear CTAs, GA4 tracking, and speed tuned for mobile.</p>
       <ul>
@@ -52,8 +58,9 @@
         <li>GA4 events + JSON-LD schema</li>
         <li>Digital Asset Pack & handover</li>
       </ul>
-    </div>
-    <div class="card">
+    </article>
+
+    <article class="card">
       <h3>Growth Care Plan</h3>
       <p>Keep it fast & improving: hosting, updates, monthly CRO nudge, GBP hygiene, and a simple report.</p>
       <ul>
@@ -61,26 +68,37 @@
         <li>Monthly report with commission-savings line</li>
         <li>Quarterly content block</li>
       </ul>
-    </div>
-    <div class="card">
+    </article>
+
+    <article class="card">
       <h3>Why it pays</h3>
       <p>Each booking moved off OTAs saves roughly <strong>ADR × ALOS × 18%</strong>. We track booking-clicks and report the shift monthly.</p>
       <p class="small">Example: ADR £100, ALOS 2 → ~£36 saved per booking.</p>
 
       <div class="roi-box">
         <strong>ROI at a glance</strong>
-        <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>£4.3k–£8.6k/yr</strong> in OTA fees — often enough to repay a Core project inside 12 months.</p>
+        <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>£4.3k–£8.6k/yr</strong> — often enough to repay a Core project inside 12 months.</p>
         <p class="tiny">Figures vary by occupancy and season.</p>
       </div>
-    </div>
+    </article>
   </section>
 
-  <!-- Founders' Pilot banner -->
   <section class="container banner">
     <p><strong>Founders’ Pilot (2 slots/month):</strong> For qualifying inns (8–20 rooms) who want proof fast — reduced fee in exchange for metrics access and a short testimonial. Same deliverables, same 3-week timeline.</p>
   </section>
 
-  <section id="results" class="container">
+  <section class="container specialists section" aria-labelledby="specialists-title">
+    <h2 id="specialists-title">Our Specialist Network</h2>
+    <p class="small">We’re a lean studio with a vetted bench. When a project needs extra hands, we bring in <strong>Top Rated</strong> designers and builders who follow our Keyturn playbook. You meet them; we manage the work.</p>
+    <ul class="specialist-list">
+      <li><div class="spec-name">Jane D.</div><div class="spec-meta">UI/UX for hospitality — Top Rated Plus, 500+ ★ reviews</div></li>
+      <li><div class="spec-name">Leo P.</div><div class="spec-meta">Next.js/Tailwind implementer — Top Rated, 300+ ★ reviews</div></li>
+      <li><div class="spec-name">Ava K.</div><div class="spec-meta">Technical SEO & schema — Top Rated, 200+ ★ reviews</div></li>
+    </ul>
+    <p class="tiny">Partner badges and prior experience shown with permission. Listed individuals are independent collaborators, not employees.</p>
+  </section>
+
+  <section id="results" class="container section">
     <h2>Results</h2>
 
     <div class="result">
@@ -94,8 +112,8 @@
 
         <div class="buttons">
           <a class="btn" href="/anchor-case.html">Read case study</a>
-          <a class="btn" href="https://www.theanchorhotelhaydonbridge.com" target="_blank" rel="noopener">View live site</a>
-          <a class="btn" href="screenshot.png" target="_blank" rel="noopener">Open screenshot</a>
+          <a class="btn" href="https://www.theanchorhotelhaydonbridge.com" target="_blank" rel="noopener noreferrer">View live site</a>
+          <a class="btn" href="/screenshot.png" target="_blank" rel="noopener noreferrer">Open screenshot</a>
         </div>
 
         <p class="disclaimer"><em>Independent studio. “The Anchor Hotel” case study shown with permission.
@@ -103,44 +121,31 @@
       </div>
 
       <figure class="result-visual">
-        <img src="screenshot.png" alt="The Anchor Hotel website homepage after the makeover">
+        <img src="/screenshot.png" alt="The Anchor Hotel homepage after the makeover" loading="lazy" decoding="async">
         <figcaption>Homepage after the makeover</figcaption>
       </figure>
     </div>
 
-    <!-- micro-proof tiles -->
     <div class="proof-grid">
-      <article class="proof-card">
-        <h5>Direct share ↑</h5>
-        <p>From single digits to <strong>22–25%+</strong> (seasonal).</p>
-      </article>
-      <article class="proof-card">
-        <h5>PageSpeed / CWV</h5>
-        <p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p>
-      </article>
-      <article class="proof-card">
-        <h5>Tracked funnel</h5>
-        <p><code>book_click</code> & <code>booking_outbound</code> GA4 events live.</p>
-      </article>
+      <article class="proof-card"><h5>Direct share ↑</h5><p>From single digits to <strong>22–25%+</strong> (seasonal).</p></article>
+      <article class="proof-card"><h5>PageSpeed / CWV</h5><p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p></article>
+      <article class="proof-card"><h5>Tracked funnel</h5><p><code>book_click</code> & <code>booking_outbound</code> GA4 events live.</p></article>
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section id="pricing" class="container">
+  <section id="pricing" class="container section">
     <h2>Pricing</h2>
     <p class="small">Built for owner-operated inns & small hotels (<strong>8–40 rooms</strong>)</p>
 
-    <!-- Pay monthly toggle -->
-    <div class="pay-toggle">
+    <div class="pay-toggle" role="group" aria-label="Payment options">
       <label class="switch">
-        <input type="checkbox" id="payToggle">
-        <span class="slider"></span>
-        <span class="switch-label">Pay monthly (0% 4-pay)</span>
+        <input type="checkbox" id="payToggle" role="switch" aria-checked="false" aria-label="Pay monthly (0% 4-pay)">
+        <span class="slider" aria-hidden="true"></span>
+        <span id="switchLabel" class="switch-label">Pay monthly (0% 4-pay)</span>
       </label>
     </div>
 
     <div class="grid">
-      <!-- Core -->
       <article class="card">
         <h3 class="card-title">Makeover Sprint (Core)</h3>
         <div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
@@ -154,7 +159,6 @@
         <a class="btn primary" href="#audit">Get a 10-min audit</a>
       </article>
 
-      <!-- Pro -->
       <article class="card">
         <h3 class="card-title">Makeover + CRO (Pro)</h3>
         <div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
@@ -168,7 +172,6 @@
         <a class="btn" href="#audit">Book discovery</a>
       </article>
 
-      <!-- Plans -->
       <article class="card">
         <h3 class="card-title">Ongoing Plans</h3>
         <div class="price">$300–$900/mo</div>
@@ -183,7 +186,6 @@
       </article>
     </div>
 
-    <!-- Who each tier fits -->
     <div class="card footnote">
       <p><strong>Who each tier fits</strong></p>
       <ul>
@@ -209,7 +211,7 @@
     </div>
   </section>
 
-  <section id="principles" class="container">
+  <section id="principles" class="container section">
     <h2>How we work</h2>
     <ul class="bullets">
       <li><strong>Independent studio.</strong> No affiliation with the properties shown unless stated.</li>
@@ -221,58 +223,36 @@
     </ul>
   </section>
   
-  <section id="portfolio" class="container">
+  <section id="portfolio" class="container section">
     <h2>Portfolio components</h2>
     <p class="small">A few example blocks from recent work.</p>
     <div class="gallery">
-      <figure><img src="/public/portfolio/Hero_Desktop.png" alt="Hero (desktop)"><figcaption>Hero (desktop)</figcaption></figure>
-      <figure><img src="/public/portfolio/Hero_Mobile.png" alt="Hero (mobile)"><figcaption>Hero (mobile)</figcaption></figure>
-      <figure><img src="/public/portfolio/Rooms_Grid.png" alt="Rooms grid"><figcaption>Rooms grid</figcaption></figure>
-      <figure><img src="/public/portfolio/RoomCard_Full.png" alt="Room detail"><figcaption>Room detail</figcaption></figure>
-      <figure><img src="/public/portfolio/Menu_Page.png" alt="Eat &amp; Drink / Menu"><figcaption>Menu section</figcaption></figure>
-      <figure><img src="/public/portfolio/Trust_Line.png" alt="Direct benefits / trust line"><figcaption>Trust line</figcaption></figure>
-      <figure><img src="/public/portfolio/Sticky_CTA_Mobile.png" alt="Sticky booking bar (mobile)"><figcaption>Sticky CTA (mobile)</figcaption></figure>
-      <figure><img src="/public/portfolio/Events_Strip.png" alt="What’s On events strip"><figcaption>Events strip</figcaption></figure>
-      <figure><img src="/public/portfolio/Booking_CTA_Click.png" alt="Booking CTA"><figcaption>Booking CTA</figcaption></figure>
+      <figure><img src="/public/portfolio/Hero_Desktop.png" alt="Hero (desktop)" loading="lazy" decoding="async"><figcaption>Hero (desktop)</figcaption></figure>
+      <figure><img src="/public/portfolio/Hero_Mobile.png" alt="Hero (mobile)" loading="lazy" decoding="async"><figcaption>Hero (mobile)</figcaption></figure>
+      <figure><img src="/public/portfolio/Rooms_Grid.png" alt="Rooms grid" loading="lazy" decoding="async"><figcaption>Rooms grid</figcaption></figure>
+      <figure><img src="/public/portfolio/RoomCard_Full.png" alt="Room detail" loading="lazy" decoding="async"><figcaption>Room detail</figcaption></figure>
+      <figure><img src="/public/portfolio/Menu_Page.png" alt="Menu section" loading="lazy" decoding="async"><figcaption>Menu section</figcaption></figure>
+      <figure><img src="/public/portfolio/Trust_Line.png" alt="Direct benefits / trust line" loading="lazy" decoding="async"><figcaption>Trust line</figcaption></figure>
+      <figure><img src="/public/portfolio/Sticky_CTA_Mobile.png" alt="Sticky booking bar (mobile)" loading="lazy" decoding="async"><figcaption>Sticky CTA (mobile)</figcaption></figure>
+      <figure><img src="/public/portfolio/Events_Strip.png" alt="What’s On events strip" loading="lazy" decoding="async"><figcaption>Events strip</figcaption></figure>
+      <figure><img src="/public/portfolio/Booking_CTA_Click.png" alt="Booking CTA" loading="lazy" decoding="async"><figcaption>Booking CTA</figcaption></figure>
     </div>
   </section>
   
-  <!-- audit form -->
-  <section id="audit" class="container contact">
+  <section id="audit" class="container contact section">
     <h2>Get a quick audit</h2>
     <p class="small">Share a few details and we’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
 
     <form id="auditForm" class="audit-form">
-      <div class="form-row">
-        <label>Property name</label>
-        <input type="text" name="property" required>
-      </div>
-      <div class="form-row">
-        <label>Website URL</label>
-        <input type="url" name="website" placeholder="https://example.com" required>
-      </div>
+      <div class="form-row"><label>Property name</label><input type="text" name="property" required></div>
+      <div class="form-row"><label>Website URL</label><input type="url" name="website" placeholder="https://example.com" required></div>
       <div class="form-row two">
-        <div>
-          <label>Rooms</label>
-          <input type="number" name="rooms" min="1" max="100" required>
-        </div>
-        <div>
-          <label>ADR (approx.)</label>
-          <input type="number" name="adr" min="40" step="1" required>
-        </div>
+        <div><label>Rooms</label><input type="number" name="rooms" min="1" max="100" required></div>
+        <div><label>ADR (approx.)</label><input type="number" name="adr" min="40" step="1" required></div>
       </div>
-      <div class="form-row">
-        <label>Booking engine link</label>
-        <input type="url" name="booking" placeholder="Direct booking URL">
-      </div>
-      <div class="form-row">
-        <label>Your email</label>
-        <input type="email" name="email" required>
-      </div>
-      <div class="form-row">
-        <label>Notes (optional)</label>
-        <textarea name="notes" rows="4" placeholder="Anything we should know?"></textarea>
-      </div>
+      <div class="form-row"><label>Booking engine link</label><input type="url" name="booking" placeholder="Direct booking URL"></div>
+      <div class="form-row"><label>Your email</label><input type="email" name="email" required></div>
+      <div class="form-row"><label>Notes (optional)</label><textarea name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
       <button class="btn primary" type="submit">Request audit</button>
       <p class="tiny">Prefer email? <a href="mailto:keyturnstudio@proton.me">keyturnstudio@proton.me</a></p>
     </form>
@@ -281,45 +261,35 @@
 
 <footer class="container footer">
   <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
-  <p class="small">
-    <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
-  </p>
+  <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
 </footer>
 
 <script>
+  // year
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // mailto-based audit form (no backend)
+  // mailto-based audit form
   const form = document.getElementById('auditForm');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(form);
-    const p = encodeURIComponent(data.get('property') || '');
-    const w = encodeURIComponent(data.get('website') || '');
-    const r = encodeURIComponent(data.get('rooms') || '');
-    const a = encodeURIComponent(data.get('adr') || '');
-    const b = encodeURIComponent(data.get('booking') || '');
-    const em = encodeURIComponent(data.get('email') || '');
-    const n = encodeURIComponent(data.get('notes') || '');
-
     const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
     const body = encodeURIComponent(
-`Property: ${p}
-Website: ${w}
-Rooms: ${r}
-ADR: £${a}
-Booking engine: ${b}
-Email: ${em}
+`Property: ${data.get('property')||''}
+Website: ${data.get('website')||''}
+Rooms: ${data.get('rooms')||''}
+ADR: £${data.get('adr')||''}
+Booking engine: ${data.get('booking')||''}
+Email: ${data.get('email')||''}
 
 Notes:
-${n}
+${data.get('notes')||''}
 
 Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
-
     window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
   });
 
-  // pricing toggle
+  // pricing toggle (accessible)
   const toggle = document.getElementById('payToggle');
   const priceEls = document.querySelectorAll('#pricing .price');
   function setPrices(monthly){
@@ -329,7 +299,14 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
       el.textContent = monthly ? monthlyVal : upfront;
     });
   }
-  if (toggle){ setPrices(false); toggle.addEventListener('change', e => setPrices(e.target.checked)); }
+  if (toggle){
+    setPrices(false);
+    toggle.addEventListener('change', e => {
+      const checked = e.target.checked;
+      e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
+      setPrices(checked);
+    });
+  }
 </script>
 </body>
 </html>
