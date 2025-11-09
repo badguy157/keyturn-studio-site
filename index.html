@@ -329,5 +329,27 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
     window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
   });
 </script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // pricing toggle
+  const toggle = document.getElementById('payToggle');
+  const priceEls = document.querySelectorAll('#pricing .price');
+
+  function setPrices(monthly){
+    priceEls.forEach(el=>{
+      const upfront = el.getAttribute('data-upfront');
+      const monthlyVal = el.getAttribute('data-monthly') || upfront;
+      el.textContent = monthly ? monthlyVal : upfront;
+    });
+  }
+  if (toggle){
+    setPrices(false);
+    toggle.addEventListener('change', e => setPrices(e.target.checked));
+  }
+
+  // existing mailto audit form JS (keep if you already added it)
+</script>
+
 </body>
 </html>
