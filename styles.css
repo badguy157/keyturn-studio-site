@@ -150,3 +150,26 @@ p{color:var(--muted-2);font-size:var(--s-3);margin:.25rem 0 .75rem}
           color:#e5e7eb; border-radius:10px; cursor:pointer}
 body.no-scroll{overflow:hidden}
 @keyframes lbFade{from{opacity:0} to{opacity:1}}
+
+/* Acronym tooltip style for <abbr> */
+abbr[title]{text-decoration: underline dotted; cursor: help}
+
+/* details/summary */
+details {margin-top: 6px}
+details > summary {cursor: pointer; user-select: none}
+details.tiny > summary {color: var(--muted); font-size: var(--s-2)}
+
+/* estimator mini-form inline look */
+.est {display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin-top:8px}
+.est label {display:flex; flex-direction:column; gap:4px; font-size:.95rem; color:var(--muted-2)}
+.est input {background:#0b1326; border:1px solid var(--border); border-radius:10px; color:var(--text); padding:8px 10px}
+
+/* sticky mobile CTA */
+.sticky-cta{
+  display:none;
+  position:fixed; left:16px; right:16px; bottom:16px;
+  background:var(--brand); color:#fff; text-align:center;
+  padding:12px 16px; border-radius:12px;
+  box-shadow: var(--shadow); z-index: 1001; border:1px solid var(--border);
+}
+@media (max-width: 640px){ .sticky-cta{display:block} }

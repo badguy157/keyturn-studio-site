@@ -33,10 +33,10 @@
     <p>We rebuild <strong>8–40 room inns & small hotels</strong> so more guests book direct.</p>
 
     <div class="badges">
-      <span class="badge">GA4 events</span>
-      <span class="badge">JSON-LD</span>
-      <span class="badge">Core Web Vitals</span>
-      <span class="badge">Accessibility pass</span>
+      <span class="badge" title="Google Analytics 4">GA4 events</span>
+      <span class="badge" title="Structured data for search engines">JSON-LD</span>
+      <span class="badge" title="Core Web Vitals">CWV</span>
+      <span class="badge" title="Accessible to screen readers & keyboard users">Accessibility pass</span>
     </div>
 
     <div class="buttons">
@@ -72,13 +72,20 @@
 
     <article class="card">
       <h3>Why it pays</h3>
-      <p>Each booking moved off OTAs saves roughly <strong>ADR × ALOS × 18%</strong>. We track booking-clicks and report the shift monthly.</p>
+      <p>Each booking moved off OTAs saves roughly <strong>ADR <abbr title="Average Daily Rate">ADR</abbr> × <abbr title="Average Length of Stay">ALOS</abbr> × 18%</strong>.</p>
       <p class="small">Example: ADR £100, ALOS 2 → ~£36 saved per booking.</p>
 
       <div class="roi-box">
         <strong>ROI at a glance</strong>
         <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>£4.3k–£8.6k/yr</strong> — often enough to repay a Core project inside 12 months.</p>
-        <p class="tiny">Figures vary by occupancy and season.</p>
+
+        <details class="tiny">
+          <summary>Show the math</summary>
+          <div>
+            <p>Saved/booking = ADR × ALOS × commission. Using example values: 100 × 2 × 0.18 = <strong>£36</strong>.</p>
+            <p>Annual savings ≈ moved_bookings_per_month × £36 × 12.</p>
+          </div>
+        </details>
       </div>
     </article>
   </section>
@@ -129,7 +136,7 @@
     <!-- Micro-proof tiles -->
     <div class="proof-grid">
       <article class="proof-card"><h5>Direct share ↑</h5><p>From single digits to <strong>22–25%+</strong> (seasonal).</p></article>
-      <article class="proof-card"><h5>PageSpeed / CWV</h5><p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p></article>
+      <article class="proof-card"><h5>PageSpeed / <abbr title="Core Web Vitals">CWV</abbr></h5><p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p></article>
       <article class="proof-card"><h5>Tracked funnel</h5><p><code>book_click</code> & <code>booking_outbound</code> GA4 events live.</p></article>
     </div>
 
@@ -138,7 +145,7 @@
       <article class="metric-card">
         <h5>Website-direct (annual, weighted)</h5>
         <p><strong>21.7%</strong> website-direct</p>
-        <p class="tiny">Assumptions: off-peak 18.8% (3/16), off-peak ≈9.8% of annual volume, in-season site-direct 22%.</p>
+        <p class="tiny">Off-peak snapshot: 18.8% (3/16). Annual weighting uses off-peak ≈9.8% of yearly bookings. In-season assumption: 22% website-direct.</p>
       </article>
       <article class="metric-card">
         <h5>Post-launch snapshot</h5>
@@ -146,7 +153,7 @@
         <p class="tiny">Oct 28 → Nov 9 • off-peak</p>
       </article>
       <article class="metric-card">
-        <h5>ADR & ALOS</h5>
+        <h5><abbr title="Average Daily Rate">ADR</abbr> & <abbr title="Average Length of Stay">ALOS</abbr></h5>
         <p><strong>£90.65 ADR</strong> • <strong>1.51 nights</strong></p>
         <p class="tiny">Occupancy ~26.3% (8 rooms)</p>
       </article>
@@ -224,20 +231,19 @@
         <li><strong>Growth (from $900/mo):</strong> select high-volume properties; target +20–30 direct bookings/month and track it.</li>
       </ul>
       <p class="tiny">0% 4-pay spreads your setup across 4 equal monthly payments; work begins after first payment. Care/Growth are separate.</p>
-    </div>
 
-    <div class="policies card">
-      <h4>Guarantees</h4>
-      <ul>
-        <li>On-time launch: if I miss for reasons within my control, I credit 5% of the fee.</li>
-        <li>30-day polish window: minor text/image tweaks &amp; bug fixes included post-launch.</li>
-      </ul>
-      <h4>Refunds &amp; Cancellations</h4>
-      <ul>
-        <li>Deposit is earned at kickoff and non-refundable.</li>
-        <li>Client delays may trigger pause/reschedule; kill fee = completed work + 30% of remaining.</li>
-        <li>Care/Growth cancel with 30-day notice; partial months not refunded.</li>
-      </ul>
+      <details class="tiny" style="margin-top:8px">
+        <summary>Payback estimator (try it)</summary>
+        <div class="est">
+          <label>ADR (£): <input id="estADR" type="number" min="30" step="1" value="100"></label>
+          <label>ALOS (nights): <input id="estALOS" type="number" min="1" step="0.1" value="2"></label>
+          <label>Bookings moved / month: <input id="estMoved" type="number" min="1" step="1" value="15"></label>
+          <label>Commission (%): <input id="estComm" type="number" min="0" max="100" step="1" value="18"></label>
+          <label>Project cost (£): <input id="estCost" type="number" min="1000" step="100" value="7500"></label>
+          <button class="btn" type="button" id="estBtn">Calculate</button>
+          <p id="estOut" class="small"></p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -249,7 +255,7 @@
       <li><strong>You own everything.</strong> Domain, content, images, and code are handed over in a Digital Asset Pack.</li>
       <li><strong>Transparent fees.</strong> Fixed-fee makeover sprint + simple monthly care plan.</li>
       <li><strong>Privacy-minded.</strong> GA4 only; no guest data resale pixels.</li>
-      <li><strong>Truth in imagery.</strong> Lifestyle shots may be staged or AI-assisted—we label them.</li>
+      <li><strong>Truth in imagery.</strong> Lifestyle shots may be staged or AI-assisted — we label them.</li>
     </ul>
   </section>
   
@@ -294,6 +300,9 @@
   <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
 </footer>
 
+<!-- Sticky mobile CTA -->
+<a href="#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
+
 <script>
   // year
   document.getElementById('y').textContent = new Date().getFullYear();
@@ -335,6 +344,23 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
       const checked = e.target.checked;
       e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
       setPrices(checked);
+    });
+  }
+
+  // estimator
+  const estBtn = document.getElementById('estBtn');
+  if (estBtn){
+    estBtn.addEventListener('click', ()=>{
+      const ADR = parseFloat(document.getElementById('estADR').value||0);
+      const ALOS = parseFloat(document.getElementById('estALOS').value||0);
+      const moved = parseFloat(document.getElementById('estMoved').value||0);
+      const comm = parseFloat(document.getElementById('estComm').value||0)/100;
+      const cost = parseFloat(document.getElementById('estCost').value||0);
+      const savedPer = ADR * ALOS * comm;
+      const monthlySavings = moved * savedPer;
+      const months = monthlySavings > 0 ? Math.ceil(cost / monthlySavings) : '–';
+      const out = document.getElementById('estOut');
+      out.textContent = `Saved per moved booking ≈ £${savedPer.toFixed(2)} · Payback ≈ ${months} month(s) at ${moved} moved bookings/month.`;
     });
   }
 
