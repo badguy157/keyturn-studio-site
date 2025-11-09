@@ -3,10 +3,9 @@ html,body{
   margin:0;
   padding:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  background:#0b1220;       /* dark background */
-  color:#e5e7eb;            /* LIGHT default text so bullets are readable */
+  background:#0b1220;
+  color:#e5e7eb;
 }
-/* optional: keep small/body text slightly dimmer if you like */
 p{color:#cbd5e1}
 .small{color:#94a3b8}
 .disclaimer{color:#cbd5e1}
@@ -37,42 +36,39 @@ a{color:#93c5fd}
 @media (max-width:860px){.case{grid-template-columns:1fr}}
 @media (max-width:640px){h1{font-size:32px}}
 
-/* Case study layout */
+/* Results layout */
 .result{
-    display:grid;
-    grid-template-columns:1.2fr 0.8fr;
-    gap:24px;
-    padding:18px;
-    background:#0f172a;
-    border:1px solid #1f2937;
-    border-radius:14px;
-    align-items:center;
-    margin-top:12px;
-  }
-  .result-visual img{
-    display:block;
-    width:100%;
-    height:auto;
-    border-radius:12px;
-    border:1px solid #1f2937;
-    box-shadow:0 6px 24px rgba(0,0,0,.25);
-  }
-  .result-visual figcaption{
-    text-align:center;
-    margin-top:8px;
-    font-size:14px;
-    color:#94a3b8;
-  }
-  
-  /* mobile stack */
-  @media (max-width:900px){
-    .result{ grid-template-columns:1fr; }
-  }
-  
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  gap:24px;
+  padding:18px;
+  background:#0f172a;
+  border:1px solid #1f2937;
+  border-radius:14px;
+  align-items:center;
+  margin-top:12px;
+}
+.result-visual img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+  border:1px solid #1f2937;
+  box-shadow:0 6px 24px rgba(0,0,0,.25);
+}
+.result-visual figcaption{
+  text-align:center;
+  margin-top:8px;
+  font-size:14px;
+  color:#94a3b8;
+}
+@media (max-width:900px){.result{grid-template-columns:1fr}}
+
+/* Branding */
 .brand img{height:36px;width:auto;display:block}
 .nav{align-items:center}
 
-/* --- Pricing --- */
+/* Pricing */
 .card-title{font-size:1.25rem;font-weight:700;margin:.25rem 0 .5rem}
 .price{font-size:1.75rem;font-weight:700;margin:.25rem 0 .5rem;color:#e2e8f0}
 .features{margin:.5rem 0 1rem;padding-left:1.1rem}
@@ -107,30 +103,30 @@ a{color:#93c5fd}
   margin-top:6px;
 }
 
-/* --- NEW: badges under hero --- */
+/* badges under hero */
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
 .badge{background:#0f172a;border:1px solid #1f2937;border-radius:999px;padding:6px 10px;font-size:13px;color:#cbd5e1}
 
-/* --- NEW: ROI box --- */
+/* ROI box */
 .roi-box{margin-top:12px;padding:12px;border:1px dashed #334155;border-radius:10px;background:#0b1326}
 
-/* --- NEW: banner (pilot) --- */
+/* pilot banner */
 .banner{background:#0f172a;border:1px solid #1f2937;border-radius:14px;padding:14px;margin-top:8px}
 
-/* --- NEW: specialists list --- */
+/* specialists list */
 .specialists .specialist-list{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
 .specialists .spec-name{font-weight:700;color:#e2e8f0}
 .specialists .spec-meta{font-size:.95rem;color:#94a3b8}
 
-/* --- NEW: micro-proof tiles --- */
+/* micro-proof tiles */
 .proof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
 .proof-card{background:#0f172a;border:1px solid #1f2937;border-radius:12px;padding:12px}
 .proof-card h5{margin:.25rem 0 .25rem;color:#e2e8f0}
 
-/* --- NEW: footnote under pricing --- */
+/* footnote under pricing */
 .footnote ul{margin:.25rem 0 0 1.1rem}
 
-/* --- NEW: audit form --- */
+/* audit form */
 .audit-form{margin-top:12px}
 .form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
 .form-row.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}

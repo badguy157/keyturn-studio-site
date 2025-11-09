@@ -67,7 +67,6 @@
       <p>Each booking moved off OTAs saves roughly <strong>ADR × ALOS × 18%</strong>. We track booking-clicks and report the shift monthly.</p>
       <p class="small">Example: ADR £100, ALOS 2 → ~£36 saved per booking.</p>
 
-      <!-- NEW: ROI at a glance -->
       <div class="roi-box">
         <strong>ROI at a glance</strong>
         <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>£4.3k–£8.6k/yr</strong> in OTA fees — often enough to repay a Core project inside 12 months.</p>
@@ -130,7 +129,7 @@
       </figure>
     </div>
 
-    <!-- NEW: micro-proof tiles -->
+    <!-- micro-proof tiles -->
     <div class="proof-grid">
       <article class="proof-card">
         <h5>Direct share ↑</h5>
@@ -151,32 +150,44 @@
   <section id="pricing" class="container">
     <h2>Pricing</h2>
     <p class="small">Built for owner-operated inns & small hotels (<strong>8–40 rooms</strong>)</p>
-<!-- ADD: pay toggle -->
-<div class="pay-toggle">
-  <label class="switch">
-    <input type="checkbox" id="payToggle">
-    <span class="slider"></span>
-    <span class="switch-label">Pay monthly (0% 4-pay)</span>
-  </label>
-</div>
 
-    <p class="small">Built for owner-operated inns & small hotels (<strong>8–40 rooms</strong>)</p>
+    <!-- Pay monthly toggle -->
+    <div class="pay-toggle">
+      <label class="switch">
+        <input type="checkbox" id="payToggle">
+        <span class="slider"></span>
+        <span class="switch-label">Pay monthly (0% 4-pay)</span>
+      </label>
+    </div>
 
     <div class="grid">
       <!-- Core -->
-<article class="card">
-  <h3 class="card-title">Makeover Sprint (Core)</h3>
-  <div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
-  ...
-</article>
+      <article class="card">
+        <h3 class="card-title">Makeover Sprint (Core)</h3>
+        <div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
+        <ul class="features">
+          <li>Core pages: Home, Rooms, Eat &amp; Drink, What’s On, Story/FAQ</li>
+          <li>Unified “Book direct — best rate” CTAs (sticky + hero)</li>
+          <li>GA4 events (booking_outbound/book_click) + quick dashboard</li>
+          <li>JSON-LD: Hotel/Restaurant/FAQ • Speed &amp; accessibility pass</li>
+          <li>eviivo branding/config touch-ups • 2 revision rounds</li>
+        </ul>
+        <a class="btn primary" href="#audit">Get a 10-min audit</a>
+      </article>
 
-<!-- Pro -->
-<article class="card">
-  <h3 class="card-title">Makeover + CRO (Pro)</h3>
-  <div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
-  ...
-</article>
-
+      <!-- Pro -->
+      <article class="card">
+        <h3 class="card-title">Makeover + CRO (Pro)</h3>
+        <div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
+        <ul class="features">
+          <li>Everything in Core</li>
+          <li>Copy polish + structured FAQs + review badges</li>
+          <li>Events strip &amp; menu presentation upgrades</li>
+          <li>A/B-ready CTA variants &amp; experiment hooks</li>
+          <li>Seasonal landing blocks (e.g., cyclists, walkers, weddings)</li>
+        </ul>
+        <a class="btn" href="#audit">Book discovery</a>
+      </article>
 
       <!-- Plans -->
       <article class="card">
@@ -193,7 +204,7 @@
       </article>
     </div>
 
-    <!-- NEW: who each tier fits -->
+    <!-- Who each tier fits -->
     <div class="card footnote">
       <p><strong>Who each tier fits</strong></p>
       <ul>
@@ -201,6 +212,7 @@
         <li><strong>Pro ($12k):</strong> 20–40 rooms or smaller properties with strong year-round demand/F&amp;B.</li>
         <li><strong>Growth (from $900/mo):</strong> select high-volume properties; target +20–30 direct bookings/month and track it.</li>
       </ul>
+      <p class="tiny">0% 4-pay spreads your setup across 4 equal monthly payments; work begins after first payment. Care/Growth are separate.</p>
     </div>
 
     <div class="policies card">
@@ -217,7 +229,6 @@
       </ul>
     </div>
   </section>
-  <!-- /Pricing -->
 
   <section id="principles" class="container">
     <h2>How we work</h2>
@@ -247,7 +258,7 @@
     </div>
   </section>
   
-  <!-- NEW: audit form -->
+  <!-- audit form -->
   <section id="audit" class="container contact">
     <h2>Get a quick audit</h2>
     <p class="small">Share a few details and we’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
@@ -328,14 +339,10 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
 
     window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
   });
-</script>
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
 
   // pricing toggle
   const toggle = document.getElementById('payToggle');
   const priceEls = document.querySelectorAll('#pricing .price');
-
   function setPrices(monthly){
     priceEls.forEach(el=>{
       const upfront = el.getAttribute('data-upfront');
@@ -343,13 +350,7 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
       el.textContent = monthly ? monthlyVal : upfront;
     });
   }
-  if (toggle){
-    setPrices(false);
-    toggle.addEventListener('change', e => setPrices(e.target.checked));
-  }
-
-  // existing mailto audit form JS (keep if you already added it)
+  if (toggle){ setPrices(false); toggle.addEventListener('change', e => setPrices(e.target.checked)); }
 </script>
-
 </body>
 </html>
