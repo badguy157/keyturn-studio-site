@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Keyturn Studio — Hospitality Website Makeovers</title>
-  <meta name="description" content="We rebuild small hotel & inn websites to increase direct bookings and reduce OTA commissions.">
+  <meta name="description" content="We rebuild 8–40 room inn & small-hotel websites to increase direct bookings and reduce OTA commissions.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,12 +19,20 @@
         <img src="logo.svg" alt="Keyturn Studio" width="220" height="70">
       </a>
     </div>
-    <a class="cta" href="#contact">Get a 10-min audit</a>
+    <a class="cta" href="#audit">Get a 10-min audit</a>
   </div>
 
   <div class="hero">
     <h1>More <span class="accent">direct bookings</span>, fewer OTA fees.</h1>
-    <p>Turn more visits into stays.</p>
+    <p>We rebuild <strong>8–40 room inns & small hotels</strong> so more guests book direct.</p>
+
+    <div class="badges">
+      <span class="badge">GA4 events</span>
+      <span class="badge">JSON-LD</span>
+      <span class="badge">Core Web Vitals</span>
+      <span class="badge">Accessibility pass</span>
+    </div>
+
     <div class="buttons">
       <a class="btn primary" href="#services">How it works</a>
       <a class="btn" href="#results">See proof</a>
@@ -58,7 +66,40 @@
       <h3>Why it pays</h3>
       <p>Each booking moved off OTAs saves roughly <strong>ADR × ALOS × 18%</strong>. We track booking-clicks and report the shift monthly.</p>
       <p class="small">Example: ADR £100, ALOS 2 → ~£36 saved per booking.</p>
+
+      <!-- NEW: ROI at a glance -->
+      <div class="roi-box">
+        <strong>ROI at a glance</strong>
+        <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>£4.3k–£8.6k/yr</strong> in OTA fees — often enough to repay a Core project inside 12 months.</p>
+        <p class="tiny">Figures vary by occupancy and season.</p>
+      </div>
     </div>
+  </section>
+
+  <!-- Founders' Pilot banner -->
+  <section class="container banner">
+    <p><strong>Founders’ Pilot (2 slots/month):</strong> For qualifying inns (8–20 rooms) who want proof fast — reduced fee in exchange for metrics access and a short testimonial. Same deliverables, same 3-week timeline.</p>
+  </section>
+
+  <!-- Specialist Network -->
+  <section class="container specialists" aria-labelledby="specialists-title">
+    <h2 id="specialists-title">Our Specialist Network</h2>
+    <p class="small">We’re a lean studio with a vetted bench. When a project needs extra hands, we bring in <strong>Top Rated</strong> designers and builders who follow our Keyturn playbook. You meet them; we manage the work.</p>
+    <ul class="specialist-list">
+      <li>
+        <div class="spec-name">Jane D.</div>
+        <div class="spec-meta">UI/UX for hospitality — Top Rated Plus, 500+ ★ reviews</div>
+      </li>
+      <li>
+        <div class="spec-name">Leo P.</div>
+        <div class="spec-meta">Next.js/Tailwind implementer — Top Rated, 300+ ★ reviews</div>
+      </li>
+      <li>
+        <div class="spec-name">Ava K.</div>
+        <div class="spec-meta">Technical SEO & schema — Top Rated, 200+ ★ reviews</div>
+      </li>
+    </ul>
+    <p class="tiny">Partner badges and prior experience shown with permission. Listed individuals are independent collaborators, not employees.</p>
   </section>
 
   <section id="results" class="container">
@@ -88,41 +129,54 @@
         <figcaption>Homepage after the makeover</figcaption>
       </figure>
     </div>
+
+    <!-- NEW: micro-proof tiles -->
+    <div class="proof-grid">
+      <article class="proof-card">
+        <h5>Direct share ↑</h5>
+        <p>From single digits to <strong>22–25%+</strong> (seasonal).</p>
+      </article>
+      <article class="proof-card">
+        <h5>PageSpeed / CWV</h5>
+        <p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p>
+      </article>
+      <article class="proof-card">
+        <h5>Tracked funnel</h5>
+        <p><code>book_click</code> & <code>booking_outbound</code> GA4 events live.</p>
+      </article>
+    </div>
   </section>
 
-  <!-- NEW: Pricing -->
+  <!-- Pricing -->
   <section id="pricing" class="container">
     <h2>Pricing</h2>
-    <p class="small">Built for owner-operated inns & small hotels (10–40 rooms)</p>
+    <p class="small">Built for owner-operated inns & small hotels (<strong>8–40 rooms</strong>)</p>
+<!-- ADD: pay toggle -->
+<div class="pay-toggle">
+  <label class="switch">
+    <input type="checkbox" id="payToggle">
+    <span class="slider"></span>
+    <span class="switch-label">Pay monthly (0% 4-pay)</span>
+  </label>
+</div>
+
+    <p class="small">Built for owner-operated inns & small hotels (<strong>8–40 rooms</strong>)</p>
 
     <div class="grid">
       <!-- Core -->
-      <article class="card">
-        <h3 class="card-title">Makeover Sprint (Core)</h3>
-        <div class="price">$7,500</div>
-        <ul class="features">
-          <li>Core pages: Home, Rooms, Eat &amp; Drink, What’s On, Story/FAQ</li>
-          <li>Unified “Book direct — best rate” CTAs (sticky + hero)</li>
-          <li>GA4 events (booking_outbound/book_click) + quick dashboard</li>
-          <li>JSON-LD: Hotel/Restaurant/FAQ • Speed &amp; accessibility pass</li>
-          <li>eviivo branding/config touch-ups • 2 revision rounds</li>
-        </ul>
-        <a class="btn primary" href="#contact">Get a 10-min audit</a>
-      </article>
+<article class="card">
+  <h3 class="card-title">Makeover Sprint (Core)</h3>
+  <div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
+  ...
+</article>
 
-      <!-- Pro -->
-      <article class="card">
-        <h3 class="card-title">Makeover + CRO (Pro)</h3>
-        <div class="price">$12,000</div>
-        <ul class="features">
-          <li>Everything in Core</li>
-          <li>Copy polish + structured FAQs + review badges</li>
-          <li>Events strip &amp; menu presentation upgrades</li>
-          <li>A/B-ready CTA variants &amp; experiment hooks</li>
-          <li>Seasonal landing blocks (e.g., cyclists, walkers, weddings)</li>
-        </ul>
-        <a class="btn" href="#contact">Book discovery</a>
-      </article>
+<!-- Pro -->
+<article class="card">
+  <h3 class="card-title">Makeover + CRO (Pro)</h3>
+  <div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
+  ...
+</article>
+
 
       <!-- Plans -->
       <article class="card">
@@ -134,9 +188,19 @@
           <li>Monthly change log &amp; direct-booking click tracking</li>
           <li>Cancel any time with 30-day notice</li>
         </ul>
-        <a class="btn" href="#contact">See plan details</a>
+        <a class="btn" href="#audit">See plan details</a>
         <p class="tiny">Alt: $4,500 + $499/mo × 12</p>
       </article>
+    </div>
+
+    <!-- NEW: who each tier fits -->
+    <div class="card footnote">
+      <p><strong>Who each tier fits</strong></p>
+      <ul>
+        <li><strong>Core ($7.5k):</strong> 8–20 rooms; typically repays in ~12–18 months from saved commission alone.</li>
+        <li><strong>Pro ($12k):</strong> 20–40 rooms or smaller properties with strong year-round demand/F&amp;B.</li>
+        <li><strong>Growth (from $900/mo):</strong> select high-volume properties; target +20–30 direct bookings/month and track it.</li>
+      </ul>
     </div>
 
     <div class="policies card">
@@ -183,10 +247,45 @@
     </div>
   </section>
   
-  <section id="contact" class="container contact">
+  <!-- NEW: audit form -->
+  <section id="audit" class="container contact">
     <h2>Get a quick audit</h2>
-    <p>Email: <a href="mailto:keyturnstudio@proton.me">keyturnstudio@proton.me</a></p>
-    <p class="small">We’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
+    <p class="small">Share a few details and we’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
+
+    <form id="auditForm" class="audit-form">
+      <div class="form-row">
+        <label>Property name</label>
+        <input type="text" name="property" required>
+      </div>
+      <div class="form-row">
+        <label>Website URL</label>
+        <input type="url" name="website" placeholder="https://example.com" required>
+      </div>
+      <div class="form-row two">
+        <div>
+          <label>Rooms</label>
+          <input type="number" name="rooms" min="1" max="100" required>
+        </div>
+        <div>
+          <label>ADR (approx.)</label>
+          <input type="number" name="adr" min="40" step="1" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Booking engine link</label>
+        <input type="url" name="booking" placeholder="Direct booking URL">
+      </div>
+      <div class="form-row">
+        <label>Your email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label>Notes (optional)</label>
+        <textarea name="notes" rows="4" placeholder="Anything we should know?"></textarea>
+      </div>
+      <button class="btn primary" type="submit">Request audit</button>
+      <p class="tiny">Prefer email? <a href="mailto:keyturnstudio@proton.me">keyturnstudio@proton.me</a></p>
+    </form>
   </section>
 </main>
 
@@ -197,6 +296,38 @@
   </p>
 </footer>
 
-<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // mailto-based audit form (no backend)
+  const form = document.getElementById('auditForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const p = encodeURIComponent(data.get('property') || '');
+    const w = encodeURIComponent(data.get('website') || '');
+    const r = encodeURIComponent(data.get('rooms') || '');
+    const a = encodeURIComponent(data.get('adr') || '');
+    const b = encodeURIComponent(data.get('booking') || '');
+    const em = encodeURIComponent(data.get('email') || '');
+    const n = encodeURIComponent(data.get('notes') || '');
+
+    const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
+    const body = encodeURIComponent(
+`Property: ${p}
+Website: ${w}
+Rooms: ${r}
+ADR: £${a}
+Booking engine: ${b}
+Email: ${em}
+
+Notes:
+${n}
+
+Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
+
+    window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
+  });
+</script>
 </body>
 </html>

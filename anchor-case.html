@@ -12,7 +12,7 @@
   <header class="container">
     <div class="nav">
       <div class="brand"><a href="/"><img src="/logo.svg" alt="Keyturn Studio" width="220" height="70"></a></div>
-      <a class="cta" href="/#contact">Get a 10-min audit</a>
+      <a class="cta" href="/#audit">Get a 10-min audit</a>
     </div>
   </header>
 
@@ -50,6 +50,13 @@
         <p class="small"><em>Indicative figures; bookings vary by season and demand.</em></p>
       </div>
 
+      <!-- NEW: What this uplift is worth -->
+      <div class="card worth" style="margin-top:12px">
+        <h2>What this uplift is worth</h2>
+        <p>At <strong>£100 ADR</strong>, <strong>2 nights</strong>, and <strong>18% OTA commission</strong>, moving around <strong>18–21 bookings/month</strong> from OTAs to direct equals roughly <strong>£7k–£9k/year</strong> in saved fees.</p>
+        <p class="tiny">Illustrative math; actuals vary by occupancy and season.</p>
+      </div>
+
       <div class="card" style="margin-top:12px">
         <h2>What we delivered</h2>
         <ul>
@@ -65,12 +72,31 @@
         <p class="disclaimer"><em>Independent studio. “The Anchor Hotel” case study shown with permission.
           <strong>No affiliation or ownership.</strong></em></p>
       </div>
+
+      <!-- Optional: tech proof screenshots (replace src paths as you have them) -->
+      <div class="proof-grid" style="margin-top:12px">
+        <article class="proof-card">
+          <h5>Lighthouse / CWV</h5>
+          <p>Homepage in the green on mobile.</p>
+          <!-- <img src="/public/cwv-after.png" alt="Core Web Vitals green screenshot"> -->
+        </article>
+        <article class="proof-card">
+          <h5>Schema</h5>
+          <p>Hotel / Room / FAQ JSON-LD passes validation.</p>
+          <!-- <img src="/public/schema-pass.png" alt="Schema validator pass"> -->
+        </article>
+        <article class="proof-card">
+          <h5>Events</h5>
+          <p><code>book_click</code> & <code>booking_outbound</code> firing in GA4.</p>
+          <!-- <img src="/public/ga4-events.png" alt="GA4 events screenshot"> -->
+        </article>
+      </div>
     </section>
 
-    <section id="contact" class="container contact">
+    <section id="audit" class="container contact">
       <h2>Get a quick audit</h2>
-      <p>Email: <a href="mailto:keyturnstudio@proton.me">keyturnstudio@proton.me</a></p>
-      <p class="small">We’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
+      <p class="small">Share your website, rooms count, ADR, and booking engine link. We’ll send a 2–3 minute Loom with 3 fixes and an ROI estimate.</p>
+      <p class="small"><a class="btn" href="/#audit">Open audit form</a></p>
     </section>
   </main>
 

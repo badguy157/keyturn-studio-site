@@ -106,3 +106,48 @@ a{color:#93c5fd}
   color:#94a3b8;
   margin-top:6px;
 }
+
+/* --- NEW: badges under hero --- */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.badge{background:#0f172a;border:1px solid #1f2937;border-radius:999px;padding:6px 10px;font-size:13px;color:#cbd5e1}
+
+/* --- NEW: ROI box --- */
+.roi-box{margin-top:12px;padding:12px;border:1px dashed #334155;border-radius:10px;background:#0b1326}
+
+/* --- NEW: banner (pilot) --- */
+.banner{background:#0f172a;border:1px solid #1f2937;border-radius:14px;padding:14px;margin-top:8px}
+
+/* --- NEW: specialists list --- */
+.specialists .specialist-list{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.specialists .spec-name{font-weight:700;color:#e2e8f0}
+.specialists .spec-meta{font-size:.95rem;color:#94a3b8}
+
+/* --- NEW: micro-proof tiles --- */
+.proof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.proof-card{background:#0f172a;border:1px solid #1f2937;border-radius:12px;padding:12px}
+.proof-card h5{margin:.25rem 0 .25rem;color:#e2e8f0}
+
+/* --- NEW: footnote under pricing --- */
+.footnote ul{margin:.25rem 0 0 1.1rem}
+
+/* --- NEW: audit form --- */
+.audit-form{margin-top:12px}
+.form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.form-row.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.audit-form label{font-size:.95rem;color:#cbd5e1}
+.audit-form input,.audit-form textarea{
+  background:#0b1326;border:1px solid #1f2937;border-radius:10px;color:#e5e7eb;
+  padding:10px 12px;font-size:1rem;outline:none
+}
+.audit-form input:focus,.audit-form textarea:focus{border-color:#334155}
+@media (max-width:640px){.form-row.two{grid-template-columns:1fr}}
+
+/* pay toggle */
+.pay-toggle{display:flex;align-items:center;gap:10px;margin:8px 0 14px}
+.switch{position:relative;display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+.switch input{display:none}
+.slider{width:44px;height:24px;background:#1f2937;border-radius:999px;position:relative;transition:.2s}
+.slider::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:#e5e7eb;border-radius:50%;transition:.2s}
+.switch input:checked + .slider{background:#1d4ed8}
+.switch input:checked + .slider::after{transform:translateX(20px)}
+.switch-label{font-size:.95rem;color:#cbd5e1}
