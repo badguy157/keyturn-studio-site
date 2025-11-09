@@ -304,107 +304,93 @@
 <a href="#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
 
 <script>
-  // year
-  document.getElementById('y').textContent = new Date().getFullYear();
-
-  // mailto-based audit form
-  const form = document.getElementById('auditForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
-    const body = encodeURIComponent(
-`Property: ${data.get('property')||''}
-Website: ${data.get('website')||''}
-Rooms: ${data.get('rooms')||''}
-ADR: £${data.get('adr')||''}
-Booking engine: ${data.get('booking')||''}
-Email: ${data.get('email')||''}
-
-Notes:
-${data.get('notes')||''}
-
-Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
-    window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
-  });
-
-  // pricing toggle (accessible)
-  const toggle = document.getElementById('payToggle');
-  const priceEls = document.querySelectorAll('#pricing .price');
-  function setPrices(monthly){
-    priceEls.forEach(el=>{
-      const upfront = el.getAttribute('data-upfront');
-      const monthlyVal = el.getAttribute('data-monthly') || upfront;
-      el.textContent = monthly ? monthlyVal : upfront;
-    });
-  }
-  if (toggle){
-    setPrices(false);
-    toggle.addEventListener('change', e => {
-      const checked = e.target.checked;
-      e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
-      setPrices(checked);
-    });
-  }
-
-  // estimator
-  const estBtn = document.getElementById('estBtn');
-  if (estBtn){
-    estBtn.addEventListener('click', ()=>{
-      const ADR = parseFloat(document.getElementById('estADR').value||0);
-      const ALOS = parseFloat(document.getElementById('estALOS').value||0);
-      const moved = parseFloat(document.getElementById('estMoved').value||0);
-      const comm = parseFloat(document.getElementById('estComm').value||0)/100;
-      const cost = parseFloat(document.getElementById('estCost').value||0);
-      const savedPer = ADR * ALOS * comm;
-      const monthlySavings = moved * savedPer;
-      const months = monthlySavings > 0 ? Math.ceil(cost / monthlySavings) : '–';
-      const out = document.getElementById('estOut');
-      out.textContent = `Saved per moved booking ≈ £${savedPer.toFixed(2)} · Payback ≈ ${months} month(s) at ${moved} moved bookings/month.`;
-    });
-  }
-
-  // simple lightbox (for images with .zoomable)
-  const lb = document.getElementById('lb');
-  const lbImg = document.querySelector('.lb-img');
-  const lbCap = document.getElementById('lbCap');
-  const lbClose = document.querySelector('.lb-close');
-
-  function openLB(src, alt){
-    lbImg.src = src;
-    lbImg.alt = alt || '';
-    lbCap.textContent = alt || '';
-    lb.classList.add('is-open');
-    lb.setAttribute('aria-hidden','false');
-    document.body.classList.add('no-scroll');
-  }
-  function closeLB(){
-    lb.classList.remove('is-open');
-    lb.setAttribute('aria-hidden','true');
-    document.body.classList.remove('no-scroll');
-    lbImg.src = '';
-    lbCap.textContent = '';
-  }
-
-  document.addEventListener('click', (e)=>{
-    const t = e.target;
-    if (t.classList && t.classList.contains('zoomable')){
-      e.preventDefault();
-      openLB(t.src, t.alt);
+  document.addEventListener('DOMContentLoaded', () => {
+    // year
+    const y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
+  
+    // mailto-based audit form
+    const form = document.getElementById('auditForm');
+    if (form){
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
+        const body = encodeURIComponent(
+  `Property: ${data.get('property')||''}
+  Website: ${data.get('website')||''}
+  Rooms: ${data.get('rooms')||''}
+  ADR: £${data.get('adr')||''}
+  Booking engine: ${data.get('booking')||''}
+  Email: ${data.get('email')||''}
+  
+  Notes:
+  ${data.get('notes')||''}
+  
+  Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
+        window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
+      });
     }
-    if (t.classList && t.classList.contains('lb-close')){
-      closeLB();
+  
+    // pricing toggle (accessible)
+    const toggle = document.getElementById('payToggle');
+    const priceEls = document.querySelectorAll('#pricing .price');
+    function setPrices(monthly){
+      priceEls.forEach(el=>{
+        const upfront = el.getAttribute('data-upfront');
+        const monthlyVal = el.getAttribute('data-monthly') || upfront;
+        el.textContent = monthly ? monthlyVal : upfront;
+      });
     }
-    if (t === lb){
-      closeLB();
+    if (toggle){
+      setPrices(false);
+      toggle.addEventListener('change', e => {
+        const checked = e.target.checked;
+        e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
+        setPrices(checked);
+      });
+    }
+  
+    // --- simple lightbox (robust) ---
+    const lb = document.getElementById('lb');
+    if (lb){
+      const lbImg = lb.querySelector('.lb-img');
+      const lbCap = document.getElementById('lbCap');
+  
+      function openLB(src, alt){
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lbCap.textContent = alt || '';
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden','false');
+        document.body.classList.add('no-scroll');
+      }
+      function closeLB(){
+        lb.classList.remove('is-open');
+        lb.setAttribute('aria-hidden','true');
+        document.body.classList.remove('no-scroll');
+        lbImg.src = '';
+        lbCap.textContent = '';
+      }
+  
+      // Use closest() and currentSrc; support data-zoom for higher-res
+      document.addEventListener('click', (e)=>{
+        const img = e.target.closest('img.zoomable');
+        if (img){
+          e.preventDefault();
+          const src = img.getAttribute('data-zoom') || img.currentSrc || img.src;
+          openLB(src, img.alt);
+          return;
+        }
+        if (e.target.closest('.lb-close') || e.target === lb){ closeLB(); }
+      });
+  
+      document.addEventListener('keydown', (e)=>{
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB();
+      });
     }
   });
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape' && lb.classList.contains('is-open')){
-      closeLB();
-    }
-  });
-</script>
+  </script>  
 
 <!-- Lightbox -->
 <div class="lb" id="lb" aria-hidden="true">
