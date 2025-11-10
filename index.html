@@ -96,7 +96,11 @@
 
   <section class="container banner">
     <p><strong>Founders’ Pilot (2 slots/month):</strong> For qualifying inns (8–20 rooms) who want proof fast — reduced fee in exchange for metrics access and a short testimonial. Same deliverables, same 3-week timeline.</p>
+    <div class="buttons">
+      <a class="btn primary js-pilot" href="#audit" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
+    </div>
   </section>
+  
 
   <section class="container specialists section" aria-labelledby="specialists-title">
     <h2 id="specialists-title">Our Specialist Network</h2>
@@ -189,6 +193,10 @@
         <h3 class="card-title">Makeover Sprint (Core)</h3>
         <div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
         <ul class="features">
+          <!-- Core card -->
+<div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
+<p class="who small">Best for: 12–25 rooms, single-property owners.</p>
+
           <li>Core pages: Home, Rooms, Eat &amp; Drink, What’s On, Story/FAQ</li>
           <li>Unified “Book direct — best rate” CTAs (sticky + hero)</li>
           <li>GA4 events (booking_outbound/book_click) + quick dashboard</li>
@@ -202,6 +210,10 @@
         <h3 class="card-title">Makeover + CRO (Pro)</h3>
         <div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
         <ul class="features">
+          <!-- Pro card -->
+<div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
+<p class="who small">Best for: 20–40 rooms or high-demand boutique stays.</p>
+
           <li>Everything in Core</li>
           <li>Copy polish + structured FAQs + review badges</li>
           <li>Events strip &amp; menu presentation upgrades</li>
@@ -215,6 +227,10 @@
         <h3 class="card-title">Ongoing Plans</h3>
         <div class="price">$300–$900/mo</div>
         <ul class="features">
+          <!-- Ongoing Plans card -->
+<div class="price">$300–$900/mo</div>
+<p class="who small">Best for: properties investing in steady CRO/SEO momentum.</p>
+
           <li><strong>Care ($300/mo):</strong> updates, backups, small edits, GA4 sanity checks</li>
           <li><strong>Growth ($900/mo):</strong> 1 meaningful CRO/SEO win + GBP posts + KPI line</li>
           <li>Monthly change log &amp; direct-booking click tracking</li>
@@ -334,6 +350,48 @@
         <label for="email">Your email</label>
         <input id="email" type="email" name="email" required autocomplete="email">
       </div>
+<!-- Pilot opt-in -->
+<div class="form-row">
+  <label class="check">
+    <input type="checkbox"
+           id="pilot"
+           name="pilot"
+           value="yes"
+           aria-controls="pilotFields"
+           aria-expanded="false">
+    Apply for Founders’ Pilot (8–12 rooms, case-study discount)
+  </label>
+  <p class="tiny" id="pilotHelp">If selected, please share a public rooms link and confirm the conditions.</p>
+</div>
+
+<!-- Pilot-only fields (revealed when checked) -->
+<fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
+  <legend class="tiny">Pilot verification (required for Pilot)</legend>
+
+  <div class="form-row">
+    <label for="rooms_url">Public rooms link (booking engine or OTA)</label>
+    <input id="rooms_url" name="rooms_url" type="url" placeholder="https://booking.example.com/property" autocomplete="url">
+  </div>
+
+  <div class="form-row">
+    <label for="ota_url">Optional: OTA listing link</label>
+    <input id="ota_url" name="ota_url" type="url" placeholder="https://www.booking.com/hotel/..." autocomplete="url">
+  </div>
+
+  <div class="form-row">
+    <label class="check">
+      <input type="checkbox" id="att_rooms" name="att_rooms" value="yes">
+      I attest this property has <strong>8–12 rooms</strong>.
+    </label>
+    <label class="check">
+      <input type="checkbox" id="att_metrics" name="att_metrics" value="yes">
+      I agree to share metrics and allow a short public case study.
+    </label>
+  </div>
+</fieldset>
+
+<!-- Tag the submission type for Formspree -->
+<input type="hidden" name="program" id="program" value="Standard">
 
       <div class="form-row">
         <label for="notes">Notes (optional)</label>
@@ -366,163 +424,66 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // year
-    const y = document.getElementById('y');
-    if (y) y.textContent = new Date().getFullYear();
+    // ... your existing code ...
 
-    // ---- Audit form (Formspree) ----
+    // ---- Pilot toggle (conditional fields + CTA wiring) ----
+    const pilot       = document.getElementById('pilot');
+    const pilotFields = document.getElementById('pilotFields');
+    const program     = document.getElementById('program');
+
+    // Any link with .js-pilot sets the form to Pilot mode
+    document.querySelectorAll('a.js-pilot').forEach(a => {
+      a.addEventListener('click', () => {
+        if (pilot){
+          pilot.checked = true;
+          pilot.dispatchEvent(new Event('change'));
+        }
+      });
+    });
+
+    function syncPilotRequired() {
+      const isOn = !!(pilot && pilot.checked);
+      if (pilotFields){
+        pilotFields.hidden = !isOn;
+        pilot?.setAttribute('aria-expanded', isOn ? 'true' : 'false');
+      }
+
+      // Toggle required attrs only when Pilot is on
+      const pilotReqIds = ['rooms_url', 'att_rooms', 'att_metrics'];
+      pilotReqIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.type === 'checkbox') {
+          el.required = isOn;
+        } else {
+          el.toggleAttribute('required', isOn);
+        }
+      });
+
+      // Tag program for Formspree
+      if (program){
+        program.value = isOn ? 'Founders’ Pilot' : 'Standard';
+      }
+    }
+
+    pilot?.addEventListener('change', syncPilotRequired);
+
+    // Auto-enable Pilot if ?pilot=1 or #pilot is present
+    const qs = new URLSearchParams(location.search);
+    if ((qs.get('pilot') === '1' || location.hash.includes('pilot')) && pilot){
+      pilot.checked = true;
+    }
+    syncPilotRequired();
+
+    // Hook into your existing Formspree submit to ensure program is correct
     const form = document.getElementById('auditForm');
-    const btn  = document.getElementById('auditSubmit');
-    const msg  = document.getElementById('auditMsg');
-
-    function setFieldValidity(input, valid){
-      if (!input) return;
-      input.setAttribute('aria-invalid', valid ? 'false' : 'true');
-    }
-
     if (form){
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // HTML5 validity check
-        if (form.checkValidity && !form.checkValidity()){
-          form.reportValidity();
-          return;
-        }
-
-        if (msg){ msg.textContent = ''; }
-        if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
-
-        const fd = new FormData(form);
-        fd.set('_subject', `Audit request: ${fd.get('property') || ''}`);
-        fd.set('_replyto', fd.get('email') || '');
-
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: fd,
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (res.ok){
-            form.reset();
-            if (msg){ msg.textContent = 'Thanks! We’ll send your Loom audit shortly.'; msg.style.color = '#c8facc'; }
-          } else {
-            if (msg){ msg.textContent = 'Could not send right now. Please email vinnie@keyturn.studio.'; msg.style.color = '#fca5a5'; }
-          }
-        } catch {
-          if (msg){ msg.textContent = 'Network error. Please email vinnie@keyturn.studio.'; msg.style.color = '#fca5a5'; }
-        } finally {
-          if (btn){ btn.disabled = false; btn.textContent = 'Request audit'; }
-        }
-      });
+      form.addEventListener('submit', () => {
+        syncPilotRequired(); // makes sure required flags/program are up to date
+      }, { capture: true });
     }
 
-    // ---- Pricing toggle ----
-    const toggle = document.getElementById('payToggle');
-    const priceEls = document.querySelectorAll('#pricing .price');
-    function setPrices(monthly){
-      priceEls.forEach(el=>{
-        const upfront = el.getAttribute('data-upfront');
-        const monthlyVal = el.getAttribute('data-monthly') || upfront;
-        el.textContent = monthly ? monthlyVal : upfront;
-      });
-    }
-    if (toggle){
-      setPrices(false);
-      toggle.addEventListener('change', e => {
-        const checked = e.target.checked;
-        e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
-        setPrices(checked);
-      });
-    }
-
-    // ---- Estimator (Calculate) ----
-    const estBtn   = document.getElementById('estBtn');
-    const estOut   = document.getElementById('estOut');
-    const $ = (id) => document.getElementById(id);
-
-    function fmtGBP(n, frac = 0){
-      try { return new Intl.NumberFormat('en-GB', { style:'currency', currency:'GBP', maximumFractionDigits: frac, minimumFractionDigits: frac }).format(n); }
-      catch { return `£${Number(n).toFixed(frac)}`; }
-    }
-
-    function clamp(v, min, max){
-      v = Number(v);
-      if (Number.isNaN(v)) return min;
-      return Math.min(Math.max(v, min), max);
-    }
-
-    if (estBtn){
-      estBtn.addEventListener('click', () => {
-        const adr    = parseFloat($('estADR').value);
-        const alos   = parseFloat($('estALOS').value);
-        const moved  = parseFloat($('estMoved').value);
-        const comm   = clamp(parseFloat($('estComm').value), 0, 100) / 100;
-        const cost   = parseFloat($('estCost').value);
-
-        // Basic validation
-        const valid = [adr, alos, moved, comm, cost].every(n => Number.isFinite(n) && n >= 0);
-        if (!valid || adr <= 0 || alos <= 0 || moved <= 0 || cost <= 0){
-          estOut.textContent = 'Please enter positive values for ADR, ALOS, moved bookings, and project cost.';
-          estOut.style.color = '#fca5a5';
-          return;
-        }
-
-        const savedPerBooking = adr * alos * comm;
-        const annualSavings   = savedPerBooking * moved * 12;
-        const monthlySavings  = annualSavings / 12;
-        const breakevenMonths = monthlySavings > 0 ? (cost / monthlySavings) : Infinity;
-        const roiYear1        = annualSavings - cost;
-
-        estOut.innerHTML = `
-          Saves about <strong>${fmtGBP(annualSavings)}</strong>/yr
-          (≈ ${fmtGBP(monthlySavings)}/mo).<br>
-          Per moved booking: <strong>${fmtGBP(savedPerBooking, 2)}</strong>.
-          Breakeven in <strong>${Number.isFinite(breakevenMonths) ? breakevenMonths.toFixed(1) : '—'}</strong> months.
-          ${roiYear1 >= 0 ? `Year-1 net after project: <strong>${fmtGBP(roiYear1)}</strong>.` : `Year-1 shortfall before month-${breakevenMonths.toFixed(1)} breakeven: <strong>${fmtGBP(roiYear1)}</strong>.`}
-        `;
-        estOut.style.color = 'var(--muted-2)';
-      });
-    }
-
-    // ---- Lightbox ----
-    const lb = document.getElementById('lb');
-    if (lb){
-      const lbImg = lb.querySelector('.lb-img');
-      const lbCap = document.getElementById('lbCap');
-
-      function openLB(src, alt){
-        lbImg.src = src;
-        lbImg.alt = alt || '';
-        lbCap.textContent = alt || '';
-        lb.classList.add('is-open');
-        lb.setAttribute('aria-hidden','false');
-        document.body.classList.add('no-scroll');
-      }
-      function closeLB(){
-        lb.classList.remove('is-open');
-        lb.setAttribute('aria-hidden','true');
-        document.body.classList.remove('no-scroll');
-        lbImg.src = '';
-        lbCap.textContent = '';
-      }
-
-      document.addEventListener('click', (e)=>{
-        const img = e.target.closest('img.zoomable');
-        if (img){
-          e.preventDefault();
-          const src = img.getAttribute('data-zoom') || img.currentSrc || img.src;
-          openLB(src, img.alt);
-          return;
-        }
-        if (e.target.closest('.lb-close') || e.target === lb){ closeLB(); }
-      });
-
-      document.addEventListener('keydown', (e)=>{
-        if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB();
-      });
-    }
+    // ... your existing Lightbox code ...
   });
 </script>
 
