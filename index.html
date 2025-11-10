@@ -77,17 +77,17 @@
     <article class="card">
       <h3>Why it pays</h3>
       <p>Each booking moved off OTAs saves roughly <strong><abbr title="Average Daily Rate">ADR</abbr> × <abbr title="Average Length of Stay">ALOS</abbr> × 18%</strong>.</p>
-      <p class="small">Example: ADR £100, ALOS 2 → ~£36 saved per booking.</p>
+      <p class="small">Example: ADR $100, ALOS 2 → ~$36 saved per booking.</p>
 
       <div class="roi-box">
         <strong>ROI at a glance</strong>
-        <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>£4.3k–£8.6k/yr</strong> — often enough to repay a Core project inside 12 months.</p>
+        <p>Move just <strong>10–20 bookings/month</strong> to direct and save about <strong>$4.3k–$8.6k/yr</strong> — often enough to repay a Core project inside 12 months.</p>
 
         <details class="tiny">
           <summary>Show the math</summary>
           <div>
-            <p>Saved/booking = ADR × ALOS × commission. Using example values: 100 × 2 × 0.18 = <strong>£36</strong>.</p>
-            <p>Annual savings ≈ moved_bookings_per_month × £36 × 12.</p>
+            <p>Saved/booking = ADR × ALOS × commission. Using example values: 100 × 2 × 0.18 = <strong>$36</strong>.</p>
+            <p>Annual savings ≈ moved_bookings_per_month × $36 × 12.</p>
           </div>
         </details>
       </div>
@@ -160,12 +160,12 @@
       </article>
       <article class="metric-card">
         <h5><abbr title="Average Daily Rate">ADR</abbr> & <abbr title="Average Length of Stay">ALOS</abbr></h5>
-        <p><strong>£90.65 ADR</strong> • <strong>1.51 nights</strong></p>
+        <p><strong>$90.65 ADR</strong> • <strong>1.51 nights</strong></p>
         <p class="tiny">Occupancy ~26.3% (8 rooms)</p>
       </article>
       <article class="metric-card">
         <h5>Saved per moved booking</h5>
-        <p><strong>~£24.60</strong> per booking</p>
+        <p><strong>~$24.60</strong> per booking</p>
         <p class="tiny">ADR × ALOS × 18% commission</p>
       </article>
       <article class="metric-card">
@@ -247,7 +247,7 @@
         <summary>Payback estimator (try it)</summary>
         <div class="est" aria-labelledby="estLbl">
           <label id="estLbl" class="sr-only">Payback estimator inputs</label>
-          <label for="estADR">ADR (£)
+          <label for="estADR">ADR ($)
             <input id="estADR" type="number" min="30" step="1" value="100" autocomplete="off" inputmode="decimal">
           </label>
           <label for="estALOS">ALOS (nights)
@@ -259,7 +259,7 @@
           <label for="estComm">Commission (%)
             <input id="estComm" type="number" min="0" max="100" step="1" value="18" autocomplete="off" inputmode="numeric">
           </label>
-          <label for="estCost">Project cost (£)
+          <label for="estCost">Project cost ($)
             <input id="estCost" type="number" min="1000" step="100" value="7500" autocomplete="off" inputmode="numeric">
           </label>
           <button class="btn secondary" type="button" id="estBtn" aria-label="Calculate payback estimate">Calculate</button>
@@ -402,9 +402,9 @@
         </div>
 
         <div class="form-row">
-          <label for="vol_adr">ADR (£)</label>
+          <label for="vol_adr">ADR ($)</label>
           <input id="vol_adr" name="vol_adr" type="number" min="0" step="1" placeholder="e.g., 80">
-          <p class="tiny">Benchmark: <strong>≥ £80</strong></p>
+          <p class="tiny">Benchmark: <strong>≥ $80</strong></p>
         </div>
       </fieldset>
 
@@ -475,7 +475,7 @@
 
     function fmtGBP(n, frac = 0){
       try { return new Intl.NumberFormat('en-GB', { style:'currency', currency:'GBP', maximumFractionDigits: frac, minimumFractionDigits: frac }).format(n); }
-      catch { return `£${Number(n).toFixed(frac)}`; }
+      catch { return `$${Number(n).toFixed(frac)}`; }
     }
     function clamp(v, min, max){ v = Number(v); if (Number.isNaN(v)) return min; return Math.min(Math.max(v, min), max); }
 
@@ -615,7 +615,7 @@
           }
 
           if (!vol.ok){
-            msg.textContent = 'Pilot note: please meet at least one benchmark (sessions ≥ 1,500, OTA ≥ 10/mo, or ADR ≥ £80). If your story is exceptional, we may still approve—add context in Notes.';
+            msg.textContent = 'Pilot note: please meet at least one benchmark (sessions ≥ 1,500, OTA ≥ 10/mo, or ADR ≥ $80). If your story is exceptional, we may still approve—add context in Notes.';
             msg.style.color = '#f59e0b';
             // continue, but tag as borderline
           }
