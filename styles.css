@@ -309,3 +309,24 @@ body{background:var(--bg);color:var(--fg)}
   .hero{padding:72px 0 40px}
   .hero-ctas{grid-template-columns:auto auto;justify-content:flex-start}
 }
+
+/* --- FIX: Honor [hidden] so the drawer can close/open --- */
+.mobile-drawer[hidden]{
+  display: none !important;
+}
+
+/* --- FIX: Button colors inside the mobile drawer --- */
+.mobile-drawer .btn-primary{
+  background: var(--fg);
+  color: #0a0f1a !important; /* dark text on light button */
+  border: 1px solid var(--line);
+}
+.mobile-drawer .btn-ghost{
+  color: var(--fg) !important;
+  border-color: var(--line);
+}
+
+/* Optional: make plain links in the drawer a tad dimmer than buttons */
+.mobile-drawer > a:not(.btn){
+  color: var(--muted-2);
+}
