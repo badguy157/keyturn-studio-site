@@ -14,67 +14,180 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="container">
-  <nav class="nav" aria-label="Primary">
+<!-- Sticky site header -->
+<header class="site-header">
+  <div class="container header-bar">
     <a class="brand" href="/" aria-label="Keyturn Studio home">
-      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70">
+      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="180" height="56" decoding="async">
     </a>
-    <div class="nav-links">
-      <a href="/onboarding.html">How it works</a>
-      <a href="/#results">Proof</a>
-      <a href="/#pricing">Pricing</a>
-      <a class="cta" href="/audit.html#audit">Get a 10-min audit</a>
-    </div>
-  </nav>
 
-  <div class="hero">
-    <h1>Get a <span class="accent">10-min audit</span></h1>
-    <p>We’ll send a <strong>2–3 minute Loom</strong> with <strong>3 fixes</strong> and an <strong>ROI estimate</strong> for moving bookings to website-direct.</p>
+    <!-- Desktop nav -->
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="/onboarding.html">How it works</a></li>
+        <li><a href="/#results">Proof</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a class="btn btn-ghost" href="#audit">Get a 10-min audit</a>
+        <a class="btn btn-primary" href="/onboarding.html">Start onboarding</a>
+      </div>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="menu-toggle" aria-controls="mobileMenu" aria-expanded="false" data-menu-toggle>
+      <span class="sr-only">Toggle menu</span>☰
+    </button>
   </div>
+
+  <!-- Mobile drawer -->
+  <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
+    <a href="/onboarding.html">How it works</a>
+    <a href="/#results">Proof</a>
+    <a href="/#pricing">Pricing</a>
+    <a class="btn btn-ghost w-full" href="#audit">Get a 10-min audit</a>
+    <a class="btn btn-primary w-full" href="/onboarding.html">Start onboarding</a>
+  </nav>
 </header>
 
-<main id="main" class="container section">
-  <section class="card" id="audit">
-    <h2>Audit form</h2>
-    <p class="small">We only use this to send your Loom. No spam — ever.</p>
+<!-- Compact hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Get a <span class="accent">10-min audit</span></h1>
+    <p class="hero-lede">We’ll send a <strong>2–3 minute Loom</strong> with <strong>3 fixes</strong> and an <strong>ROI estimate</strong> for moving bookings to website-direct.</p>
+  </div>
+</section>
 
-    <form id="auditForm"
-          class="audit-form"
-          action="https://formspree.io/f/mvgdpyay"
-          method="POST">
-      <div class="form-row"><label for="property">Property name</label><input id="property" type="text" name="property" required></div>
-      <div class="form-row"><label for="website">Website URL</label><input id="website" type="url" name="website" placeholder="https://example.com" required></div>
+<main id="main" class="section">
+  <div class="container">
+    <section class="card" id="audit" aria-labelledby="auditTitle">
+      <h2 id="auditTitle">Audit form</h2>
+      <p class="small">We only use this to send your Loom. No spam — ever.</p>
 
-      <div class="form-row two">
-        <div>
-          <label for="rooms">Rooms</label>
-          <input id="rooms" type="number" name="rooms" min="1" max="100" required>
+      <form id="auditForm"
+            class="audit-form"
+            action="https://formspree.io/f/mvgdpyay"
+            method="POST" novalidate>
+        <div class="form-row">
+          <label for="property">Property name</label>
+          <input id="property" type="text" name="property" required autocomplete="organization">
         </div>
-        <div>
-          <label for="adr">
-            <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">ADR</abbr> (approx.)
+
+        <div class="form-row">
+          <label for="website">Website URL</label>
+          <input id="website" type="url" name="website" placeholder="https://example.com" required autocomplete="url">
+        </div>
+
+        <div class="form-row two">
+          <div>
+            <label for="rooms">Rooms</label>
+            <input id="rooms" type="number" name="rooms" min="1" max="100" required inputmode="numeric" autocomplete="off">
+          </div>
+          <div>
+            <label for="adr">
+              <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">ADR</abbr> (approx.)
+            </label>
+            <input id="adr" type="number" name="adr" min="40" step="1" inputmode="decimal"
+                   placeholder="e.g., 100" aria-describedby="adrHelp" required autocomplete="off">
+            <p id="adrHelp" class="tiny">Use your average nightly room price before taxes/fees.</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="booking">Booking engine link</label>
+          <input id="booking" type="url" name="booking" placeholder="Direct booking URL" autocomplete="url">
+        </div>
+
+        <div class="form-row">
+          <label for="email">Your email</label>
+          <input id="email" type="email" name="email" required autocomplete="email">
+        </div>
+
+        <!-- Pilot opt-in (IDENTICAL to index) -->
+        <div class="form-row">
+          <label class="check">
+            <input type="checkbox"
+                   id="pilot"
+                   name="pilot"
+                   value="yes"
+                   aria-controls="pilotFields"
+                   aria-expanded="false">
+            Apply for Founders’ Pilot (case-study partner pricing)
           </label>
-          <input id="adr" type="number" name="adr" min="40" step="1" inputmode="decimal"
-                 placeholder="e.g., 100" aria-describedby="adrHelp" required>
-          <p id="adrHelp" class="tiny">Use your average nightly room price before taxes/fees.</p>
+          <p class="tiny" id="pilotHelp">If selected, share a public rooms link and confirm the conditions below.</p>
         </div>
-      </div>
 
-      <div class="form-row"><label for="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
-      <div class="form-row"><label for="email">Your email</label><input id="email" type="email" name="email" required></div>
-      <div class="form-row"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
+        <!-- Pilot-only fields -->
+        <fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
+          <legend class="tiny">Pilot verification (required for Pilot)</legend>
 
-      <!-- Helpful metadata for Formspree -->
-      <input type="hidden" name="_subject" id="fsSubject" value="">
-      <input type="hidden" name="_replyto"  id="fsReply"   value="">
-      <input type="hidden" name="source" value="audit-page">
-      <input type="text"   name="_gotcha" style="display:none">
+          <div class="form-row">
+            <label for="rooms_url">Public rooms link (booking engine or OTA)</label>
+            <input id="rooms_url" name="rooms_url" type="url" placeholder="https://booking.example.com/property" autocomplete="url">
+          </div>
 
-      <button class="btn primary" type="submit" id="auditSubmit">Request audit</button>
-      <p class="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
-      <p id="auditMsg" class="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
-    </form>
-  </section>
+          <div class="form-row">
+            <label for="ota_url">Optional: OTA listing link</label>
+            <input id="ota_url" name="ota_url" type="url" placeholder="https://www.booking.com/hotel/..." autocomplete="url">
+          </div>
+
+          <div class="form-row">
+            <label for="ga4_email">GA4/analytics access email</label>
+            <input id="ga4_email" name="ga4_email" type="email" placeholder="analytics@yourhotel.com" autocomplete="email">
+          </div>
+
+          <div class="form-row">
+            <label class="check">
+              <input type="checkbox" id="att_showcase" name="att_showcase" value="yes">
+              I allow Keyturn to publish a case study incl. anonymised metrics for 18 months.
+            </label>
+            <label class="check">
+              <input type="checkbox" id="att_metrics" name="att_metrics" value="yes">
+              I agree to share GA4 + booking/OTA metrics for setup and reporting.
+            </label>
+          </div>
+
+          <div class="form-row two">
+            <div>
+              <label for="vol_sessions">Monthly site sessions (≈)</label>
+              <input id="vol_sessions" name="vol_sessions" type="number" min="0" step="1" placeholder="e.g., 1500">
+              <p class="tiny">Benchmark: <strong>≥ 1,500</strong></p>
+            </div>
+            <div>
+              <label for="vol_ota">OTA bookings / month (≈)</label>
+              <input id="vol_ota" name="vol_ota" type="number" min="0" step="1" placeholder="e.g., 10">
+              <p class="tiny">Benchmark: <strong>≥ 10</strong></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="vol_adr">ADR ($)</label>
+            <input id="vol_adr" name="vol_adr" type="number" min="0" step="1" placeholder="e.g., 80">
+            <p class="tiny">Benchmark: <strong>≥ $80</strong></p>
+          </div>
+        </fieldset>
+
+        <!-- Tag the submission type -->
+        <input type="hidden" name="program" id="program" value="Standard">
+        <input type="hidden" name="pilot_benchmarks" id="pilot_benchmarks" value="">
+
+        <div class="form-row">
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?" autocomplete="off"></textarea>
+        </div>
+
+        <!-- helper fields for Formspree -->
+        <input type="hidden" name="_subject" id="fsSubject" value="">
+        <input type="hidden" name="_replyto"  id="fsReply"   value="">
+        <input type="hidden" name="source" value="audit-page">
+        <input type="text"   name="_gotcha"   style="display:none">
+
+        <button class="btn primary" type="submit" id="auditSubmit">Request audit</button>
+        <p class="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
+        <p id="auditMsg" class="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
+      </form>
+    </section>
+  </div>
 </main>
 
 <footer class="container footer">
@@ -82,59 +195,149 @@
   <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
 </footer>
 
+<!-- Sticky mobile CTA -->
+<a href="#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
+
 <script>
-document.getElementById('y').textContent = new Date().getFullYear();
+  // Year
+  document.getElementById('y').textContent = new Date().getFullYear();
 
-const form = document.getElementById('auditForm');
-const msg  = document.getElementById('auditMsg');
-const btn  = document.getElementById('auditSubmit');
-const fsSubject = document.getElementById('fsSubject');
-const fsReply   = document.getElementById('fsReply');
-const emailInput = document.getElementById('email');
-const propertyInput = document.getElementById('property');
-
-function setHiddenFields(){
-  fsSubject.value = `Audit request: ${propertyInput.value || 'Property'}`;
-  fsReply.value = emailInput.value || '';
-}
-emailInput.addEventListener('input', setHiddenFields);
-propertyInput.addEventListener('input', setHiddenFields);
-
-form.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  setHiddenFields();
-
-  msg.textContent = 'Sending…';
-  btn.disabled = true;
-
-  try{
-    const res = await fetch(form.action, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+  // Mobile menu toggle (same as other pages)
+  (function(){
+    const toggle = document.querySelector('[data-menu-toggle]');
+    const drawer = document.getElementById('mobileMenu');
+    if (!toggle || !drawer) return;
+    const closeDrawer = () => { drawer.hidden = true; toggle.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      drawer.hidden = open;
+      document.body.classList.toggle('no-scroll', !open);
     });
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+  })();
 
-    if (res.ok){
-      // Optional GA4
-      window.gtag && window.gtag('event','audit_submit_success', { form: 'audit-page' });
+  // Pilot toggle + validity (IDENTICAL logic to index)
+  (function(){
+    const pilot        = document.getElementById('pilot');
+    const pilotFields  = document.getElementById('pilotFields');
+    const program      = document.getElementById('program');
+    const pilotBench   = document.getElementById('pilot_benchmarks');
+    const form         = document.getElementById('auditForm');
+    const msg          = document.getElementById('auditMsg');
+    const btn          = document.getElementById('auditSubmit');
+    const fsSubject    = document.getElementById('fsSubject');
+    const fsReply      = document.getElementById('fsReply');
+    const emailInput   = document.getElementById('email');
+    const propertyInput= document.getElementById('property');
 
-      form.innerHTML = `
-        <h3>Thanks! 🎉</h3>
-        <p>We’ve got your details. We’ll send a <strong>2–3 minute Loom</strong> with 3 fixes and an ROI estimate.</p>
-        <p class="small">If you need to add anything, reply to the confirmation email we just sent.</p>
-        <div class="buttons" style="margin-top:10px">
-          <a class="btn" href="/">Back to home</a>
-          <a class="btn" href="/onboarding.html">See how onboarding works</a>
-        </div>`;
-    } else {
-      msg.textContent = 'Something went wrong. Please try again or email vinnie@keyturn.studio.';
-      btn.disabled = false;
+    function setHiddenFields(){
+      fsSubject.value = `Audit request: ${propertyInput.value || 'Property'}`;
+      fsReply.value   = emailInput.value || '';
     }
-  } catch(err){
-    msg.textContent = 'Network error. Please try again or email vinnie@keyturn.studio.';
-    btn.disabled = false;
-  }
-});
+
+    function meetsVolumeBenchmarks(){
+      const sessions = parseFloat(document.getElementById('vol_sessions')?.value || '') || 0;
+      const ota      = parseFloat(document.getElementById('vol_ota')?.value || '') || 0;
+      const adr      = parseFloat(document.getElementById('vol_adr')?.value || '') || 0;
+      const ok = (sessions >= 1500) || (ota >= 10) || (adr >= 80);
+      let why = [];
+      if (sessions >= 1500) why.push('sessions≥1500');
+      if (ota >= 10)        why.push('OTA≥10/mo');
+      if (adr >= 80)        why.push('ADR≥80');
+      return { ok, why: why.join(', ') || 'none' };
+    }
+
+    function syncPilotRequired() {
+      const isOn = !!(pilot && pilot.checked);
+      if (pilotFields){
+        pilotFields.hidden = !isOn;
+        pilot?.setAttribute('aria-expanded', isOn ? 'true' : 'false');
+      }
+      const reqIds = ['rooms_url', 'ga4_email', 'att_showcase', 'att_metrics'];
+      reqIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.type === 'checkbox') {
+          el.required = isOn;
+        } else {
+          el.toggleAttribute('required', isOn);
+        }
+      });
+      if (program) program.value = isOn ? 'Founders’ Pilot' : 'Standard';
+    }
+
+    pilot?.addEventListener('change', syncPilotRequired);
+
+    // Auto-enable with ?pilot=1 or #pilot
+    const qs = new URLSearchParams(location.search);
+    if ((qs.get('pilot') === '1' || location.hash.includes('pilot')) && pilot){
+      pilot.checked = true;
+    }
+    syncPilotRequired();
+
+    // Submit handler (Formspree) with Pilot screening
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (form.checkValidity && !form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+
+      const pilotOn = !!(pilot && pilot.checked);
+      if (pilotOn){
+        const roomsURL   = document.getElementById('rooms_url')?.value.trim();
+        const showcaseOK = document.getElementById('att_showcase')?.checked;
+        const metricsOK  = document.getElementById('att_metrics')?.checked;
+        const ga4Email   = document.getElementById('ga4_email')?.value.trim();
+        const vol        = meetsVolumeBenchmarks();
+
+        if (!roomsURL || !showcaseOK || !metricsOK || !ga4Email){
+          msg.textContent = 'For the Pilot, please add a rooms/OTA link, GA4 access email, and tick both attestations.';
+          msg.style.color = '#fca5a5';
+          return;
+        }
+        if (!vol.ok){
+          msg.textContent = 'Pilot note: please meet at least one benchmark (sessions ≥ 1,500, OTA ≥ 10/mo, or ADR ≥ $80). If your story is exceptional, add context in Notes.';
+          msg.style.color = '#f59e0b';
+        }
+        if (pilotBench) pilotBench.value = vol.why;
+      }
+
+      setHiddenFields();
+      msg.textContent = 'Sending…';
+      msg.style.color = 'var(--muted)';
+      btn.disabled = true;
+
+      try{
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (res.ok){
+          window.gtag && window.gtag('event','audit_submit_success', { form: 'audit-page' });
+          form.reset();
+          syncPilotRequired();
+          form.innerHTML = `
+            <h3>Thanks! 🎉</h3>
+            <p>We’ve got your details. We’ll send a <strong>2–3 minute Loom</strong> with 3 fixes and an ROI estimate.</p>
+            <p class="small">If you need to add anything, reply to the confirmation email we just sent.</p>
+            <div class="buttons" style="margin-top:10px">
+              <a class="btn" href="/">Back to home</a>
+              <a class="btn" href="/onboarding.html">See how onboarding works</a>
+            </div>`;
+        } else {
+          msg.textContent = 'Something went wrong. Please try again or email vinnie@keyturn.studio.';
+          btn.disabled = false;
+        }
+      } catch(err){
+        msg.textContent = 'Network error. Please try again or email vinnie@keyturn.studio.';
+        btn.disabled = false;
+      }
+    });
+  })();
 </script>
 </body>
 </html>
