@@ -14,27 +14,57 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="container">
-  <nav class="nav" aria-label="Primary">
+<!-- ===== Sticky site header (same as index) ===== -->
+<header class="site-header">
+  <div class="container header-bar">
     <a class="brand" href="/" aria-label="Keyturn Studio home">
-      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70">
+      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="180" height="56" decoding="async">
     </a>
-    <div class="nav-links">
-      <a href="/onboarding.html">How it works</a>
-      <a href="/#results">Proof</a>
-      <a href="/#pricing">Pricing</a>
-      <a class="cta" href="/audit.html">Get a 10-min audit</a>
-    </div>
-  </nav>
 
-  <div class="hero">
-    <h1>How onboarding works</h1>
-    <p>Simple, fast, and built around lifting <strong>website-direct</strong> share.</p>
+    <!-- Desktop nav -->
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#process">How it works</a></li>
+        <li><a href="/#results">Proof</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a class="btn btn-ghost" href="/audit.html">Get a 10-min audit</a>
+        <a class="btn btn-primary" href="/onboarding.html" aria-label="You are on onboarding">Onboarding</a>
+      </div>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="menu-toggle" aria-controls="mobileMenu" aria-expanded="false" data-menu-toggle>
+      <span class="sr-only">Toggle menu</span>☰
+    </button>
   </div>
+
+  <!-- Mobile drawer -->
+  <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
+    <a href="#process">How it works</a>
+    <a href="/#results">Proof</a>
+    <a href="/#pricing">Pricing</a>
+    <a class="btn btn-ghost w-full" href="/audit.html">Get a 10-min audit</a>
+    <a class="btn btn-primary w-full" href="/onboarding.html">Onboarding</a>
+  </nav>
 </header>
 
+<!-- ===== Compact hero (same style) ===== -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Onboarding & process</h1>
+    <p class="hero-lede">Simple, fast, and built around lifting <strong>website-direct</strong> share.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="/audit.html">Request your audit</a>
+      <a class="btn btn-ghost" href="/#results">See proof</a>
+    </div>
+  </div>
+</section>
+
 <main id="main">
-  <section class="container grid section">
+  <!-- ===== Process (3 cards) ===== -->
+  <section id="process" class="container grid section">
     <article class="card">
       <h3>1) Discovery → Audit</h3>
       <ul>
@@ -58,12 +88,13 @@
       <h3>3) Launch → Polish → Growth</h3>
       <ul>
         <li>Go-live + 30-day polish window for small tweaks</li>
-        <li>Optional Care/Growth plan for CRO nudge & reporting</li>
+        <li>Optional Care/Growth plan for CRO nudge &amp; reporting</li>
         <li>Monthly KPI line: website-direct share (weighted), booking CTR, search clicks/CTR</li>
       </ul>
     </article>
   </section>
 
+  <!-- ===== Requirements / Approvals / Success ===== -->
   <section class="container section">
     <div class="grid">
       <article class="card">
@@ -100,14 +131,29 @@
     </div>
   </section>
 
+  <!-- ===== Pilot note (matches homepage language) ===== -->
+  <section class="container banner">
+    <p><strong>Founders’ Pilot (2 slots/month)</strong> — reduced setup for case-study partners (GA4 + bookings access). <strong>Includes first 2 months of Care free, then $300/mo.</strong></p>
+    <ul class="small" style="margin:8px 0 0 1.2rem">
+      <li>Allow anonymised metrics & screenshots for 18 months</li>
+      <li>Provide GA4 + booking/OTA access (for setup & reporting)</li>
+      <li>Meet any one: ≥ 1,500 sessions/mo, ≥ 10 OTA bookings/mo, or ADR ≥ $80</li>
+    </ul>
+    <div class="buttons" style="margin-top:10px">
+      <a class="btn btn-primary" href="/audit.html#pilot" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
+    </div>
+  </section>
+
+  <!-- ===== Pricing summary + CTAs ===== -->
   <section class="container section">
     <div class="grid">
       <article class="card">
         <h3>Pricing & payment</h3>
         <ul>
-          <li><strong>Core:</strong> £7,500 (0% 4-pay available)</li>
-          <li><strong>Pro:</strong> £12,000</li>
-          <li><strong>Care/Growth:</strong> £300–£900/mo</li>
+          <li><strong>Core:</strong> $7,500 (0% 4-pay available)</li>
+          <li><strong>Pro:</strong> $12,000</li>
+          <li><strong>Premier:</strong> $18,000–$25,000</li>
+          <li><strong>Care/Growth:</strong> $300–$900/mo</li>
         </ul>
         <p class="tiny">Work starts after first payment. You own domain, content, images, and code.</p>
       </article>
@@ -123,9 +169,10 @@
         </ul>
       </article>
     </div>
+
     <div class="buttons" style="margin-top:12px">
-      <a class="btn primary" href="/audit.html">Request your audit</a>
-      <a class="btn" href="/#results">See results</a>
+      <a class="btn btn-primary" href="/audit.html">Request your audit</a>
+      <a class="btn btn-ghost" href="/#pricing">View full pricing</a>
     </div>
   </section>
 </main>
@@ -135,9 +182,27 @@
   <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
 </footer>
 
-<!-- Sticky mobile CTA -->
+<!-- Sticky mobile CTA (same pattern as index) -->
 <a href="/audit.html#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
 
-<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<!-- Minimal JS: mobile drawer + year -->
+<script>
+  (function(){
+    const toggle = document.querySelector('[data-menu-toggle]');
+    const drawer = document.getElementById('mobileMenu');
+    if (toggle && drawer){
+      const closeDrawer = () => { drawer.hidden = true; toggle.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        drawer.hidden = open;
+        document.body.classList.toggle('no-scroll', !open);
+      });
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    }
+    const y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
 </body>
 </html>
