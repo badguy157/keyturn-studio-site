@@ -15,41 +15,67 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="container">
-  <nav class="nav" aria-label="Primary">
+<!-- ===== New sticky header (mobile-first) ===== -->
+<header class="site-header">
+  <div class="container header-bar">
     <a class="brand" href="/" aria-label="Keyturn Studio home">
-      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70">
+      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="180" height="56" decoding="async">
     </a>
-    <div class="nav-links">
-      <a href="#services">How it works</a>
-      <a href="#results">Proof</a>
-      <a href="#pricing">Pricing</a>
-      <a class="cta" href="/audit.html">Get a 10-min audit</a>
-      <a class="cta ghost" href="/onboarding.html" aria-label="Skip audit and start onboarding">Start onboarding</a>
-    </div>
-  </nav>
 
-  <div class="hero">
-    <h1>More <span class="accent">direct bookings</span>, fewer OTA fees.</h1>
-    <p>We rebuild <strong>8–40 room inns & small hotels</strong> so more guests book direct.</p>
+    <!-- Desktop nav -->
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#services">How it works</a></li>
+        <li><a href="#results">Proof</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a class="btn btn-ghost" href="/audit.html">Get a 10-min audit</a>
+        <a class="btn btn-primary" href="/onboarding.html" aria-label="Skip audit and start onboarding">Start onboarding</a>
+      </div>
+    </nav>
 
-    <div class="badges">
-      <span class="badge" title="Google Analytics 4">GA4 events</span>
-      <span class="badge" title="Structured data for search engines">JSON-LD</span>
-      <span class="badge" title="Core Web Vitals">CWV</span>
-      <span class="badge" title="Accessible to screen readers & keyboard users">Accessibility pass</span>
-    </div>
-
-    <div class="buttons">
-      <a class="btn primary" href="#services">How it works</a>
-      <a class="btn" href="#results">See proof</a>
-      <a class="btn" href="#pricing">Pricing</a>
-      <a class="btn" href="/onboarding.html">Start onboarding</a>
-    </div>
-
-    <p class="tiny" style="margin-top:8px">Ready now? Skip the audit and <a href="/onboarding.html">start onboarding</a> (3-week build, fixed fee).</p>
+    <!-- Mobile hamburger -->
+    <button class="menu-toggle" aria-controls="mobileMenu" aria-expanded="false" data-menu-toggle>
+      <span class="sr-only">Open menu</span>☰
+    </button>
   </div>
+
+  <!-- Mobile drawer -->
+  <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
+    <a href="#services">How it works</a>
+    <a href="#results">Proof</a>
+    <a href="#pricing">Pricing</a>
+    <a class="btn btn-ghost w-full" href="/audit.html">Get a 10-min audit</a>
+    <a class="btn btn-primary w-full" href="/onboarding.html">Start onboarding</a>
+  </nav>
 </header>
+
+<!-- ===== New compact hero ===== -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">
+      More <span class="accent">direct bookings</span>, fewer OTA fees.
+    </h1>
+    <p class="hero-lede">We rebuild <strong>8–40 room inns &amp; small hotels</strong> so more guests book direct.</p>
+
+    <div class="chip-row" aria-label="Capabilities">
+      <span class="chip" title="Google Analytics 4">GA4 events</span>
+      <span class="chip" title="Structured data for search engines">JSON-LD</span>
+      <span class="chip" title="Core Web Vitals">CWV</span>
+      <span class="chip" title="Accessible to screen readers &amp; keyboard users">Accessibility pass</span>
+    </div>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#services">How it works</a>
+      <a class="btn btn-ghost" href="#results">See proof</a>
+    </div>
+
+    <p class="hero-subtext">
+      Ready now? <a href="/onboarding.html">Start onboarding</a> (3-week build, fixed fee).
+    </p>
+  </div>
+</section>
 
 <main id="main">
   <section id="services" class="container grid section">
@@ -76,7 +102,7 @@
 
     <article class="card">
       <h3>Why it pays</h3>
-      <p>Each booking moved off OTAs saves roughly <strong><abbr title="Average Daily Rate">ADR</abbr> × <abbr title="Average Length of Stay">ALOS</abbr> × 18%</strong>.</p>
+      <p>Each booking moved off OTAs saves roughly <strong><abbr title="Average Daily Rate">ADR</abbr> × <abbr title="Average Length of Stay">ALOS</strong> × 18%</abbr>.</p>
       <p class="small">Example: ADR $100, ALOS 2 → ~$36 saved per booking.</p>
 
       <div class="roi-box">
@@ -94,7 +120,7 @@
     </article>
   </section>
 
-  <!-- Pilot banner (open eligibility, capped slots, care perk) -->
+  <!-- Pilot banner -->
   <section class="container banner">
     <p><strong>Founders’ Pilot (2 slots/month):</strong> Reduced setup for properties that let us <strong>publish a case study with metrics</strong> (GA4 + bookings). <strong>Includes first 2 months of Care free, then $300/mo.</strong> Same deliverables, same 3-week timeline.</p>
     <div class="buttons">
@@ -144,7 +170,7 @@
     <div class="proof-grid">
       <article class="proof-card"><h5>Direct share ↑</h5><p>From single digits to <strong>22–25%+</strong> (seasonal).</p></article>
       <article class="proof-card"><h5>PageSpeed / <abbr title="Core Web Vitals">CWV</abbr></h5><p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p></article>
-      <article class="proof-card"><h5>Tracked funnel</h5><p><code>book_click</code> & <code>booking_outbound</code> GA4 events live.</p></article>
+      <article class="proof-card"><h5>Tracked funnel</h5><p><code>book_click</code> &amp; <code>booking_outbound</code> GA4 events live.</p></article>
     </div>
 
     <div class="metrics-grid">
@@ -159,7 +185,7 @@
         <p class="tiny">Oct 28 → Nov 9 • off-peak</p>
       </article>
       <article class="metric-card">
-        <h5><abbr title="Average Daily Rate">ADR</abbr> & <abbr title="Average Length of Stay">ALOS</abbr></h5>
+        <h5><abbr title="Average Daily Rate">ADR</abbr> &amp; <abbr title="Average Length of Stay">ALOS</abbr></h5>
         <p><strong>$90.65 ADR</strong> • <strong>1.51 nights</strong></p>
         <p class="tiny">Occupancy ~26.3% (8 rooms)</p>
       </article>
@@ -178,7 +204,7 @@
 
   <section id="pricing" class="container section">
     <h2>Pricing</h2>
-    <p class="small">Built for owner-operated inns & small hotels (<strong>8–40 rooms</strong>)</p>
+    <p class="small">Built for owner-operated inns &amp; small hotels (<strong>8–40 rooms</strong>)</p>
 
     <div class="pay-toggle" role="group" aria-label="Payment options">
       <label class="switch">
@@ -225,7 +251,6 @@
           <li><strong>Care ($300/mo):</strong> updates, backups, small edits, GA4 sanity checks</li>
           <li><strong>Growth ($900/mo):</strong> 1 meaningful CRO/SEO win + GBP posts + KPI line</li>
           <li>Monthly change log &amp; direct-booking click tracking</li>
-          <li>Cancel any time with 30-day notice</li>
         </ul>
         <p class="tiny perk">Pilot perk: <strong>first 2 months of Care free</strong>, then $300/mo.</p>
         <a class="btn js-pilot" href="#audit">See plan details</a>
@@ -344,7 +369,7 @@
         <input id="email" type="email" name="email" required autocomplete="email">
       </div>
 
-      <!-- Pilot opt-in (open eligibility) -->
+      <!-- Pilot opt-in -->
       <div class="form-row">
         <label class="check">
           <input type="checkbox"
@@ -358,7 +383,7 @@
         <p class="tiny" id="pilotHelp">If selected, share a public rooms link and confirm the conditions below.</p>
       </div>
 
-      <!-- Pilot-only fields (revealed when checked) -->
+      <!-- Pilot-only fields -->
       <fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
         <legend class="tiny">Pilot verification (required for Pilot)</legend>
 
@@ -408,7 +433,7 @@
         </div>
       </fieldset>
 
-      <!-- Tag the submission type for Formspree -->
+      <!-- Tag the submission type -->
       <input type="hidden" name="program" id="program" value="Standard">
       <input type="hidden" name="pilot_benchmarks" id="pilot_benchmarks" value="">
 
@@ -438,11 +463,25 @@
   </p>
 </footer>
 
-<!-- Sticky mobile CTA -->
+<!-- Sticky mobile CTA (kept as audit request) -->
 <a href="#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // ===== Mobile menu toggle =====
+    const toggle = document.querySelector('[data-menu-toggle]');
+    const drawer = document.getElementById('mobileMenu');
+    if (toggle && drawer){
+      const closeDrawer = () => { drawer.hidden = true; toggle.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        drawer.hidden = open;
+        document.body.classList.toggle('no-scroll', !open);
+      });
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    }
+
     // Year
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
@@ -518,55 +557,16 @@
     const pilotBench   = document.getElementById('pilot_benchmarks');
     const msg          = document.getElementById('auditMsg');
 
-    // Any link with .js-pilot sets the form to Pilot mode
     document.querySelectorAll('a.js-pilot').forEach(a => {
       a.addEventListener('click', () => {
         if (pilot){
           pilot.checked = true;
           pilot.dispatchEvent(new Event('change'));
-          // jump to form
           const audit = document.getElementById('audit');
           if (audit) audit.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
-
-    function syncPilotRequired() {
-      const isOn = !!(pilot && pilot.checked);
-      if (pilotFields){
-        pilotFields.hidden = !isOn;
-        pilot?.setAttribute('aria-expanded', isOn ? 'true' : 'false');
-      }
-
-      // Toggle required attrs only when Pilot is on
-      const reqIds = ['rooms_url', 'ga4_email', 'att_showcase', 'att_metrics'];
-      reqIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        if (el.type === 'checkbox') {
-          el.required = isOn;
-        } else {
-          el.toggleAttribute('required', isOn);
-        }
-      });
-
-      if (program){
-        program.value = isOn ? 'Founders’ Pilot' : 'Standard';
-      }
-    }
-
-    pilot?.addEventListener('change', syncPilotRequired);
-
-    // Auto-enable Pilot if ?pilot=1 or #pilot is present
-    const qs = new URLSearchParams(location.search);
-    if ((qs.get('pilot') === '1' || location.hash.includes('pilot')) && pilot){
-      pilot.checked = true;
-    }
-    syncPilotRequired();
-
-    // ===== Audit form (Formspree) with Pilot screening =====
-    const form = document.getElementById('auditForm');
-    const btn  = document.getElementById('auditSubmit');
 
     function meetsVolumeBenchmarks(){
       const sessions = parseFloat(document.getElementById('vol_sessions')?.value || '') || 0;
@@ -580,12 +580,39 @@
       return { ok, why: why.join(', ') || 'none' };
     }
 
-    async function submitFormspree(fd){
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: fd,
-        headers: { 'Accept': 'application/json' }
+    function syncPilotRequired() {
+      const isOn = !!(pilot && pilot.checked);
+      if (pilotFields){
+        pilotFields.hidden = !isOn;
+        pilot?.setAttribute('aria-expanded', isOn ? 'true' : 'false');
+      }
+      const reqIds = ['rooms_url', 'ga4_email', 'att_showcase', 'att_metrics'];
+      reqIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.type === 'checkbox') {
+          el.required = isOn;
+        } else {
+          el.toggleAttribute('required', isOn);
+        }
       });
+      if (program) program.value = isOn ? 'Founders’ Pilot' : 'Standard';
+    }
+
+    pilot?.addEventListener('change', syncPilotRequired);
+
+    const qs = new URLSearchParams(location.search);
+    if ((qs.get('pilot') === '1' || location.hash.includes('pilot')) && pilot){
+      pilot.checked = true;
+    }
+    syncPilotRequired();
+
+    // ===== Audit form (Formspree) with Pilot screening =====
+    const form = document.getElementById('auditForm');
+    const btn  = document.getElementById('auditSubmit');
+
+    async function submitFormspree(fd){
+      const res = await fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
       return res.ok;
     }
 
@@ -593,13 +620,11 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // HTML5 validity first
         if (form.checkValidity && !form.checkValidity()){
           form.reportValidity();
           return;
         }
 
-        // Pilot-specific screening
         const pilotOn = !!(pilot && pilot.checked);
         if (pilotOn){
           const roomsURL   = document.getElementById('rooms_url')?.value.trim();
@@ -613,16 +638,13 @@
             msg.style.color = '#fca5a5';
             return;
           }
-
           if (!vol.ok){
             msg.textContent = 'Pilot note: please meet at least one benchmark (sessions ≥ 1,500, OTA ≥ 10/mo, or ADR ≥ $80). If your story is exceptional, we may still approve—add context in Notes.';
             msg.style.color = '#f59e0b';
-            // continue, but tag as borderline
           }
           if (pilotBench) pilotBench.value = vol.why;
         }
 
-        // Ready to submit
         if (msg){ msg.textContent = ''; }
         if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
 
@@ -633,7 +655,7 @@
         const ok = await submitFormspree(fd);
         if (ok){
           form.reset();
-          syncPilotRequired(); // hide pilot fields post-reset
+          syncPilotRequired();
           if (msg){ msg.textContent = 'Thanks! We’ll send your Loom audit shortly.'; msg.style.color = '#c8facc'; }
         } else {
           if (msg){ msg.textContent = 'Could not send right now. Please email vinnie@keyturn.studio.'; msg.style.color = '#fca5a5'; }
@@ -642,7 +664,7 @@
       }, { capture: true });
     }
 
-    // ===== Lightbox =====
+    // ===== Lightbox (unchanged) =====
     const lb = document.getElementById('lb');
     if (lb){
       const lbImg = lb.querySelector('.lb-img');
