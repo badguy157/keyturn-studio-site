@@ -94,8 +94,9 @@
     </article>
   </section>
 
+  <!-- Pilot banner (open eligibility, capped slots, care perk) -->
   <section class="container banner">
-    <p><strong>Founders’ Pilot (2 slots/month):</strong> For qualifying inns (8–12 rooms) who want proof fast — reduced setup in exchange for metrics access and a short testimonial. <strong>Includes your first 2 months of Care free, then $300/mo.</strong> Same deliverables, same 3-week timeline.</p>
+    <p><strong>Founders’ Pilot (2 slots/month):</strong> Reduced setup for properties that let us <strong>publish a case study with metrics</strong> (GA4 + bookings). <strong>Includes first 2 months of Care free, then $300/mo.</strong> Same deliverables, same 3-week timeline.</p>
     <div class="buttons">
       <a class="btn primary js-pilot" href="#audit" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
     </div>
@@ -235,7 +236,7 @@
     <div class="card footnote">
       <p><strong>Who each tier fits</strong></p>
       <ul>
-        <p class="tiny">Founders’ Pilot: 8–12 rooms, public rooms link + metrics access + short case study. Includes first 2 months of Care free, then $300/mo.</p>
+        <p class="tiny">Founders’ Pilot: case-study partners who meet criteria (data access, showcase permission, and basic volume fit). Includes first 2 months of Care free, then $300/mo.</p>
         <li><strong>Core ($7.5k):</strong> 8–20 rooms; typically repays in ~12–18 months from saved commission alone.</li>
         <li><strong>Pro ($12k):</strong> 20–40 rooms or smaller properties with strong year-round demand/F&amp;B.</li>
         <li><strong>Growth (from $900/mo):</strong> select high-volume properties; target +20–30 direct bookings/month and track it.</li>
@@ -342,48 +343,74 @@
         <label for="email">Your email</label>
         <input id="email" type="email" name="email" required autocomplete="email">
       </div>
-<!-- Pilot opt-in -->
-<div class="form-row">
-  <label class="check">
-    <input type="checkbox"
-           id="pilot"
-           name="pilot"
-           value="yes"
-           aria-controls="pilotFields"
-           aria-expanded="false">
-    Apply for Founders’ Pilot (8–12 rooms, case-study discount)
-  </label>
-  <p class="tiny" id="pilotHelp">If selected, please share a public rooms link and confirm the conditions.</p>
-</div>
 
-<!-- Pilot-only fields (revealed when checked) -->
-<fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
-  <legend class="tiny">Pilot verification (required for Pilot)</legend>
+      <!-- Pilot opt-in (open eligibility) -->
+      <div class="form-row">
+        <label class="check">
+          <input type="checkbox"
+                 id="pilot"
+                 name="pilot"
+                 value="yes"
+                 aria-controls="pilotFields"
+                 aria-expanded="false">
+          Apply for Founders’ Pilot (case-study partner pricing)
+        </label>
+        <p class="tiny" id="pilotHelp">If selected, share a public rooms link and confirm the conditions below.</p>
+      </div>
 
-  <div class="form-row">
-    <label for="rooms_url">Public rooms link (booking engine or OTA)</label>
-    <input id="rooms_url" name="rooms_url" type="url" placeholder="https://booking.example.com/property" autocomplete="url">
-  </div>
+      <!-- Pilot-only fields (revealed when checked) -->
+      <fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
+        <legend class="tiny">Pilot verification (required for Pilot)</legend>
 
-  <div class="form-row">
-    <label for="ota_url">Optional: OTA listing link</label>
-    <input id="ota_url" name="ota_url" type="url" placeholder="https://www.booking.com/hotel/..." autocomplete="url">
-  </div>
+        <div class="form-row">
+          <label for="rooms_url">Public rooms link (booking engine or OTA)</label>
+          <input id="rooms_url" name="rooms_url" type="url" placeholder="https://booking.example.com/property" autocomplete="url">
+        </div>
 
-  <div class="form-row">
-    <label class="check">
-      <input type="checkbox" id="att_rooms" name="att_rooms" value="yes">
-      I attest this property has <strong>8–12 rooms</strong>.
-    </label>
-    <label class="check">
-      <input type="checkbox" id="att_metrics" name="att_metrics" value="yes">
-      I agree to share metrics and allow a short public case study.
-    </label>
-  </div>
-</fieldset>
+        <div class="form-row">
+          <label for="ota_url">Optional: OTA listing link</label>
+          <input id="ota_url" name="ota_url" type="url" placeholder="https://www.booking.com/hotel/..." autocomplete="url">
+        </div>
 
-<!-- Tag the submission type for Formspree -->
-<input type="hidden" name="program" id="program" value="Standard">
+        <div class="form-row">
+          <label for="ga4_email">GA4/analytics access email</label>
+          <input id="ga4_email" name="ga4_email" type="email" placeholder="analytics@yourhotel.com" autocomplete="email">
+        </div>
+
+        <div class="form-row">
+          <label class="check">
+            <input type="checkbox" id="att_showcase" name="att_showcase" value="yes">
+            I allow Keyturn to publish a case study incl. anonymised metrics for 18 months.
+          </label>
+          <label class="check">
+            <input type="checkbox" id="att_metrics" name="att_metrics" value="yes">
+            I agree to share GA4 + booking/OTA metrics for setup and reporting.
+          </label>
+        </div>
+
+        <div class="form-row two">
+          <div>
+            <label for="vol_sessions">Monthly site sessions (≈)</label>
+            <input id="vol_sessions" name="vol_sessions" type="number" min="0" step="1" placeholder="e.g., 1500">
+            <p class="tiny">Benchmark: <strong>≥ 1,500</strong></p>
+          </div>
+          <div>
+            <label for="vol_ota">OTA bookings / month (≈)</label>
+            <input id="vol_ota" name="vol_ota" type="number" min="0" step="1" placeholder="e.g., 10">
+            <p class="tiny">Benchmark: <strong>≥ 10</strong></p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="vol_adr">ADR (£)</label>
+          <input id="vol_adr" name="vol_adr" type="number" min="0" step="1" placeholder="e.g., 80">
+          <p class="tiny">Benchmark: <strong>≥ £80</strong></p>
+        </div>
+      </fieldset>
+
+      <!-- Tag the submission type for Formspree -->
+      <input type="hidden" name="program" id="program" value="Standard">
+      <input type="hidden" name="pilot_benchmarks" id="pilot_benchmarks" value="">
 
       <div class="form-row">
         <label for="notes">Notes (optional)</label>
@@ -416,35 +443,80 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // ... your existing code ...
-// ---- Pricing toggle ----
-const payToggle = document.getElementById('payToggle');
-const priceEls = document.querySelectorAll('#pricing .price');
+    // Year
+    const y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
 
-function setPrices(monthly){
-  priceEls.forEach(el => {
-    const upfront = el.getAttribute('data-upfront');
-    const monthlyVal = el.getAttribute('data-monthly');
-    // Only swap text for cards that define both prices
-    if (!upfront) return;
-    el.textContent = monthly && monthlyVal ? monthlyVal : upfront;
-  });
-}
+    // ===== Pricing toggle (works for cards that have data-upfront / data-monthly) =====
+    const payToggle = document.getElementById('payToggle');
+    const priceEls  = document.querySelectorAll('#pricing .price');
 
-if (payToggle){
-  // default to upfront on load
-  setPrices(false);
-  payToggle.addEventListener('change', (e) => {
-    const checked = e.target.checked;
-    e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
-    setPrices(checked);
-  });
-}
+    function setPrices(monthly){
+      priceEls.forEach(el => {
+        const upfront = el.getAttribute('data-upfront');
+        const monthlyVal = el.getAttribute('data-monthly');
+        if (!upfront) return; // skip prices that aren't toggleable
+        el.textContent = monthly && monthlyVal ? monthlyVal : upfront;
+      });
+    }
+    if (payToggle){
+      setPrices(false);
+      payToggle.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
+        setPrices(checked);
+      });
+    }
 
-    // ---- Pilot toggle (conditional fields + CTA wiring) ----
-    const pilot       = document.getElementById('pilot');
-    const pilotFields = document.getElementById('pilotFields');
-    const program     = document.getElementById('program');
+    // ===== Estimator =====
+    const estBtn   = document.getElementById('estBtn');
+    const estOut   = document.getElementById('estOut');
+    const $        = (id) => document.getElementById(id);
+
+    function fmtGBP(n, frac = 0){
+      try { return new Intl.NumberFormat('en-GB', { style:'currency', currency:'GBP', maximumFractionDigits: frac, minimumFractionDigits: frac }).format(n); }
+      catch { return `£${Number(n).toFixed(frac)}`; }
+    }
+    function clamp(v, min, max){ v = Number(v); if (Number.isNaN(v)) return min; return Math.min(Math.max(v, min), max); }
+
+    if (estBtn){
+      estBtn.addEventListener('click', () => {
+        const adr    = parseFloat($('estADR').value);
+        const alos   = parseFloat($('estALOS').value);
+        const moved  = parseFloat($('estMoved').value);
+        const comm   = clamp(parseFloat($('estComm').value), 0, 100) / 100;
+        const cost   = parseFloat($('estCost').value);
+
+        const valid = [adr, alos, moved, comm, cost].every(n => Number.isFinite(n) && n >= 0);
+        if (!valid || adr <= 0 || alos <= 0 || moved <= 0 || cost <= 0){
+          estOut.textContent = 'Please enter positive values for ADR, ALOS, moved bookings, and project cost.';
+          estOut.style.color = '#fca5a5';
+          return;
+        }
+
+        const savedPerBooking = adr * alos * comm;
+        const annualSavings   = savedPerBooking * moved * 12;
+        const monthlySavings  = annualSavings / 12;
+        const breakevenMonths = monthlySavings > 0 ? (cost / monthlySavings) : Infinity;
+        const roiYear1        = annualSavings - cost;
+
+        estOut.innerHTML = `
+          Saves about <strong>${fmtGBP(annualSavings)}</strong>/yr
+          (≈ ${fmtGBP(monthlySavings)}/mo).<br>
+          Per moved booking: <strong>${fmtGBP(savedPerBooking, 2)}</strong>.
+          Breakeven in <strong>${Number.isFinite(breakevenMonths) ? breakevenMonths.toFixed(1) : '—'}</strong> months.
+          ${roiYear1 >= 0 ? `Year-1 net after project: <strong>${fmtGBP(roiYear1)}</strong>.` : `Year-1 shortfall before month-${breakevenMonths.toFixed(1)} breakeven: <strong>${fmtGBP(roiYear1)}</strong>.`}
+        `;
+        estOut.style.color = 'var(--muted-2)';
+      });
+    }
+
+    // ===== Pilot toggle (conditional fields + CTA wiring) =====
+    const pilot        = document.getElementById('pilot');
+    const pilotFields  = document.getElementById('pilotFields');
+    const program      = document.getElementById('program');
+    const pilotBench   = document.getElementById('pilot_benchmarks');
+    const msg          = document.getElementById('auditMsg');
 
     // Any link with .js-pilot sets the form to Pilot mode
     document.querySelectorAll('a.js-pilot').forEach(a => {
@@ -452,6 +524,9 @@ if (payToggle){
         if (pilot){
           pilot.checked = true;
           pilot.dispatchEvent(new Event('change'));
+          // jump to form
+          const audit = document.getElementById('audit');
+          if (audit) audit.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
@@ -464,8 +539,8 @@ if (payToggle){
       }
 
       // Toggle required attrs only when Pilot is on
-      const pilotReqIds = ['rooms_url', 'att_rooms', 'att_metrics'];
-      pilotReqIds.forEach(id => {
+      const reqIds = ['rooms_url', 'ga4_email', 'att_showcase', 'att_metrics'];
+      reqIds.forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         if (el.type === 'checkbox') {
@@ -475,7 +550,6 @@ if (payToggle){
         }
       });
 
-      // Tag program for Formspree
       if (program){
         program.value = isOn ? 'Founders’ Pilot' : 'Standard';
       }
@@ -490,15 +564,121 @@ if (payToggle){
     }
     syncPilotRequired();
 
-    // Hook into your existing Formspree submit to ensure program is correct
+    // ===== Audit form (Formspree) with Pilot screening =====
     const form = document.getElementById('auditForm');
+    const btn  = document.getElementById('auditSubmit');
+
+    function meetsVolumeBenchmarks(){
+      const sessions = parseFloat(document.getElementById('vol_sessions')?.value || '') || 0;
+      const ota      = parseFloat(document.getElementById('vol_ota')?.value || '') || 0;
+      const adr      = parseFloat(document.getElementById('vol_adr')?.value || '') || 0;
+      const ok = (sessions >= 1500) || (ota >= 10) || (adr >= 80);
+      let why = [];
+      if (sessions >= 1500) why.push('sessions≥1500');
+      if (ota >= 10)        why.push('OTA≥10/mo');
+      if (adr >= 80)        why.push('ADR≥80');
+      return { ok, why: why.join(', ') || 'none' };
+    }
+
+    async function submitFormspree(fd){
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      });
+      return res.ok;
+    }
+
     if (form){
-      form.addEventListener('submit', () => {
-        syncPilotRequired(); // makes sure required flags/program are up to date
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // HTML5 validity first
+        if (form.checkValidity && !form.checkValidity()){
+          form.reportValidity();
+          return;
+        }
+
+        // Pilot-specific screening
+        const pilotOn = !!(pilot && pilot.checked);
+        if (pilotOn){
+          const roomsURL   = document.getElementById('rooms_url')?.value.trim();
+          const showcaseOK = document.getElementById('att_showcase')?.checked;
+          const metricsOK  = document.getElementById('att_metrics')?.checked;
+          const ga4Email   = document.getElementById('ga4_email')?.value.trim();
+          const vol        = meetsVolumeBenchmarks();
+
+          if (!roomsURL || !showcaseOK || !metricsOK || !ga4Email){
+            msg.textContent = 'For the Pilot, please add a rooms/OTA link, GA4 access email, and tick both attestations.';
+            msg.style.color = '#fca5a5';
+            return;
+          }
+
+          if (!vol.ok){
+            msg.textContent = 'Pilot note: please meet at least one benchmark (sessions ≥ 1,500, OTA ≥ 10/mo, or ADR ≥ £80). If your story is exceptional, we may still approve—add context in Notes.';
+            msg.style.color = '#f59e0b';
+            // continue, but tag as borderline
+          }
+          if (pilotBench) pilotBench.value = vol.why;
+        }
+
+        // Ready to submit
+        if (msg){ msg.textContent = ''; }
+        if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+
+        const fd = new FormData(form);
+        fd.set('_subject', `Audit request: ${fd.get('property') || ''}`);
+        fd.set('_replyto', fd.get('email') || '');
+
+        const ok = await submitFormspree(fd);
+        if (ok){
+          form.reset();
+          syncPilotRequired(); // hide pilot fields post-reset
+          if (msg){ msg.textContent = 'Thanks! We’ll send your Loom audit shortly.'; msg.style.color = '#c8facc'; }
+        } else {
+          if (msg){ msg.textContent = 'Could not send right now. Please email vinnie@keyturn.studio.'; msg.style.color = '#fca5a5'; }
+        }
+        if (btn){ btn.disabled = false; btn.textContent = 'Request audit'; }
       }, { capture: true });
     }
 
-    // ... your existing Lightbox code ...
+    // ===== Lightbox =====
+    const lb = document.getElementById('lb');
+    if (lb){
+      const lbImg = lb.querySelector('.lb-img');
+      const lbCap = document.getElementById('lbCap');
+
+      function openLB(src, alt){
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lbCap.textContent = alt || '';
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden','false');
+        document.body.classList.add('no-scroll');
+      }
+      function closeLB(){
+        lb.classList.remove('is-open');
+        lb.setAttribute('aria-hidden','true');
+        document.body.classList.remove('no-scroll');
+        lbImg.src = '';
+        lbCap.textContent = '';
+      }
+
+      document.addEventListener('click', (e)=>{
+        const img = e.target.closest('img.zoomable');
+        if (img){
+          e.preventDefault();
+          const src = img.getAttribute('data-zoom') || img.currentSrc || img.src;
+          openLB(src, img.alt);
+          return;
+        }
+        if (e.target.closest('.lb-close') || e.target === lb){ closeLB(); }
+      });
+
+      document.addEventListener('keydown', (e)=>{
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB();
+      });
+    }
   });
 </script>
 

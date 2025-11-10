@@ -184,7 +184,7 @@ details {margin-top: 6px}
 details > summary {cursor: pointer; user-select: none}
 details.tiny > summary {color: var(--muted); font-size: var(--s-2)}
 
-/* estimator (aligned fields + readable button) */
+/* estimator */
 .est{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
