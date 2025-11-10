@@ -232,3 +232,20 @@ details.tiny > summary {color: var(--muted); font-size: var(--s-2)}
   overflow:hidden; clip:rect(0,0,0,0);
   white-space:nowrap; border:0;
 }
+
+/* "Who it’s for" line on pricing cards */
+.who { margin-top: 4px; color: var(--muted-2); }
+
+/* Checkbox labels */
+.check { display:flex; gap:8px; align-items:flex-start; font-size:0.95rem; color:var(--muted-2); }
+.check input { margin-top:4px; }
+
+/* Pilot fieldset block */
+.pilot-fields {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px dashed var(--border-soft);
+  border-radius: 10px;
+  background: #0b1326;
+}
+.pilot-fields legend { padding: 0 6px; color: var(--muted); }
