@@ -417,6 +417,29 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // ... your existing code ...
+// ---- Pricing toggle ----
+const payToggle = document.getElementById('payToggle');
+const priceEls = document.querySelectorAll('#pricing .price');
+
+function setPrices(monthly){
+  priceEls.forEach(el => {
+    const upfront = el.getAttribute('data-upfront');
+    const monthlyVal = el.getAttribute('data-monthly');
+    // Only swap text for cards that define both prices
+    if (!upfront) return;
+    el.textContent = monthly && monthlyVal ? monthlyVal : upfront;
+  });
+}
+
+if (payToggle){
+  // default to upfront on load
+  setPrices(false);
+  payToggle.addEventListener('change', (e) => {
+    const checked = e.target.checked;
+    e.target.setAttribute('aria-checked', checked ? 'true' : 'false');
+    setPrices(checked);
+  });
+}
 
     // ---- Pilot toggle (conditional fields + CTA wiring) ----
     const pilot       = document.getElementById('pilot');
