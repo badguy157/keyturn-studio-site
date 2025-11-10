@@ -25,6 +25,7 @@
       <a href="#results">Proof</a>
       <a href="#pricing">Pricing</a>
       <a class="cta" href="/audit.html">Get a 10-min audit</a>
+      <a class="cta ghost" href="/onboarding.html" aria-label="Skip audit and start onboarding">Start onboarding</a>
     </div>
   </nav>
 
@@ -43,7 +44,10 @@
       <a class="btn primary" href="#services">How it works</a>
       <a class="btn" href="#results">See proof</a>
       <a class="btn" href="#pricing">Pricing</a>
+      <a class="btn" href="/onboarding.html">Start onboarding</a>
     </div>
+
+    <p class="tiny" style="margin-top:8px">Ready now? Skip the audit and <a href="/onboarding.html">start onboarding</a> (3-week build, fixed fee).</p>
   </div>
 </header>
 
@@ -232,16 +236,31 @@
 
       <details class="tiny" style="margin-top:8px">
         <summary>Payback estimator (try it)</summary>
-        <div class="est">
-          <label>ADR (£): <input id="estADR" type="number" min="30" step="1" value="100"></label>
-          <label>ALOS (nights): <input id="estALOS" type="number" min="1" step="0.1" value="2"></label>
-          <label>Bookings moved / month: <input id="estMoved" type="number" min="1" step="1" value="15"></label>
-          <label>Commission (%): <input id="estComm" type="number" min="0" max="100" step="1" value="18"></label>
-          <label>Project cost (£): <input id="estCost" type="number" min="1000" step="100" value="7500"></label>
-          <button class="btn secondary" type="button" id="estBtn">Calculate</button>
-          <p id="estOut" class="small"></p>
+        <div class="est" aria-labelledby="estLbl">
+          <label id="estLbl" class="sr-only">Payback estimator inputs</label>
+          <label for="estADR">ADR (£)
+            <input id="estADR" type="number" min="30" step="1" value="100" autocomplete="off" inputmode="decimal">
+          </label>
+          <label for="estALOS">ALOS (nights)
+            <input id="estALOS" type="number" min="1" step="0.1" value="2" autocomplete="off" inputmode="decimal">
+          </label>
+          <label for="estMoved">Bookings moved / month
+            <input id="estMoved" type="number" min="1" step="1" value="15" autocomplete="off" inputmode="numeric">
+          </label>
+          <label for="estComm">Commission (%)
+            <input id="estComm" type="number" min="0" max="100" step="1" value="18" autocomplete="off" inputmode="numeric">
+          </label>
+          <label for="estCost">Project cost (£)
+            <input id="estCost" type="number" min="1000" step="100" value="7500" autocomplete="off" inputmode="numeric">
+          </label>
+          <button class="btn secondary" type="button" id="estBtn" aria-label="Calculate payback estimate">Calculate</button>
+          <p id="estOut" class="small" role="status" aria-live="polite"></p>
         </div>
       </details>
+
+      <div class="buttons" style="margin-top:10px">
+        <a class="btn" href="/onboarding.html">Start onboarding</a>
+      </div>
     </div>
   </section>
 
@@ -280,28 +299,46 @@
     <form id="auditForm"
           class="audit-form"
           action="https://formspree.io/f/mvgdpyay"
-          method="POST">
-      <div class="form-row"><label for="property">Property name</label><input id="property" type="text" name="property" required></div>
-      <div class="form-row"><label for="website">Website URL</label><input id="website" type="url" name="website" placeholder="https://example.com" required></div>
+          method="POST" novalidate>
+      <div class="form-row">
+        <label for="property">Property name</label>
+        <input id="property" type="text" name="property" required autocomplete="organization">
+      </div>
+
+      <div class="form-row">
+        <label for="website">Website URL</label>
+        <input id="website" type="url" name="website" placeholder="https://example.com" required autocomplete="url">
+      </div>
 
       <div class="form-row two">
         <div>
           <label for="rooms">Rooms</label>
-          <input id="rooms" type="number" name="rooms" min="1" max="100" required>
+          <input id="rooms" type="number" name="rooms" min="1" max="100" required inputmode="numeric" autocomplete="off">
         </div>
         <div>
           <label for="adr">
             <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">ADR</abbr> (approx.)
           </label>
           <input id="adr" type="number" name="adr" min="40" step="1" inputmode="decimal"
-                 placeholder="e.g., 100" aria-describedby="adrHelp" required>
+                 placeholder="e.g., 100" aria-describedby="adrHelp" required autocomplete="off">
           <p id="adrHelp" class="tiny">Use your average nightly room price before taxes/fees.</p>
         </div>
       </div>
 
-      <div class="form-row"><label for="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
-      <div class="form-row"><label for="email">Your email</label><input id="email" type="email" name="email" required></div>
-      <div class="form-row"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
+      <div class="form-row">
+        <label for="booking">Booking engine link</label>
+        <input id="booking" type="url" name="booking" placeholder="Direct booking URL" autocomplete="url">
+      </div>
+
+      <div class="form-row">
+        <label for="email">Your email</label>
+        <input id="email" type="email" name="email" required autocomplete="email">
+      </div>
+
+      <div class="form-row">
+        <label for="notes">Notes (optional)</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?" autocomplete="off"></textarea>
+      </div>
 
       <!-- helper fields for Formspree -->
       <input type="hidden" name="_subject" id="fsSubject" value="">
@@ -317,7 +354,11 @@
 
 <footer class="container footer">
   <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
-  <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  <p class="small">
+    <a href="/privacy.html">Privacy</a> ·
+    <a href="/terms.html">Terms</a> ·
+    <a href="/onboarding.html">Start onboarding</a>
+  </p>
 </footer>
 
 <!-- Sticky mobile CTA -->
@@ -329,30 +370,21 @@
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
 
-    // ---- Formspree submit (no email client) ----
+    // ---- Audit form (Formspree) ----
     const form = document.getElementById('auditForm');
     const btn  = document.getElementById('auditSubmit');
     const msg  = document.getElementById('auditMsg');
 
+    function setFieldValidity(input, valid){
+      if (!input) return;
+      input.setAttribute('aria-invalid', valid ? 'false' : 'true');
+    }
+
     if (form){
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const data = new FormData(form);
-        const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
-        const body = encodeURIComponent(
-`Property: ${data.get('property')||''}
-Website: ${data.get('website')||''}
-Rooms: ${data.get('rooms')||''}
-ADR: £${data.get('adr')||''}
-Booking engine: ${data.get('booking')||''}
-Email: ${data.get('email')||''}
 
-Notes:
-${data.get('notes')||''}
-
-Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
-        window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
-
+        // HTML5 validity check
         if (form.checkValidity && !form.checkValidity()){
           form.reportValidity();
           return;
@@ -386,7 +418,7 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
       });
     }
 
-    // pricing toggle (accessible)
+    // ---- Pricing toggle ----
     const toggle = document.getElementById('payToggle');
     const priceEls = document.querySelectorAll('#pricing .price');
     function setPrices(monthly){
@@ -405,7 +437,56 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
       });
     }
 
-    // --- simple lightbox (robust) ---
+    // ---- Estimator (Calculate) ----
+    const estBtn   = document.getElementById('estBtn');
+    const estOut   = document.getElementById('estOut');
+    const $ = (id) => document.getElementById(id);
+
+    function fmtGBP(n, frac = 0){
+      try { return new Intl.NumberFormat('en-GB', { style:'currency', currency:'GBP', maximumFractionDigits: frac, minimumFractionDigits: frac }).format(n); }
+      catch { return `£${Number(n).toFixed(frac)}`; }
+    }
+
+    function clamp(v, min, max){
+      v = Number(v);
+      if (Number.isNaN(v)) return min;
+      return Math.min(Math.max(v, min), max);
+    }
+
+    if (estBtn){
+      estBtn.addEventListener('click', () => {
+        const adr    = parseFloat($('estADR').value);
+        const alos   = parseFloat($('estALOS').value);
+        const moved  = parseFloat($('estMoved').value);
+        const comm   = clamp(parseFloat($('estComm').value), 0, 100) / 100;
+        const cost   = parseFloat($('estCost').value);
+
+        // Basic validation
+        const valid = [adr, alos, moved, comm, cost].every(n => Number.isFinite(n) && n >= 0);
+        if (!valid || adr <= 0 || alos <= 0 || moved <= 0 || cost <= 0){
+          estOut.textContent = 'Please enter positive values for ADR, ALOS, moved bookings, and project cost.';
+          estOut.style.color = '#fca5a5';
+          return;
+        }
+
+        const savedPerBooking = adr * alos * comm;
+        const annualSavings   = savedPerBooking * moved * 12;
+        const monthlySavings  = annualSavings / 12;
+        const breakevenMonths = monthlySavings > 0 ? (cost / monthlySavings) : Infinity;
+        const roiYear1        = annualSavings - cost;
+
+        estOut.innerHTML = `
+          Saves about <strong>${fmtGBP(annualSavings)}</strong>/yr
+          (≈ ${fmtGBP(monthlySavings)}/mo).<br>
+          Per moved booking: <strong>${fmtGBP(savedPerBooking, 2)}</strong>.
+          Breakeven in <strong>${Number.isFinite(breakevenMonths) ? breakevenMonths.toFixed(1) : '—'}</strong> months.
+          ${roiYear1 >= 0 ? `Year-1 net after project: <strong>${fmtGBP(roiYear1)}</strong>.` : `Year-1 shortfall before month-${breakevenMonths.toFixed(1)} breakeven: <strong>${fmtGBP(roiYear1)}</strong>.`}
+        `;
+        estOut.style.color = 'var(--muted-2)';
+      });
+    }
+
+    // ---- Lightbox ----
     const lb = document.getElementById('lb');
     if (lb){
       const lbImg = lb.querySelector('.lb-img');
@@ -426,7 +507,6 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
         lbImg.src = '';
         lbCap.textContent = '';
       }
-  
 
       document.addEventListener('click', (e)=>{
         const img = e.target.closest('img.zoomable');
@@ -444,7 +524,6 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
       });
     }
   });
-</script>  
 </script>
 
 <!-- Lightbox -->
