@@ -14,7 +14,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Sticky site header (same as index/onboarding) -->
+<!-- Sticky site header -->
 <header class="site-header">
   <div class="container header-bar">
     <a class="brand" href="/" aria-label="Keyturn Studio home">
@@ -29,14 +29,14 @@
         <li><a href="/#pricing">Pricing</a></li>
       </ul>
       <div class="nav-ctas">
-        <a class="btn btn-ghost" href="/audit.html#audit">Get a 10-min audit</a>
-        <a class="btn btn-primary" href="/onboarding.html" aria-label="Skip audit and start onboarding">Start onboarding</a>
+        <a class="btn btn-ghost" href="#audit">Get a 10-min audit</a>
+        <a class="btn btn-primary" href="/onboarding.html">Start onboarding</a>
       </div>
     </nav>
 
     <!-- Mobile hamburger -->
     <button class="menu-toggle" aria-controls="mobileMenu" aria-expanded="false" data-menu-toggle>
-      <span class="sr-only"></span>☰
+      <span class="sr-only">Toggle menu</span>☰
     </button>
   </div>
 
@@ -45,12 +45,12 @@
     <a href="/onboarding.html">How it works</a>
     <a href="/#results">Proof</a>
     <a href="/#pricing">Pricing</a>
-    <a class="btn btn-ghost w-full" href="/audit.html#audit">Get a 10-min audit</a>
+    <a class="btn btn-ghost w-full" href="#audit">Get a 10-min audit</a>
     <a class="btn btn-primary w-full" href="/onboarding.html">Start onboarding</a>
   </nav>
 </header>
 
-<!-- Compact hero (same style) -->
+<!-- Compact hero -->
 <section class="hero">
   <div class="container">
     <h1 class="hero-title">Get a <span class="accent">10-min audit</span></h1>
@@ -103,16 +103,84 @@
           <input id="email" type="email" name="email" required autocomplete="email">
         </div>
 
+        <!-- Pilot opt-in (IDENTICAL to index) -->
+        <div class="form-row">
+          <label class="check">
+            <input type="checkbox"
+                   id="pilot"
+                   name="pilot"
+                   value="yes"
+                   aria-controls="pilotFields"
+                   aria-expanded="false">
+            Apply for Founders’ Pilot (case-study partner pricing)
+          </label>
+          <p class="tiny" id="pilotHelp">If selected, share a public rooms link and confirm the conditions below.</p>
+        </div>
+
+        <!-- Pilot-only fields -->
+        <fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
+          <legend class="tiny">Pilot verification (required for Pilot)</legend>
+
+          <div class="form-row">
+            <label for="rooms_url">Public rooms link (booking engine or OTA)</label>
+            <input id="rooms_url" name="rooms_url" type="url" placeholder="https://booking.example.com/property" autocomplete="url">
+          </div>
+
+          <div class="form-row">
+            <label for="ota_url">Optional: OTA listing link</label>
+            <input id="ota_url" name="ota_url" type="url" placeholder="https://www.booking.com/hotel/..." autocomplete="url">
+          </div>
+
+          <div class="form-row">
+            <label for="ga4_email">GA4/analytics access email</label>
+            <input id="ga4_email" name="ga4_email" type="email" placeholder="analytics@yourhotel.com" autocomplete="email">
+          </div>
+
+          <div class="form-row">
+            <label class="check">
+              <input type="checkbox" id="att_showcase" name="att_showcase" value="yes">
+              I allow Keyturn to publish a case study incl. anonymised metrics for 18 months.
+            </label>
+            <label class="check">
+              <input type="checkbox" id="att_metrics" name="att_metrics" value="yes">
+              I agree to share GA4 + booking/OTA metrics for setup and reporting.
+            </label>
+          </div>
+
+          <div class="form-row two">
+            <div>
+              <label for="vol_sessions">Monthly site sessions (≈)</label>
+              <input id="vol_sessions" name="vol_sessions" type="number" min="0" step="1" placeholder="e.g., 1500">
+              <p class="tiny">Benchmark: <strong>≥ 1,500</strong></p>
+            </div>
+            <div>
+              <label for="vol_ota">OTA bookings / month (≈)</label>
+              <input id="vol_ota" name="vol_ota" type="number" min="0" step="1" placeholder="e.g., 10">
+              <p class="tiny">Benchmark: <strong>≥ 10</strong></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="vol_adr">ADR ($)</label>
+            <input id="vol_adr" name="vol_adr" type="number" min="0" step="1" placeholder="e.g., 80">
+            <p class="tiny">Benchmark: <strong>≥ $80</strong></p>
+          </div>
+        </fieldset>
+
+        <!-- Tag the submission type -->
+        <input type="hidden" name="program" id="program" value="Standard">
+        <input type="hidden" name="pilot_benchmarks" id="pilot_benchmarks" value="">
+
         <div class="form-row">
           <label for="notes">Notes (optional)</label>
           <textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?" autocomplete="off"></textarea>
         </div>
 
-        <!-- Helpful metadata for Formspree -->
+        <!-- helper fields for Formspree -->
         <input type="hidden" name="_subject" id="fsSubject" value="">
         <input type="hidden" name="_replyto"  id="fsReply"   value="">
         <input type="hidden" name="source" value="audit-page">
-        <input type="text"   name="_gotcha" style="display:none">
+        <input type="text"   name="_gotcha"   style="display:none">
 
         <button class="btn primary" type="submit" id="auditSubmit">Request audit</button>
         <p class="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
@@ -134,7 +202,7 @@
   // Year
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // Mobile menu toggle (same behavior as other pages)
+  // Mobile menu toggle (same as other pages)
   (function(){
     const toggle = document.querySelector('[data-menu-toggle]');
     const drawer = document.getElementById('mobileMenu');
@@ -149,31 +217,96 @@
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
   })();
 
-  // Audit form submission (unchanged, just tidied)
+  // Pilot toggle + validity (IDENTICAL logic to index)
   (function(){
-    const form = document.getElementById('auditForm');
-    const msg  = document.getElementById('auditMsg');
-    const btn  = document.getElementById('auditSubmit');
-    const fsSubject = document.getElementById('fsSubject');
-    const fsReply   = document.getElementById('fsReply');
-    const emailInput = document.getElementById('email');
-    const propertyInput = document.getElementById('property');
+    const pilot        = document.getElementById('pilot');
+    const pilotFields  = document.getElementById('pilotFields');
+    const program      = document.getElementById('program');
+    const pilotBench   = document.getElementById('pilot_benchmarks');
+    const form         = document.getElementById('auditForm');
+    const msg          = document.getElementById('auditMsg');
+    const btn          = document.getElementById('auditSubmit');
+    const fsSubject    = document.getElementById('fsSubject');
+    const fsReply      = document.getElementById('fsReply');
+    const emailInput   = document.getElementById('email');
+    const propertyInput= document.getElementById('property');
 
     function setHiddenFields(){
       fsSubject.value = `Audit request: ${propertyInput.value || 'Property'}`;
-      fsReply.value = emailInput.value || '';
+      fsReply.value   = emailInput.value || '';
     }
-    emailInput.addEventListener('input', setHiddenFields);
-    propertyInput.addEventListener('input', setHiddenFields);
 
-    form.addEventListener('submit', async (e)=>{
+    function meetsVolumeBenchmarks(){
+      const sessions = parseFloat(document.getElementById('vol_sessions')?.value || '') || 0;
+      const ota      = parseFloat(document.getElementById('vol_ota')?.value || '') || 0;
+      const adr      = parseFloat(document.getElementById('vol_adr')?.value || '') || 0;
+      const ok = (sessions >= 1500) || (ota >= 10) || (adr >= 80);
+      let why = [];
+      if (sessions >= 1500) why.push('sessions≥1500');
+      if (ota >= 10)        why.push('OTA≥10/mo');
+      if (adr >= 80)        why.push('ADR≥80');
+      return { ok, why: why.join(', ') || 'none' };
+    }
+
+    function syncPilotRequired() {
+      const isOn = !!(pilot && pilot.checked);
+      if (pilotFields){
+        pilotFields.hidden = !isOn;
+        pilot?.setAttribute('aria-expanded', isOn ? 'true' : 'false');
+      }
+      const reqIds = ['rooms_url', 'ga4_email', 'att_showcase', 'att_metrics'];
+      reqIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.type === 'checkbox') {
+          el.required = isOn;
+        } else {
+          el.toggleAttribute('required', isOn);
+        }
+      });
+      if (program) program.value = isOn ? 'Founders’ Pilot' : 'Standard';
+    }
+
+    pilot?.addEventListener('change', syncPilotRequired);
+
+    // Auto-enable with ?pilot=1 or #pilot
+    const qs = new URLSearchParams(location.search);
+    if ((qs.get('pilot') === '1' || location.hash.includes('pilot')) && pilot){
+      pilot.checked = true;
+    }
+    syncPilotRequired();
+
+    // Submit handler (Formspree) with Pilot screening
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (form.checkValidity && !form.checkValidity()){
         form.reportValidity();
         return;
       }
+
+      const pilotOn = !!(pilot && pilot.checked);
+      if (pilotOn){
+        const roomsURL   = document.getElementById('rooms_url')?.value.trim();
+        const showcaseOK = document.getElementById('att_showcase')?.checked;
+        const metricsOK  = document.getElementById('att_metrics')?.checked;
+        const ga4Email   = document.getElementById('ga4_email')?.value.trim();
+        const vol        = meetsVolumeBenchmarks();
+
+        if (!roomsURL || !showcaseOK || !metricsOK || !ga4Email){
+          msg.textContent = 'For the Pilot, please add a rooms/OTA link, GA4 access email, and tick both attestations.';
+          msg.style.color = '#fca5a5';
+          return;
+        }
+        if (!vol.ok){
+          msg.textContent = 'Pilot note: please meet at least one benchmark (sessions ≥ 1,500, OTA ≥ 10/mo, or ADR ≥ $80). If your story is exceptional, add context in Notes.';
+          msg.style.color = '#f59e0b';
+        }
+        if (pilotBench) pilotBench.value = vol.why;
+      }
+
       setHiddenFields();
       msg.textContent = 'Sending…';
+      msg.style.color = 'var(--muted)';
       btn.disabled = true;
 
       try{
@@ -185,6 +318,8 @@
 
         if (res.ok){
           window.gtag && window.gtag('event','audit_submit_success', { form: 'audit-page' });
+          form.reset();
+          syncPilotRequired();
           form.innerHTML = `
             <h3>Thanks! 🎉</h3>
             <p>We’ve got your details. We’ll send a <strong>2–3 minute Loom</strong> with 3 fixes and an ROI estimate.</p>
