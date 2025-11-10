@@ -24,7 +24,7 @@
       <a href="#services">How it works</a>
       <a href="#results">Proof</a>
       <a href="#pricing">Pricing</a>
-      <a class="cta" href="#audit">Get a 10-min audit</a>
+      <a class="cta" href="/audit.html">Get a 10-min audit</a>
     </div>
   </nav>
 
@@ -238,7 +238,7 @@
           <label>Bookings moved / month: <input id="estMoved" type="number" min="1" step="1" value="15"></label>
           <label>Commission (%): <input id="estComm" type="number" min="0" max="100" step="1" value="18"></label>
           <label>Project cost (£): <input id="estCost" type="number" min="1000" step="100" value="7500"></label>
-          <button class="btn" type="button" id="estBtn">Calculate</button>
+          <button class="btn secondary" type="button" id="estBtn">Calculate</button>
           <p id="estOut" class="small"></p>
         </div>
       </details>
@@ -337,6 +337,21 @@
     if (form){
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const data = new FormData(form);
+        const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
+        const body = encodeURIComponent(
+`Property: ${data.get('property')||''}
+Website: ${data.get('website')||''}
+Rooms: ${data.get('rooms')||''}
+ADR: £${data.get('adr')||''}
+Booking engine: ${data.get('booking')||''}
+Email: ${data.get('email')||''}
+
+Notes:
+${data.get('notes')||''}
+
+Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
+        window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
 
         if (form.checkValidity && !form.checkValidity()){
           form.reportValidity();
@@ -411,6 +426,7 @@
         lbImg.src = '';
         lbCap.textContent = '';
       }
+  
 
       document.addEventListener('click', (e)=>{
         const img = e.target.closest('img.zoomable');
@@ -428,6 +444,7 @@
       });
     }
   });
+</script>  
 </script>
 
 <!-- Lightbox -->

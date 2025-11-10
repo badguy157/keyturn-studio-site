@@ -51,8 +51,27 @@ p{color:var(--muted-2);font-size:var(--s-3);margin:.25rem 0 .75rem}
 .tiny{font-size:.85rem;color:var(--muted)}
 .accent{color:var(--accent)}
 .buttons{margin-top:12px}
-.btn{display:inline-block;margin-right:10px;padding:12px 16px;border-radius:10px;border:1px solid var(--border);color:var(--text)}
+
+/* unified button base */
+.btn{
+  display:inline-block;
+  margin-right:10px;
+  padding:12px 16px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  color:var(--text);
+  background:transparent;
+  cursor:pointer;
+}
 .btn.primary{background:var(--brand);border-color:var(--brand)}
+/* filled secondary for estimator */
+.btn.secondary{
+  background:#1f2937;
+  border-color:#334155;
+  color:#e5e7eb;
+}
+.btn.secondary:hover{background:#334155}
+.btn.secondary:active{transform:translateY(1px)}
 
 /* cards & grids */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--gap)}
@@ -159,10 +178,32 @@ details {margin-top: 6px}
 details > summary {cursor: pointer; user-select: none}
 details.tiny > summary {color: var(--muted); font-size: var(--s-2)}
 
-/* estimator mini-form inline look */
-.est {display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin-top:8px}
-.est label {display:flex; flex-direction:column; gap:4px; font-size:.95rem; color:var(--muted-2)}
-.est input {background:#0b1326; border:1px solid var(--border); border-radius:10px; color:var(--text); padding:8px 10px}
+/* estimator (aligned fields + readable button) */
+.est{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
+  margin-top:8px;
+  align-items:end;
+}
+.est label{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-size:.95rem;
+  color:var(--muted-2);
+}
+.est input{
+  background:#0b1326;
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:var(--text);
+  padding:10px 12px;
+  height:44px;
+  line-height:1;
+}
+.est input::placeholder{color:#8ea3b8}
+.est .btn{height:44px}
 
 /* sticky mobile CTA */
 .sticky-cta{
