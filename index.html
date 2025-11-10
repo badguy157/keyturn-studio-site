@@ -133,14 +133,12 @@
       </figure>
     </div>
 
-    <!-- Micro-proof tiles -->
     <div class="proof-grid">
       <article class="proof-card"><h5>Direct share ↑</h5><p>From single digits to <strong>22–25%+</strong> (seasonal).</p></article>
       <article class="proof-card"><h5>PageSpeed / <abbr title="Core Web Vitals">CWV</abbr></h5><p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p></article>
       <article class="proof-card"><h5>Tracked funnel</h5><p><code>book_click</code> & <code>booking_outbound</code> GA4 events live.</p></article>
     </div>
 
-    <!-- Metrics you can boast about -->
     <div class="metrics-grid">
       <article class="metric-card">
         <h5>Website-direct (annual, weighted)</h5>
@@ -279,18 +277,40 @@
     <h2>Get a quick audit</h2>
     <p class="small">Share a few details and we’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
 
-    <form id="auditForm" class="audit-form">
-      <div class="form-row"><label>Property name</label><input type="text" name="property" required></div>
-      <div class="form-row"><label>Website URL</label><input type="url" name="website" placeholder="https://example.com" required></div>
+    <form id="auditForm"
+          class="audit-form"
+          action="https://formspree.io/f/mvgdpyay"
+          method="POST">
+      <div class="form-row"><label for="property">Property name</label><input id="property" type="text" name="property" required></div>
+      <div class="form-row"><label for="website">Website URL</label><input id="website" type="url" name="website" placeholder="https://example.com" required></div>
+
       <div class="form-row two">
-        <div><label>Rooms</label><input type="number" name="rooms" min="1" max="100" required></div>
-        <div><label>ADR (approx.)</label><input type="number" name="adr" min="40" step="1" required></div>
+        <div>
+          <label for="rooms">Rooms</label>
+          <input id="rooms" type="number" name="rooms" min="1" max="100" required>
+        </div>
+        <div>
+          <label for="adr">
+            <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">ADR</abbr> (approx.)
+          </label>
+          <input id="adr" type="number" name="adr" min="40" step="1" inputmode="decimal"
+                 placeholder="e.g., 100" aria-describedby="adrHelp" required>
+          <p id="adrHelp" class="tiny">Use your average nightly room price before taxes/fees.</p>
+        </div>
       </div>
-      <div class="form-row"><label>Booking engine link</label><input type="url" name="booking" placeholder="Direct booking URL"></div>
-      <div class="form-row"><label>Your email</label><input type="email" name="email" required></div>
-      <div class="form-row"><label>Notes (optional)</label><textarea name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
-      <button class="btn primary" type="submit">Request audit</button>
-      <p class="tiny">Prefer email? <a href="mailto:keyturnstudio@proton.me">keyturnstudio@proton.me</a></p>
+
+      <div class="form-row"><label for="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
+      <div class="form-row"><label for="email">Your email</label><input id="email" type="email" name="email" required></div>
+      <div class="form-row"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
+
+      <!-- helper fields for Formspree -->
+      <input type="hidden" name="_subject" id="fsSubject" value="">
+      <input type="hidden" name="_replyto"  id="fsReply"   value="">
+      <input type="text"   name="_gotcha"   style="display:none">
+
+      <button class="btn primary" type="submit" id="auditSubmit">Request audit</button>
+      <p class="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
+      <p id="auditMsg" class="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
     </form>
   </section>
 </main>
@@ -308,11 +328,14 @@
     // year
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
-  
-    // mailto-based audit form
+
+    // ---- Formspree submit (no email client) ----
     const form = document.getElementById('auditForm');
+    const btn  = document.getElementById('auditSubmit');
+    const msg  = document.getElementById('auditMsg');
+
     if (form){
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = new FormData(form);
         const subject = encodeURIComponent(`Audit request: ${data.get('property') || 'Property'}`);
@@ -329,9 +352,40 @@ ${data.get('notes')||''}
 
 Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
         window.location.href = `mailto:keyturnstudio@proton.me?subject=${subject}&body=${body}`;
+
+        if (form.checkValidity && !form.checkValidity()){
+          form.reportValidity();
+          return;
+        }
+
+        if (msg){ msg.textContent = ''; }
+        if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+
+        const fd = new FormData(form);
+        fd.set('_subject', `Audit request: ${fd.get('property') || ''}`);
+        fd.set('_replyto', fd.get('email') || '');
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: fd,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok){
+            form.reset();
+            if (msg){ msg.textContent = 'Thanks! We’ll send your Loom audit shortly.'; msg.style.color = '#c8facc'; }
+          } else {
+            if (msg){ msg.textContent = 'Could not send right now. Please email vinnie@keyturn.studio.'; msg.style.color = '#fca5a5'; }
+          }
+        } catch {
+          if (msg){ msg.textContent = 'Network error. Please email vinnie@keyturn.studio.'; msg.style.color = '#fca5a5'; }
+        } finally {
+          if (btn){ btn.disabled = false; btn.textContent = 'Request audit'; }
+        }
       });
     }
-  
+
     // pricing toggle (accessible)
     const toggle = document.getElementById('payToggle');
     const priceEls = document.querySelectorAll('#pricing .price');
@@ -350,13 +404,13 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
         setPrices(checked);
       });
     }
-  
+
     // --- simple lightbox (robust) ---
     const lb = document.getElementById('lb');
     if (lb){
       const lbImg = lb.querySelector('.lb-img');
       const lbCap = document.getElementById('lbCap');
-  
+
       function openLB(src, alt){
         lbImg.src = src;
         lbImg.alt = alt || '';
@@ -373,6 +427,7 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
         lbCap.textContent = '';
       }
   
+
       document.addEventListener('click', (e)=>{
         const img = e.target.closest('img.zoomable');
         if (img){
@@ -383,13 +438,14 @@ Please send a 2–3 min Loom with 3 fixes and an ROI estimate.`);
         }
         if (e.target.closest('.lb-close') || e.target === lb){ closeLB(); }
       });
-  
+
       document.addEventListener('keydown', (e)=>{
         if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLB();
       });
     }
   });
 </script>  
+</script>
 
 <!-- Lightbox -->
 <div class="lb" id="lb" aria-hidden="true">

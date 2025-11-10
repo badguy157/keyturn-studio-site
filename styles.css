@@ -214,3 +214,6 @@ details.tiny > summary {color: var(--muted); font-size: var(--s-2)}
   box-shadow: var(--shadow); z-index: 1001; border:1px solid var(--border);
 }
 @media (max-width: 640px){ .sticky-cta{display:block} }
+
+/* status message colors */
+#auditMsg { color: var(--muted); }
