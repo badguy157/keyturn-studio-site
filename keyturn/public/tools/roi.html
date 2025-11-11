@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keyturn — Commission Savings & Payback Calculator</title>
+  <style>
+    :root{--w:720px;}
+    body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;line-height:1.45;margin:0;padding:24px;background:#f7f7f7;}
+    .wrap{max-width:var(--w);margin:0 auto;background:#fff;border-radius:12px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+    h1{font-size:20px;margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row{display:flex;flex-direction:column;gap:6px}
+    label{font-weight:600}
+    input{padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px}
+    .note{font-size:12px;color:#666}
+    button{padding:12px 16px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700;cursor:pointer}
+    .out{background:#fafafa;border:1px dashed #ddd;border-radius:10px;padding:16px;margin-top:16px}
+    .out h2{margin:0 0 8px;font-size:16px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .kpi{padding:12px;border-radius:10px;background:#fff;border:1px solid #eee}
+    .kpi b{display:block;font-size:20px;margin-top:4px}
+    footer{margin-top:18px;font-size:12px;color:#666}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Commission Savings & Payback Calculator</h1>
+    <p class="note">Enter conservative numbers. This tool estimates monthly OTA commission savings from shifting bookings to direct, plus an optional payback period.</p>
+
+    <div class="grid">
+      <div class="row">
+        <label>Rooms</label>
+        <input id="rooms" type="number" min="1" value="10" />
+      </div>
+      <div class="row">
+        <label>ADR (average daily rate)</label>
+        <input id="adr" type="number" min="0" step="1" value="110" />
+      </div>
+      <div class="row">
+        <label>Occupancy %</label>
+        <input id="occ" type="number" min="0" max="100" step="1" value="60" />
+      </div>
+      <div class="row">
+        <label>Nights per month</label>
+        <input id="nights" type="number" min="1" max="31" step="1" value="30" />
+      </div>
+      <div class="row">
+        <label>OTA commission %</label>
+        <input id="commission" type="number" min="0" max="100" step="0.5" value="18" />
+      </div>
+      <div class="row">
+        <label>Direct share (now) %</label>
+        <input id="directNow" type="number" min="0" max="100" step="1" value="30" />
+      </div>
+      <div class="row">
+        <label>Direct share (target) %</label>
+        <input id="directTarget" type="number" min="0" max="100" step="1" value="50" />
+      </div>
+      <div class="row">
+        <label>Project cost (optional)</label>
+        <input id="projectCost" type="number" min="0" step="100" value="6000" />
+      </div>
+    </div>
+
+    <p><button id="calc">Calculate</button></p>
+
+    <div class="out" id="out" style="display:none">
+      <h2>Results</h2>
+      <div class="cols">
+        <div class="kpi">
+          Monthly OTA spend today
+          <b id="otaNow">—</b>
+        </div>
+        <div class="kpi">
+          Monthly OTA spend after improvement
+          <b id="otaAfter">—</b>
+        </div>
+        <div class="kpi">
+          Monthly commission saved
+          <b id="saved">—</b>
+        </div>
+        <div class="kpi">
+          Payback period (months)
+          <b id="payback">—</b>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Formula: OTA spend = ADR × Rooms × Nights × (Occupancy% ÷ 100) × (OTA share ÷ 100) × (Commission% ÷ 100). Savings = OTA spend (now − after).
+    </footer>
+  </div>
+
+  <script>
+    function money(x){ return new Intl.NumberFormat(undefined,{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(x||0); }
+    function months(x){ return (x && isFinite(x)) ? (Math.ceil(x*10)/10).toFixed(1) : '—'; }
+
+    function calc(){
+      const rooms = +document.getElementById('rooms').value || 0;
+      const adr = +document.getElementById('adr').value || 0;
+      const occ = (+document.getElementById('occ').value || 0)/100;
+      const nights = +document.getElementById('nights').value || 30;
+      const commission = (+document.getElementById('commission').value || 0)/100;
+      const directNow = (+document.getElementById('directNow').value || 0)/100;
+      const directTarget = (+document.getElementById('directTarget').value || 0)/100;
+      const projectCost = +document.getElementById('projectCost').value || 0;
+
+      const otaShareNow = 1 - directNow;
+      const otaShareAfter = 1 - Math.min(directTarget,1);
+
+      const otaNow = adr * rooms * nights * occ * otaShareNow * commission;
+      const otaAfter = adr * rooms * nights * occ * otaShareAfter * commission;
+      const saved = Math.max(otaNow - otaAfter, 0);
+      const payback = saved > 0 ? projectCost / saved : Infinity;
+
+      document.getElementById('otaNow').textContent = money(otaNow);
+      document.getElementById('otaAfter').textContent = money(otaAfter);
+      document.getElementById('saved').textContent = money(saved);
+      document.getElementById('payback').textContent = (payback===Infinity ? '—' : months(payback));
+
+      document.getElementById('out').style.display = 'block';
+    }
+    document.getElementById('calc').addEventListener('click', calc);
+  </script>
+</body>
+</html>

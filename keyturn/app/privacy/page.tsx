@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Keyturn Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.6}
+.container{max-width:820px;margin:0 auto;padding:32px 20px}
+h1{font-size:34px;margin:6px 0 12px}h2{margin-top:28px}a{color:#93c5fd}.muted{color:#94a3b8;font-size:14px}
+</style></head><body><div class="container">
+<h1>Privacy Policy</h1><p class="muted">Effective 2025-11-07</p>
+<p>Keyturn Studio builds and maintains marketing websites for privately owned hospitality businesses. We keep data collection minimal and transparent.</p>
+<h2>What we collect</h2>
+<ul>
+<li><strong>Site analytics:</strong> We use Google Analytics 4 to measure anonymous usage. We do not use cross-site advertising pixels.</li>
+<li><strong>Contact info you send us:</strong> If you email us, we receive your name, email, and message.</li>
+</ul>
+<h2>How we use data</h2>
+<ul><li>To respond to messages and provide services.</li><li>To understand aggregate site performance and improve UX.</li></ul>
+<h2>Sharing</h2><p>We do not sell personal data. We may share limited information with service providers (e.g., hosting, analytics) under confidentiality terms.</p>
+<h2>Retention</h2><p>Contact emails are kept as long as needed to deliver services. Aggregate analytics are retained per the provider’s default windows.</p>
+<h2>Your choices</h2><p>Contact us to request changes or deletion of messages you’ve sent. You can also use browser-level tracking protection.</p>
+<h2>Contact</h2><p>Email: <a href="mailto:keyturnstudio@proton.me">keyturnstudio@proton.me</a></p>
+<p class="muted">Operated by Ridgeway Labs LLC.</p></div></body></html>
