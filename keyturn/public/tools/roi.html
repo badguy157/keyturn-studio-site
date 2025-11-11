@@ -24,40 +24,40 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div className="wrap">
     <h1>Commission Savings & Payback Calculator</h1>
-    <p class="note">Enter conservative numbers. This tool estimates monthly OTA commission savings from shifting bookings to direct, plus an optional payback period.</p>
+    <p className="note">Enter conservative numbers. This tool estimates monthly OTA commission savings from shifting bookings to direct, plus an optional payback period.</p>
 
-    <div class="grid">
-      <div class="row">
+    <div className="grid">
+      <div className="row">
         <label>Rooms</label>
         <input id="rooms" type="number" min="1" value="10" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>ADR (average daily rate)</label>
         <input id="adr" type="number" min="0" step="1" value="110" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>Occupancy %</label>
         <input id="occ" type="number" min="0" max="100" step="1" value="60" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>Nights per month</label>
         <input id="nights" type="number" min="1" max="31" step="1" value="30" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>OTA commission %</label>
         <input id="commission" type="number" min="0" max="100" step="0.5" value="18" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>Direct share (now) %</label>
         <input id="directNow" type="number" min="0" max="100" step="1" value="30" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>Direct share (target) %</label>
         <input id="directTarget" type="number" min="0" max="100" step="1" value="50" />
       </div>
-      <div class="row">
+      <div className="row">
         <label>Project cost (optional)</label>
         <input id="projectCost" type="number" min="0" step="100" value="6000" />
       </div>
@@ -65,22 +65,22 @@
 
     <p><button id="calc">Calculate</button></p>
 
-    <div class="out" id="out" style="display:none">
+    <div className="out" id="out" style="display:none">
       <h2>Results</h2>
-      <div class="cols">
-        <div class="kpi">
+      <div className="cols">
+        <div className="kpi">
           Monthly OTA spend today
           <b id="otaNow">—</b>
         </div>
-        <div class="kpi">
+        <div className="kpi">
           Monthly OTA spend after improvement
           <b id="otaAfter">—</b>
         </div>
-        <div class="kpi">
+        <div className="kpi">
           Monthly commission saved
           <b id="saved">—</b>
         </div>
-        <div class="kpi">
+        <div className="kpi">
           Payback period (months)
           <b id="payback">—</b>
         </div>
