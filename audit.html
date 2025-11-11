@@ -12,57 +12,57 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<a className="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header className="container">
-  <nav className="nav" aria-label="Primary">
-    <a className="brand" href="/" aria-label="Keyturn Studio home">
+<header class="container">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="/" aria-label="Keyturn Studio home">
       <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70">
     </a>
-    <div className="nav-links">
+    <div class="nav-links">
       <a href="/onboarding.html">How it works</a>
       <a href="/#results">Proof</a>
       <a href="/#pricing">Pricing</a>
-      <a className="cta" href="/audit.html#audit">Get a 10-min audit</a>
+      <a class="cta" href="/audit.html#audit">Get a 10-min audit</a>
     </div>
   </nav>
 
-  <div className="hero">
-    <h1>Get a <span className="accent">10-min audit</span></h1>
+  <div class="hero">
+    <h1>Get a <span class="accent">10-min audit</span></h1>
     <p>We’ll send a <strong>2–3 minute Loom</strong> with <strong>3 fixes</strong> and an <strong>ROI estimate</strong> for moving bookings to website-direct.</p>
   </div>
 </header>
 
-<main id="main" className="container section">
-  <section className="card" id="audit">
+<main id="main" class="container section">
+  <section class="card" id="audit">
     <h2>Audit form</h2>
-    <p className="small">We only use this to send your Loom. No spam — ever.</p>
+    <p class="small">We only use this to send your Loom. No spam — ever.</p>
 
     <form id="auditForm"
-          className="audit-form"
+          class="audit-form"
           action="https://formspree.io/f/mvgdpyay"
           method="POST">
-      <div className="form-row"><label htmlFor="property">Property name</label><input id="property" type="text" name="property" required></div>
-      <div className="form-row"><label htmlFor="website">Website URL</label><input id="website" type="url" name="website" placeholder="https://example.com" required></div>
+      <div class="form-row"><label for="property">Property name</label><input id="property" type="text" name="property" required></div>
+      <div class="form-row"><label for="website">Website URL</label><input id="website" type="url" name="website" placeholder="https://example.com" required></div>
 
-      <div className="form-row two">
+      <div class="form-row two">
         <div>
-          <label htmlFor="rooms">Rooms</label>
+          <label for="rooms">Rooms</label>
           <input id="rooms" type="number" name="rooms" min="1" max="100" required>
         </div>
         <div>
-          <label htmlFor="adr">
+          <label for="adr">
             <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">ADR</abbr> (approx.)
           </label>
           <input id="adr" type="number" name="adr" min="40" step="1" inputmode="decimal"
                  placeholder="e.g., 100" aria-describedby="adrHelp" required>
-          <p id="adrHelp" className="tiny">Use your average nightly room price before taxes/fees.</p>
+          <p id="adrHelp" class="tiny">Use your average nightly room price before taxes/fees.</p>
         </div>
       </div>
 
-      <div className="form-row"><label htmlFor="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
-      <div className="form-row"><label htmlFor="email">Your email</label><input id="email" type="email" name="email" required></div>
-      <div className="form-row"><label htmlFor="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
+      <div class="form-row"><label for="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
+      <div class="form-row"><label for="email">Your email</label><input id="email" type="email" name="email" required></div>
+      <div class="form-row"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
 
       <!-- Helpful metadata for Formspree -->
       <input type="hidden" name="_subject" id="fsSubject" value="">
@@ -70,16 +70,16 @@
       <input type="hidden" name="source" value="audit-page">
       <input type="text"   name="_gotcha" style="display:none">
 
-      <button className="btn primary" type="submit" id="auditSubmit">Request audit</button>
-      <p className="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
-      <p id="auditMsg" className="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
+      <button class="btn primary" type="submit" id="auditSubmit">Request audit</button>
+      <p class="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
+      <p id="auditMsg" class="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
     </form>
   </section>
 </main>
 
-<footer className="container footer">
+<footer class="container footer">
   <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
-  <p className="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
 </footer>
 
 <script>
@@ -121,10 +121,10 @@ form.addEventListener('submit', async (e)=>{
       form.innerHTML = `
         <h3>Thanks! 🎉</h3>
         <p>We’ve got your details. We’ll send a <strong>2–3 minute Loom</strong> with 3 fixes and an ROI estimate.</p>
-        <p className="small">If you need to add anything, reply to the confirmation email we just sent.</p>
-        <div className="buttons" style="margin-top:10px">
-          <a className="btn" href="/">Back to home</a>
-          <a className="btn" href="/onboarding.html">See how onboarding works</a>
+        <p class="small">If you need to add anything, reply to the confirmation email we just sent.</p>
+        <div class="buttons" style="margin-top:10px">
+          <a class="btn" href="/">Back to home</a>
+          <a class="btn" href="/onboarding.html">See how onboarding works</a>
         </div>`;
     } else {
       msg.textContent = 'Something went wrong. Please try again or email vinnie@keyturn.studio.';
