@@ -12,30 +12,30 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a className="skip-link" href="#main">Skip to content</a>
 
-<header class="container">
-  <nav class="nav" aria-label="Primary">
-    <a class="brand" href="/" aria-label="Keyturn Studio home">
+<header className="container">
+  <nav className="nav" aria-label="Primary">
+    <a className="brand" href="/" aria-label="Keyturn Studio home">
       <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70">
     </a>
-    <div class="nav-links">
+    <div className="nav-links">
       <a href="/onboarding.html">How it works</a>
       <a href="/#results">Proof</a>
       <a href="/#pricing">Pricing</a>
-      <a class="cta" href="/audit.html">Get a 10-min audit</a>
+      <a className="cta" href="/audit.html">Get a 10-min audit</a>
     </div>
   </nav>
 
-  <div class="hero">
+  <div className="hero">
     <h1>How onboarding works</h1>
     <p>Simple, fast, and built around lifting <strong>website-direct</strong> share.</p>
   </div>
 </header>
 
 <main id="main">
-  <section class="container grid section">
-    <article class="card">
+  <section className="container grid section">
+    <article className="card">
       <h3>1) Discovery → Audit</h3>
       <ul>
         <li>Quick audit request (<a href="/audit.html">form</a>)</li>
@@ -44,7 +44,7 @@
       </ul>
     </article>
 
-    <article class="card">
+    <article className="card">
       <h3>2) Makeover Sprint (≈3 weeks)</h3>
       <ul>
         <li>Core pages: Home, Rooms, Eat &amp; Drink, What’s On, Story/FAQ</li>
@@ -54,7 +54,7 @@
       </ul>
     </article>
 
-    <article class="card">
+    <article className="card">
       <h3>3) Launch → Polish → Growth</h3>
       <ul>
         <li>Go-live + 30-day polish window for small tweaks</li>
@@ -64,9 +64,9 @@
     </article>
   </section>
 
-  <section class="container section">
-    <div class="grid">
-      <article class="card">
+  <section className="container section">
+    <div className="grid">
+      <article className="card">
         <h3>What we need from you</h3>
         <ul>
           <li>Booking engine link (direct URL) &amp; PMS/engine name</li>
@@ -77,7 +77,7 @@
         </ul>
       </article>
 
-      <article class="card">
+      <article className="card">
         <h3>Approvals cadence</h3>
         <ul>
           <li>Kickoff &amp; copy outline</li>
@@ -85,34 +85,34 @@
           <li>Build review (round 2)</li>
           <li>Pre-launch check</li>
         </ul>
-        <p class="tiny">Guarantees &amp; cancellation terms are listed on the homepage.</p>
+        <p className="tiny">Guarantees &amp; cancellation terms are listed on the homepage.</p>
       </article>
 
-      <article class="card">
+      <article className="card">
         <h3>How we measure success</h3>
         <ul>
           <li><strong>Website-direct share (seasonally-weighted)</strong></li>
           <li>Outbound booking CTR &amp; funnel events</li>
           <li>Search clicks/CTR (GSC)</li>
         </ul>
-        <p class="tiny">Pre-launch website-direct baseline currently: <strong>7.65%</strong>. Post-launch seasonal projection mid-case: <strong>~21.7%</strong>.</p>
+        <p className="tiny">Pre-launch website-direct baseline currently: <strong>7.65%</strong>. Post-launch seasonal projection mid-case: <strong>~21.7%</strong>.</p>
       </article>
     </div>
   </section>
 
-  <section class="container section">
-    <div class="grid">
-      <article class="card">
+  <section className="container section">
+    <div className="grid">
+      <article className="card">
         <h3>Pricing & payment</h3>
         <ul>
           <li><strong>Core:</strong> $7,500 (0% 4-pay available)</li>
           <li><strong>Pro:</strong> $12,000</li>
           <li><strong>Care/Growth:</strong> $300–$900/mo</li>
         </ul>
-        <p class="tiny">Work starts after first payment. You own domain, content, images, and code.</p>
+        <p className="tiny">Work starts after first payment. You own domain, content, images, and code.</p>
       </article>
 
-      <article class="card">
+      <article className="card">
         <h3>FAQs</h3>
         <ul>
           <li><strong>ADR?</strong> <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">Average Daily Rate</abbr>.</li>
@@ -123,20 +123,20 @@
         </ul>
       </article>
     </div>
-    <div class="buttons" style="margin-top:12px">
-      <a class="btn primary" href="/audit.html">Request your audit</a>
-      <a class="btn" href="/#results">See results</a>
+    <div className="buttons" style="margin-top:12px">
+      <a className="btn primary" href="/audit.html">Request your audit</a>
+      <a className="btn" href="/#results">See results</a>
     </div>
   </section>
 </main>
 
-<footer class="container footer">
+<footer className="container footer">
   <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
-  <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  <p className="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
 </footer>
 
 <!-- Sticky mobile CTA -->
-<a href="/audit.html#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
+<a href="/audit.html#audit" className="sticky-cta" aria-label="Request an audit">Request audit</a>
 
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>
