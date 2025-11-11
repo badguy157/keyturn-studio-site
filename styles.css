@@ -274,4 +274,20 @@ details.tiny > summary{color:var(--muted);font-size:.9rem}
   font-weight:800; border-top:1px solid var(--line); z-index:1001;
 }
 @supports(padding:max(0px)){ .sticky-cta{padding-bottom:max(12px, env(safe-area-inset-bottom))} }
-@media (min-width:768px){ .menu-toggle,.mobile-drawer,.sticky-cta{display:none} }
+@media (min-width:768px){ 
+  .menu-toggle,.mobile-drawer,.sticky-cta{display:none} 
+  .nav-desktop{display:flex}
+}
+
+/* Mobile-specific optimizations for ROI page */
+@media (max-width:640px){
+  .form-row.two{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  input, button{min-height:44px;font-size:16px} /* Touch-friendly sizes, prevents zoom on iOS */
+}
+
+/* Ensure metric cards stack properly on small screens */
+@media (max-width:480px){
+  .metric-card, .proof-card, .kpi{padding:12px}
+  .metric-card h5, .proof-card h5{font-size:0.95rem}
+}
