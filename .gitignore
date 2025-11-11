@@ -1,2 +1,6 @@
 node_modules/
 .env
+# Lockfiles at repository root should not be committed
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
