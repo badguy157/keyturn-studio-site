@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* (keep all your existing CSS below this line) */
 
 /* ===============================
    Keyturn Studio — Existing CSS

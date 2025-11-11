@@ -23,6 +23,6 @@
   </g>
 
   <!-- wordmark -->
-  <text x="40" y="24" class="text bold">Keyturn</text>
-  <text x="118" y="24" class="text regular">Studio</text>
+  <text x="40" y="24" className="text bold">Keyturn</text>
+  <text x="118" y="24" className="text regular">Studio</text>
 </svg>
