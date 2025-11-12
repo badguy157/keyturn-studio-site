@@ -31,50 +31,105 @@
   <section class="container section" style="padding-top:40px">
     <h2 style="margin-bottom:28px">3-Step Onboarding Hub</h2>
 
-    <!-- Step 1: Google Form -->
+    <!-- Step 1: Native Quick Start (no third-party embed) -->
     <article class="card" id="step1" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
       <h3>Step 1: Share Your Details</h3>
-      <p class="small">Fill out the quick form below to get started. We'll use this to understand your property and prepare your project.</p>
-      
+      <p class="small">This 2-minute Quick Start lets us prep your project. You’ll get a confirmation email right after.</p>
+
       <div style="margin-top:16px">
-        <!-- Tally embed -->
-        <iframe
-          data-tally-src="https://tally.so/r/aQNL5E"
-          width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0"
-          loading="lazy" title="Onboarding Form"></iframe>
-      
-        <!-- Tally loader (keeps page static, then lazy-inits the iframe src) -->
-        <script>
-          (function () {
-            var d = document, w = window;
-            if (typeof w.Tally !== 'undefined') w.Tally.loadEmbeds();
-            else d.querySelectorAll('iframe[data-tally-src]:not([src])')
-                  .forEach(function (el) { el.src = el.dataset.tallySrc; });
-          })();
-        </script>
-      
-        <p class="small" style="margin-top:8px">
-          Prefer a new tab?
-          <a href="https://tally.so/r/YOUR_FORM_ID" target="_blank" rel="noopener">Open the form</a>.
-        </p>
+        <form id="quickstartForm" class="stack" novalidate>
+          <!-- Honeypot (anti-spam) -->
+          <input type="text" name="company" id="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px">
+
+          <div class="grid two">
+            <label>Property name
+              <input name="propertyName" required>
+            </label>
+            <label>Website URL
+              <input name="websiteUrl" type="url" placeholder="https://…" required>
+            </label>
+          </div>
+
+          <div class="grid two">
+            <label>Contact name
+              <input name="contactName" required>
+            </label>
+            <label>Email
+              <input name="email" type="email" required>
+            </label>
+          </div>
+
+          <div class="grid two">
+            <label>Phone (optional)
+              <input name="phone" type="tel" inputmode="tel">
+            </label>
+            <label>Booking system
+              <select name="bookingSystem" required>
+                <option value="" selected disabled>Select…</option>
+                <option>eviivo</option>
+                <option>Little Hotelier</option>
+                <option>SiteMinder</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid two">
+            <label>Primary goal
+              <select name="goal" required>
+                <option value="" selected disabled>Select…</option>
+                <option>More direct bookings</option>
+                <option>Reduce OTA fees</option>
+                <option>Refresh the look</option>
+                <option>Speed up the site</option>
+              </select>
+            </label>
+            <label>Ideal launch timing
+              <select name="launchTiming" required>
+                <option value="" selected disabled>Select…</option>
+                <option>ASAP</option>
+                <option>2–4 weeks</option>
+                <option>1–2 months</option>
+              </select>
+            </label>
+          </div>
+
+          <label>Shared folder link (optional — photos/menus)
+            <input name="assetsLink" type="url" placeholder="Dropbox / Drive / OneDrive link">
+          </label>
+
+          <label>Anything else? (optional)
+            <textarea name="notes" rows="3"></textarea>
+          </label>
+
+          <!-- meta captured client-side -->
+          <input type="hidden" name="pagePath" value="">
+          <input type="hidden" name="utm_source" value="">
+          <input type="hidden" name="utm_medium" value="">
+          <input type="hidden" name="utm_campaign" value="">
+          <input type="hidden" name="timezone" value="">
+
+          <div class="hero-ctas">
+            <button class="btn btn-primary" id="qsSubmit" type="submit">Send & continue</button>
+            <span id="qsMsg" class="small" aria-live="polite" style="margin-left:12px"></span>
+          </div>
+        </form>
       </div>
-      
     </article>
 
     <!-- Step 2: Secure Access -->
     <article class="card" id="step2" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
       <h3>Step 2: Secure Access</h3>
       <p class="small">Once you've submitted Step 1, provide us with secure access to your systems. This helps us set up tracking and prepare your site properly.</p>
-      
       <div class="roi-box" style="margin-top:16px">
         <h4 style="margin-top:0;font-size:1rem">What we need:</h4>
         <ul style="margin:12px 0;padding-left:1.2rem">
           <li><strong>Google Analytics 4 (GA4):</strong> Add <code>analytics@keyturn.studio</code> as a Viewer in your GA4 property</li>
           <li><strong>Domain/DNS Access:</strong> Credentials for your domain registrar or hosting (we'll guide you through this on a call)</li>
           <li><strong>Booking Engine:</strong> Your direct booking link and PMS/engine name</li>
+          <li><strong>Google Business Profile:</strong> Add <code>hello@keyturn.studio</code> as Manager</li>
           <li><strong>Brand Assets:</strong> Logo files, photos, menus (PDF), and any brand guidelines</li>
         </ul>
-        
         <div style="margin-top:16px;padding:12px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
           <p style="margin:0;font-size:.95rem;color:var(--muted-2)">
             <strong>🔒 Security note:</strong> Share credentials via secure channels only. We'll provide you with a secure link for sensitive information. Never share passwords via email.
@@ -87,17 +142,14 @@
     <article class="card" id="step3" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
       <h3>Step 3: Schedule Your Kickoff Call</h3>
       <p class="small">Book a 30-minute kickoff call to review your project scope, timeline, and answer any questions.</p>
-      
       <div style="margin-top:16px">
         <div class="calendly-inline-widget"
-     data-url="https://calendly.com/vinnie-keyturn/onboarding-kickoff?hide_gdpr_banner=1&utm_source=onboarding"
-     style="min-width:320px;height:700px;"></div>
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-<p class="small" style="margin-top:8px">
-  Prefer a new tab? <a href="https://calendly.com/vinnie-keyturn/onboarding-kickoff?utm_source=onboarding" target="_blank" rel="noopener">Open Calendly</a>.
-</p>
-
+          data-url="https://calendly.com/vinnie-keyturn/onboarding-kickoff?hide_gdpr_banner=1&utm_source=onboarding"
+          style="min-width:320px;height:700px;"></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <p class="small" style="margin-top:8px">
+          Prefer a new tab? <a href="https://calendly.com/vinnie-keyturn/onboarding-kickoff?utm_source=onboarding" target="_blank" rel="noopener">Open Calendly</a>.
+        </p>
       </div>
     </article>
   </section>
@@ -132,89 +184,6 @@
       </ul>
     </article>
   </section>
-
-  <!-- ===== Requirements / Approvals / Success ===== -->
-  <section class="container section">
-    <div class="grid">
-      <article class="card">
-        <h3>What we need from you</h3>
-        <ul>
-          <li>Booking engine link (direct URL) &amp; PMS/engine name</li>
-          <li>GA4 access; optional GSC access</li>
-          <li>Logo, photos, menus (PDF), brand notes/voice</li>
-          <li>Domain/DNS access for launch</li>
-          <li>One decision-maker for weekly approvals</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>Approvals cadence</h3>
-        <ul>
-          <li>Kickoff &amp; copy outline</li>
-          <li>Design review (round 1)</li>
-          <li>Build review (round 2)</li>
-          <li>Pre-launch check</li>
-        </ul>
-        <p class="tiny">Guarantees &amp; cancellation terms are listed on the homepage.</p>
-      </article>
-
-      <article class="card">
-        <h3>How we measure success</h3>
-        <ul>
-          <li><strong>Website-direct share (seasonally-weighted)</strong></li>
-          <li>Outbound booking CTR &amp; funnel events</li>
-          <li>Search clicks/CTR (GSC)</li>
-        </ul>
-        <p class="tiny">Pre-launch website-direct baseline currently: <strong>7.65%</strong>. Post-launch seasonal projection mid-case: <strong>~21.7%</strong>.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===== Pilot note (matches homepage language) ===== -->
-  <section class="container banner">
-    <p><strong>Founders’ Pilot (2 slots/month)</strong> — reduced setup for case-study partners (GA4 + bookings access). <strong>Includes first 2 months of Care free, then $300/mo.</strong></p>
-    <ul class="small" style="margin:8px 0 0 1.2rem">
-      <li>Allow anonymised metrics & screenshots for 18 months</li>
-      <li>Provide GA4 + booking/OTA access (for setup & reporting)</li>
-      <li>Meet any one: ≥ 1,500 sessions/mo, ≥ 10 OTA bookings/mo, or ADR ≥ $80</li>
-    </ul>
-    <div class="buttons" style="margin-top:10px">
-      <a class="btn btn-primary" href="/audit.html#pilot" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
-    </div>
-  </section>
-
-  <!-- ===== Pricing summary + CTAs ===== -->
-  <section class="container section">
-    <div class="grid">
-      <article class="card">
-        <h3>Pricing & payment</h3>
-        <ul>
-          <li><strong>Core:</strong> $7,500 <span class="tiny">or $1,875/mo × 4 (0%)</span></li>
-          <li><strong>Pro:</strong> $12,000 <span class="tiny">or $3,000/mo × 4 (0%)</span></li>
-          <li><strong>Premier:</strong> $18,000–$25,000 <span class="tiny">or $4,500–$6,250/mo × 4 (0%)</span></li>
-          <li><strong>Care/Growth:</strong> $300–$900/mo</li>
-        </ul>
-        <p class="tiny">0% 4-pay available for Core, Pro, and Premier. Work starts after first payment. You own domain, content, images, and code.</p>
-      </article>
-      
-
-      <article class="card">
-        <h3>FAQs</h3>
-        <ul>
-          <li><strong>ADR?</strong> <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">Average Daily Rate</abbr>.</li>
-          <li><strong>ALOS?</strong> <abbr title="Average Length of Stay">Average Length of Stay</abbr>.</li>
-          <li><strong>Will this change my PMS/engine?</strong> No — we link to your existing engine.</li>
-          <li><strong>Photos?</strong> Use yours or we can source/guide; we label staged/AI shots.</li>
-          <li><strong>Data?</strong> GA4 only; no resale pixels.</li>
-        </ul>
-      </article>
-    </div>
-
-    <div class="buttons" style="margin-top:12px">
-      <a class="btn btn-primary" href="/audit.html">Request your audit</a>
-      <a class="btn btn-ghost" href="/#pricing">View full pricing</a>
-    </div>
-  </section>
 </main>
 
 <footer class="container footer">
@@ -225,101 +194,120 @@
 <!-- Sticky mobile CTA (same pattern as index) -->
 <a href="#step1" class="sticky-cta" aria-label="Start onboarding">Start onboarding</a>
 
-<!-- Calendly widget script -->
+<!-- Calendly widget script (already included above for inline, harmless to keep here too) -->
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
-<!-- Onboarding page specific JS with GA4 events -->
+<!-- Onboarding page specific JS with GA4 events + native form submit -->
 <script>
-  (function() {
-    'use strict';
-  
-    // Smooth scroll for hero CTA
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '') return;
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
+(function() {
+  'use strict';
+
+  // --- helper to safely send GA4
+  window.safeEvent = window.safeEvent || function(name, params){
+    try { window.gtag && window.gtag('event', name, params); } catch(_){}
+  };
+
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
-  
-    // GA4 Events for onboarding interactions
-  
-    // Track form view when Step 1 is in viewport
-    const step1 = document.getElementById('step1');
-    if (step1) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !step1.dataset.viewed) {
-            step1.dataset.viewed = 'true';
-            window.safeEvent('onboarding_form_view', {
-              step: 'step1',
-              page_path: window.location.pathname
-            });
-          }
-        });
-      }, { threshold: 0.5 });
-      observer.observe(step1);
-    }
-  
-    // Track form interactions (best effort)
-    const formIframe = document.querySelector('iframe[title="Onboarding Form"]');
-    if (formIframe) {
-      let hasInteracted = false;
-  
-      // Track when iframe gains focus (user is interacting)
-      window.addEventListener('blur', () => {
-        if (document.activeElement === formIframe && !hasInteracted) {
-          hasInteracted = true;
-          window.safeEvent('onboarding_form_interact', {
-            step: 'step1',
-            page_path: window.location.pathname
-          });
+  });
+
+  // Track Step 1 view when 50% visible
+  const step1 = document.getElementById('step1');
+  if (step1) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !step1.dataset.viewed) {
+          step1.dataset.viewed = 'true';
+          window.safeEvent('onboarding_form_view', { step: 'step1', page_path: window.location.pathname });
         }
       });
-  
-      // Listen for form submission via postMessage (Google Forms or Tally)
-      window.addEventListener('message', (event) => {
-        try {
-          const origin = String(event.origin || '');
-          const data = event.data;
-  
-          const fromGoogleForms = origin.includes('google') &&
-            (typeof data === 'string' && data.includes('formResponse'));
-  
-          const fromTally =
-            origin.includes('tally.so') ||
-            (typeof data === 'string' && /tally.*submit/i.test(data)) ||
-            (typeof data === 'object' &&
-              (data?.event === 'Tally.FormSubmitted' ||
-               data?.type === 'TALLY_EMBED_SUBMIT' ||
-               data?.detail?.event === 'tally:submit'));
-  
-          if (fromGoogleForms || fromTally) {
-            window.safeEvent('onboarding_form_submit', {
-              step: 'step1',
-              page_path: window.location.pathname
-            });
-          }
-        } catch (_) { /* no-op */ }
-      });
-    } // <-- this was missing
-  
-    // Track Calendly booking completion
-    window.addEventListener('message', (event) => {
-      if (event.data && event.data.event === 'calendly.event_scheduled') {
-        window.safeEvent('onboarding_calendly_booked', {
-          step: 'step3',
-          page_path: window.location.pathname,
-          calendly_uri: event.data.payload?.event?.uri || ''
-        });
+    }, { threshold: 0.5 });
+    observer.observe(step1);
+  }
+
+  // Prefill hidden meta fields
+  (function prefillMeta(){
+    const qsForm = document.getElementById('quickstartForm');
+    if (!qsForm) return;
+    const params = new URLSearchParams(location.search);
+    qsForm.querySelector('input[name="pagePath"]').value = location.pathname;
+    qsForm.querySelector('input[name="utm_source"]').value = params.get('utm_source') || '';
+    qsForm.querySelector('input[name="utm_medium"]').value = params.get('utm_medium') || '';
+    qsForm.querySelector('input[name="utm_campaign"]').value = params.get('utm_campaign') || '';
+    qsForm.querySelector('input[name="timezone"]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+  })();
+
+  // Native Quick Start submit -> /api/quickstart
+  const qsForm = document.getElementById('quickstartForm');
+  if (qsForm) {
+    const btn = document.getElementById('qsSubmit');
+    const msg = document.getElementById('qsMsg');
+
+    // Consider interaction when user focuses any field
+    qsForm.addEventListener('focusin', () => {
+      if (!qsForm.dataset.interacted) {
+        qsForm.dataset.interacted = '1';
+        window.safeEvent('onboarding_form_interact', { step: 'step1', page_path: location.pathname });
       }
     });
-  })();
-  </script>
-  
+
+    qsForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = '';
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const formData = new FormData(qsForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      // honeypot
+      if (payload.company) { btn.disabled = false; btn.textContent = 'Send & continue'; return; }
+
+      // add a tiny bit of extra context
+      payload.userAgent = navigator.userAgent || '';
+      payload.referrer = document.referrer || '';
+
+      try {
+        const res = await fetch('/api/quickstart', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed');
+
+        // GA4 submit + move to Step 2
+        window.safeEvent('onboarding_form_submit', { step: 'step1', page_path: location.pathname });
+        msg.textContent = 'Thanks! Check your email for a confirmation.';
+        document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        console.error(err);
+        msg.textContent = 'Could not send. Please email hello@keyturn.studio';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send & continue';
+      }
+    });
+  }
+
+  // Track Calendly booking completion
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.event === 'calendly.event_scheduled') {
+      window.safeEvent('onboarding_calendly_booked', {
+        step: 'step3',
+        page_path: window.location.pathname,
+        calendly_uri: event.data.payload?.event?.uri || ''
+      });
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
