@@ -133,12 +133,17 @@
 
         <!-- Nice inline actions -->
         <div class="hero-ctas" style="margin-top:10px; gap:8px; flex-wrap:wrap">
-          <!-- Default href = your Dropbox request; JS can still override from /api/links -->
+          <!-- Assets upload (Dropbox File Request) -->
           <a id="btnAssets" class="btn btn-primary"
              href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg"
              target="_blank" rel="noopener">Upload brand assets</a>
-          <a class="btn btn-ghost" href="mailto:hello@keyturn.studio?subject=Request secure link for DNS credentials" target="_blank" rel="noopener">Request secure DNS link</a>
+        
+          <!-- New: Bitwarden-first secure credentials link -->
+          <a class="btn btn-ghost"
+             href="/secure.html"
+             target="_blank" rel="noopener">Share credentials securely</a>
         </div>
+        
 
         <details style="margin-top:12px">
           <summary class="small"><strong>Prefer to grant DNS-only access (no passwords)?</strong></summary>

@@ -1,5 +1,5 @@
 // File: /api/quickstart.js — Vercel Serverless Function
-// Sends admin + client emails with brand styling and correct 1–2–3 numbering.
+// Sends admin + client emails with brand styling and correct 1–2–3–4 steps.
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -43,6 +43,12 @@ export default async function handler(req, res) {
     const TALLY = process.env.TALLY_FULL_INTAKE || '';  // e.g. https://tally.so/r/XXXX?email={email}&property={property}
     const DROPB = process.env.DROPBOX_REQUEST || 'https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg';
 
+    // Build absolute URL for /secure.html (Bitwarden-first help)
+    const xfHost = req.headers['x-forwarded-host'] || req.headers.host || 'keyturn.studio';
+    const xfProto = req.headers['x-forwarded-proto'] || 'https';
+    const BASE = (process.env.PUBLIC_BASE_URL || `${xfProto}://${xfHost}`).replace(/\/$/, '');
+    const SECURE = `${BASE}/secure.html`;
+
     // Prefill Tally placeholders if present
     const intakeUrl = (TALLY || '')
       .replace('{email}', encodeURIComponent(email))
@@ -70,9 +76,14 @@ export default async function handler(req, res) {
         Meta — page: ${escapeHtml(pagePath)} | utm: ${escapeHtml(utm_source)}/${escapeHtml(utm_medium)}/${escapeHtml(utm_campaign)} |
         tz: ${escapeHtml(timezone)} | referrer: ${escapeHtml(referrer)} | UA: ${escapeHtml(userAgent)}
       </p>
-      ${(intakeUrl || DROPB) ? `
+      ${(intakeUrl || DROPB || SECURE) ? `
         <p style="font:12px/1.4 Inter,Arial,sans-serif;color:#6b7280">
-          Links: ${intakeUrl ? `Full intake: <a href="${intakeUrl}">${intakeUrl}</a>` : ''}${intakeUrl && DROPB ? ' · ' : ''}${DROPB ? `Uploads: <a href="${DROPB}">${DROPB}</a>` : ''}
+          Links:
+          ${intakeUrl ? ` Full intake: <a href="${intakeUrl}">${intakeUrl}</a>` : ''}
+          ${(intakeUrl && (DROPB || SECURE)) ? ' · ' : ''}
+          ${DROPB ? ` Uploads: <a href="${DROPB}">${DROPB}</a>` : ''}
+          ${(DROPB && SECURE) ? ' · ' : ''}
+          ${SECURE ? ` Secure creds: <a href="${SECURE}">${SECURE}</a>` : ''}
         </p>` : ''
       }
     `;
@@ -83,7 +94,7 @@ export default async function handler(req, res) {
       `<a href="${href}" target="_blank" rel="noopener"
          style="background:${COLORS.accent};border-radius:12px;padding:12px 16px;color:#fff;text-decoration:none;font-weight:700;display:inline-block;">${label}</a>`;
 
-    // Helper: a single <li> that includes its button (so numbering stays 1–2–3)
+    // Helper: list item with embedded CTA (keeps ordered numbering correct)
     const step = (text, href, ctaLabel) => {
       if (!href) return '';
       return `
@@ -104,25 +115,29 @@ export default async function handler(req, res) {
                 Hi ${escapeHtml(contactName)}, thanks for sending your details — we’ll review and follow up shortly.
               </p>
 
-              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Do these three things next</h2>
+              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Do these four things next</h2>
 
               <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
                 ${step('Complete the full intake (5–10 min):', intakeUrl, 'Open full intake')}
                 ${step('Upload brand assets (logos, menus, photos):', DROPB, 'Upload assets')}
+                ${step('Share DNS credentials securely (Bitwarden Send):', SECURE, 'Share credentials securely')}
                 <li style="margin:0 0 14px 0">
                   Book your kickoff call on the onboarding page (or reply with times that work).
                 </li>
               </ol>
 
-              ${(intakeUrl || DROPB) ? `
+              ${(intakeUrl || DROPB || SECURE) ? `
               <div style="margin-top:10px;padding:10px 12px;background:#f8fafc;border:1px solid ${COLORS.border};border-radius:10px">
                 <div style="font:12px/1.5 Inter,Arial,sans-serif;color:${COLORS.muted}">
-                  Plain links:${intakeUrl ? `<br>${intakeUrl}` : ''}${DROPB ? `<br>${DROPB}` : ''}
+                  Plain links:
+                  ${intakeUrl ? `<br>${intakeUrl}` : ''}
+                  ${DROPB ? `<br>${DROPB}` : ''}
+                  ${SECURE ? `<br>${SECURE}` : ''}
                 </div>
               </div>` : ''}
 
               <p style="margin:16px 0 0;font:12px/1.6 Inter,Arial,sans-serif;color:${COLORS.muted}">
-                Security: never email passwords. We’ll request DNS access via a secure method (see Step 2 on the onboarding page).
+                Security: never email passwords. Use the “Share credentials securely” button above (Bitwarden Send).
               </p>
               <p style="margin:16px 0 0;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">— Keyturn Studio</p>
             </div>

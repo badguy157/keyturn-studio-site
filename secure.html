@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Share credentials securely | Keyturn Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="One-time, expiring, encrypted options to share passwords and API keys with Keyturn Studio.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Share credentials securely</h1>
+      <p class="hero-lede">Use a one-time, expiring, encrypted link. We’ll save to our vault and ask you to rotate later.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#how">How it works</a>
+        <a class="btn btn-ghost" href="/onboarding.html#step2">Back to onboarding</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="how" class="container section">
+    <article class="card">
+      <h3>Option A — 1Password Send (recommended)</h3>
+      <ol>
+        <li>Open <a href="https://send.1password.com/" target="_blank" rel="noopener">1Password Send</a>.</li>
+        <li>Choose <b>Text</b>. Paste credentials (e.g., “Registrar: Namecheap — user: … / pass: …”).</li>
+        <li>Click <b>Link options</b> → set <b>Expiry</b> (e.g., 7 days) and <b>Max views</b> (1).</li>
+        <li>Click <b>Create link</b>, then copy the link.</li>
+        <li>Send the link to us at <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
+      </ol>
+      <p class="small muted">Notes: End-to-end encrypted. No account needed for you. We’ll open once, store in our vault, and confirm receipt.</p>
+    </article>
+
+    <article class="card">
+      <h3>Option B — Bitwarden Send</h3>
+      <ol>
+        <li>Open <a href="https://bitwarden.com/products/send/" target="_blank" rel="noopener">Bitwarden Send</a>.</li>
+        <li>Create a <b>Text Send</b>, set <b>Expiration</b> and <b>Max access count</b> (1), optionally add a <b>Password</b>.</li>
+        <li>Copy the link and email it to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
+      </ol>
+      <p class="small muted">Also end-to-end encrypted. Password option available.</p>
+    </article>
+
+    <article class="card">
+      <h3>For files (ID scans, contracts, etc.)</h3>
+      <p>Use our encrypted file-drop instead of email attachments:</p>
+      <div class="hero-ctas" style="margin-top:8px">
+        <a class="btn btn-primary" href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg" target="_blank" rel="noopener">Upload files securely</a>
+      </div>
+      <p class="small muted">Large files OK. Do not send passwords in documents—use a Send link above.</p>
+    </article>
+
+    <article class="card">
+      <h3>Prefer no passwords at all?</h3>
+      <ul>
+        <li><b>Cloudflare</b>: Members → Invite → role <i>DNS Editor</i></li>
+        <li><b>GoDaddy</b>: Delegate Access → share “Domains” only</li>
+        <li><b>Namecheap</b>: Access Manager → share “Domain” (manage) for the specific domain</li>
+      </ul>
+      <p class="small muted">We’ll remove access at the end of the project.</p>
+    </article>
+  </main>
+
+  <footer class="container footer">
+    <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
