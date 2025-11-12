@@ -37,18 +37,28 @@
       <p class="small">Fill out the quick form below to get started. We'll use this to understand your property and prepare your project.</p>
       
       <div style="margin-top:16px">
-        <iframe 
-          src="https://docs.google.com/forms/d/e/1FAIpQLSdExampleFormID/viewform?embedded=true" 
-          width="100%" 
-          height="800" 
-          frameborder="0" 
-          marginheight="0" 
-          marginwidth="0"
-          title="Onboarding Form"
-          loading="lazy">
-          Loading…
-        </iframe>
+        <!-- Tally embed -->
+        <iframe
+          data-tally-src="https://tally.so/r/YOUR_FORM_ID?hideTitle=1&transparentBackground=1"
+          width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0"
+          loading="lazy" title="Onboarding Form"></iframe>
+      
+        <!-- Tally loader (keeps page static, then lazy-inits the iframe src) -->
+        <script>
+          (function () {
+            var d = document, w = window;
+            if (typeof w.Tally !== 'undefined') w.Tally.loadEmbeds();
+            else d.querySelectorAll('iframe[data-tally-src]:not([src])')
+                  .forEach(function (el) { el.src = el.dataset.tallySrc; });
+          })();
+        </script>
+      
+        <p class="small" style="margin-top:8px">
+          Prefer a new tab?
+          <a href="https://tally.so/r/YOUR_FORM_ID" target="_blank" rel="noopener">Open the form</a>.
+        </p>
       </div>
+      
     </article>
 
     <!-- Step 2: Secure Access -->
@@ -220,81 +230,96 @@
 
 <!-- Onboarding page specific JS with GA4 events -->
 <script>
-(function() {
-  'use strict';
-
-  // Smooth scroll for hero CTA
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href === '#' || href === '') return;
-      
-      const target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  // GA4 Events for onboarding interactions
+  (function() {
+    'use strict';
   
-  // Track form view when Step 1 is in viewport
-  const step1 = document.getElementById('step1');
-  if (step1) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !step1.dataset.viewed) {
-          step1.dataset.viewed = 'true';
-          window.safeEvent('onboarding_form_view', {
+    // Smooth scroll for hero CTA
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  
+    // GA4 Events for onboarding interactions
+  
+    // Track form view when Step 1 is in viewport
+    const step1 = document.getElementById('step1');
+    if (step1) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !step1.dataset.viewed) {
+            step1.dataset.viewed = 'true';
+            window.safeEvent('onboarding_form_view', {
+              step: 'step1',
+              page_path: window.location.pathname
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(step1);
+    }
+  
+    // Track form interactions (best effort)
+    const formIframe = document.querySelector('iframe[title="Onboarding Form"]');
+    if (formIframe) {
+      let hasInteracted = false;
+  
+      // Track when iframe gains focus (user is interacting)
+      window.addEventListener('blur', () => {
+        if (document.activeElement === formIframe && !hasInteracted) {
+          hasInteracted = true;
+          window.safeEvent('onboarding_form_interact', {
             step: 'step1',
             page_path: window.location.pathname
           });
         }
       });
-    }, { threshold: 0.5 });
-    observer.observe(step1);
-  }
-
-  // Track form interactions (best effort)
-  const formIframe = document.querySelector('iframe[title="Onboarding Form"]');
-  if (formIframe) {
-    let hasInteracted = false;
-    
-    // Track when iframe gains focus (user is interacting)
-    window.addEventListener('blur', () => {
-      if (document.activeElement === formIframe && !hasInteracted) {
-        hasInteracted = true;
-        window.safeEvent('onboarding_form_interact', {
-          step: 'step1',
-          page_path: window.location.pathname
-        });
-      }
-    });
-
-    // Listen for form submission via postMessage (if Google Forms sends it)
-    window.addEventListener('message', (event) => {
-      // Google Forms sends formResponse message on submission
-      if (event.data && typeof event.data === 'string' && event.data.includes('formResponse')) {
-        window.safeEvent('onboarding_form_submit', {
-          step: 'step1',
-          page_path: window.location.pathname
-        });
-      }
-    });
-  }
-
-  // Track Calendly booking completion
-  window.addEventListener('message', (event) => {
-    if (event.data && event.data.event === 'calendly.event_scheduled') {
-      window.safeEvent('onboarding_calendly_booked', {
-        step: 'step3',
-        page_path: window.location.pathname,
-        calendly_uri: event.data.payload?.event?.uri || ''
+  
+      // Listen for form submission via postMessage (Google Forms or Tally)
+      window.addEventListener('message', (event) => {
+        try {
+          const origin = String(event.origin || '');
+          const data = event.data;
+  
+          const fromGoogleForms = origin.includes('google') &&
+            (typeof data === 'string' && data.includes('formResponse'));
+  
+          const fromTally =
+            origin.includes('tally.so') ||
+            (typeof data === 'string' && /tally.*submit/i.test(data)) ||
+            (typeof data === 'object' &&
+              (data?.event === 'Tally.FormSubmitted' ||
+               data?.type === 'TALLY_EMBED_SUBMIT' ||
+               data?.detail?.event === 'tally:submit'));
+  
+          if (fromGoogleForms || fromTally) {
+            window.safeEvent('onboarding_form_submit', {
+              step: 'step1',
+              page_path: window.location.pathname
+            });
+          }
+        } catch (_) { /* no-op */ }
       });
-    }
-  });
-})();
-</script>
+    } // <-- this was missing
+  
+    // Track Calendly booking completion
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.event === 'calendly.event_scheduled') {
+        window.safeEvent('onboarding_calendly_booked', {
+          step: 'step3',
+          page_path: window.location.pathname,
+          calendly_uri: event.data.payload?.event?.uri || ''
+        });
+      }
+    });
+  })();
+  </script>
+  
 </body>
 </html>
