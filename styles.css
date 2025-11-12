@@ -161,6 +161,11 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 .chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap;color:var(--muted);font-size:14px}
 .hero-subtext{color:var(--muted);font-size:14px;margin-top:6px}
 
+/* ---- Trust strip ---- */
+.trust-strip{margin-top:18px;opacity:.9}
+.trust-strip .logos{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:flex-start}
+.trust-strip img{filter:grayscale(100%);opacity:.85}
+
 /* ---- Cards, grids, content blocks ---- */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .card{
