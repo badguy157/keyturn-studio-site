@@ -1,5 +1,5 @@
 // File: /api/quickstart.js — Vercel Serverless Function
-// Sends admin + client emails with brand styling and correct 1–2–3–4 steps.
+// Sends admin + client emails with brand styling and dynamic Next Steps (Intake, Uploads, Secure, Book).
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -43,11 +43,12 @@ export default async function handler(req, res) {
     const TALLY = process.env.TALLY_FULL_INTAKE || '';  // e.g. https://tally.so/r/XXXX?email={email}&property={property}
     const DROPB = process.env.DROPBOX_REQUEST || 'https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg';
 
-    // Build absolute URL for /secure.html (Bitwarden-first help)
-    const xfHost = req.headers['x-forwarded-host'] || req.headers.host || 'keyturn.studio';
+    // Build absolute URLs (prefer PUBLIC_BASE_URL)
+    const xfHost  = req.headers['x-forwarded-host']  || req.headers.host || 'keyturn.studio';
     const xfProto = req.headers['x-forwarded-proto'] || 'https';
-    const BASE = (process.env.PUBLIC_BASE_URL || `${xfProto}://${xfHost}`).replace(/\/$/, '');
-    const SECURE = `${BASE}/secure.html`;
+    const BASE    = (process.env.PUBLIC_BASE_URL || `${xfProto}://${xfHost}`).replace(/\/$/, '');
+    const SECURE  = `${BASE}/secure.html`;
+    const ONBOARD = `${BASE}/onboarding.html#step3`;
 
     // Prefill Tally placeholders if present
     const intakeUrl = (TALLY || '')
@@ -76,14 +77,16 @@ export default async function handler(req, res) {
         Meta — page: ${escapeHtml(pagePath)} | utm: ${escapeHtml(utm_source)}/${escapeHtml(utm_medium)}/${escapeHtml(utm_campaign)} |
         tz: ${escapeHtml(timezone)} | referrer: ${escapeHtml(referrer)} | UA: ${escapeHtml(userAgent)}
       </p>
-      ${(intakeUrl || DROPB || SECURE) ? `
+      ${(intakeUrl || DROPB || SECURE || ONBOARD) ? `
         <p style="font:12px/1.4 Inter,Arial,sans-serif;color:#6b7280">
           Links:
           ${intakeUrl ? ` Full intake: <a href="${intakeUrl}">${intakeUrl}</a>` : ''}
-          ${(intakeUrl && (DROPB || SECURE)) ? ' · ' : ''}
+          ${(intakeUrl && (DROPB || SECURE || ONBOARD)) ? ' · ' : ''}
           ${DROPB ? ` Uploads: <a href="${DROPB}">${DROPB}</a>` : ''}
-          ${(DROPB && SECURE) ? ' · ' : ''}
+          ${(DROPB && (SECURE || ONBOARD)) ? ' · ' : ''}
           ${SECURE ? ` Secure creds: <a href="${SECURE}">${SECURE}</a>` : ''}
+          ${(SECURE && ONBOARD) ? ' · ' : ''}
+          ${ONBOARD ? ` Onboarding: <a href="${ONBOARD}">${ONBOARD}</a>` : ''}
         </p>` : ''
       }
     `;
@@ -115,24 +118,23 @@ export default async function handler(req, res) {
                 Hi ${escapeHtml(contactName)}, thanks for sending your details — we’ll review and follow up shortly.
               </p>
 
-              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Do these four things next</h2>
+              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Next steps</h2>
 
               <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
                 ${step('Complete the full intake (5–10 min):', intakeUrl, 'Open full intake')}
                 ${step('Upload brand assets (logos, menus, photos):', DROPB, 'Upload assets')}
                 ${step('Share DNS credentials securely (Bitwarden Send):', SECURE, 'Share credentials securely')}
-                <li style="margin:0 0 14px 0">
-                  Book your kickoff call on the onboarding page (or reply with times that work).
-                </li>
+                ${step('Book your kickoff call:', ONBOARD, 'Book kickoff call')}
               </ol>
 
-              ${(intakeUrl || DROPB || SECURE) ? `
+              ${(intakeUrl || DROPB || SECURE || ONBOARD) ? `
               <div style="margin-top:10px;padding:10px 12px;background:#f8fafc;border:1px solid ${COLORS.border};border-radius:10px">
                 <div style="font:12px/1.5 Inter,Arial,sans-serif;color:${COLORS.muted}">
                   Plain links:
                   ${intakeUrl ? `<br>${intakeUrl}` : ''}
                   ${DROPB ? `<br>${DROPB}` : ''}
                   ${SECURE ? `<br>${SECURE}` : ''}
+                  ${ONBOARD ? `<br>${ONBOARD}` : ''}
                 </div>
               </div>` : ''}
 

@@ -4,51 +4,83 @@
   <meta charset="utf-8">
   <title>Share credentials securely | Keyturn Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="One-time, expiring, encrypted options to share passwords and API keys with Keyturn Studio.">
+  <meta name="description" content="One-time, expiring, encrypted link to share passwords and API keys with Keyturn Studio via Bitwarden Send.">
+  <meta name="robots" content="noindex,follow">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
+  <!-- Minimal site header for brand consistency -->
+  <header class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0">
+    <a href="/" style="font-weight:700;text-decoration:none;color:var(--fg, #e6ebf5)">Keyturn Studio</a>
+    <nav style="display:flex;gap:16px;align-items:center">
+      <a href="/onboarding.html#step2" class="btn btn-ghost">Back to onboarding</a>
+    </nav>
+  </header>
+
   <section class="hero">
     <div class="container">
       <h1 class="hero-title">Share credentials securely</h1>
-      <p class="hero-lede">Use a one-time, expiring, encrypted link. We’ll save to our vault and ask you to rotate later.</p>
+      <p class="hero-lede">Use a one-time, expiring, encrypted link with <strong>Bitwarden Send</strong>. We’ll save to our vault and ask you to rotate later.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#how">How it works</a>
+        <a class="btn btn-primary" href="#bitwarden">Use Bitwarden Send (free)</a>
         <a class="btn btn-ghost" href="/onboarding.html#step2">Back to onboarding</a>
       </div>
     </div>
   </section>
 
-  <main id="how" class="container section">
+  <main id="bitwarden" class="container section">
     <article class="card">
-      <h3>Option A — 1Password Send (recommended)</h3>
+      <h3>Bitwarden Send (free & encrypted)</h3>
       <ol>
-        <li>Open <a href="https://send.1password.com/" target="_blank" rel="noopener">1Password Send</a>.</li>
-        <li>Choose <b>Text</b>. Paste credentials (e.g., “Registrar: Namecheap — user: … / pass: …”).</li>
-        <li>Click <b>Link options</b> → set <b>Expiry</b> (e.g., 7 days) and <b>Max views</b> (1).</li>
-        <li>Click <b>Create link</b>, then copy the link.</li>
-        <li>Send the link to us at <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
+        <li>Create a free account and sign in to the <a href="https://vault.bitwarden.com/" target="_blank" rel="noopener">Bitwarden Web Vault</a>.</li>
+        <li>Go to <b>Send</b> → <b>New</b> → choose <b>Text</b>.</li>
+        <li>Paste only what’s needed (use the template below).</li>
+        <li>Click <b>Options</b> and set:
+          <ul>
+            <li><b>Expiration</b>: 7 days</li>
+            <li><b>Max access count</b>: 1</li>
+            <li><b>Password</b>: add a simple passphrase (send that passphrase separately)</li>
+          </ul>
+        </li>
+        <li>Click <b>Create</b>, copy the link, and email it to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
       </ol>
-      <p class="small muted">Notes: End-to-end encrypted. No account needed for you. We’ll open once, store in our vault, and confirm receipt.</p>
+      <p class="small muted">Recipients <em>don’t</em> need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.</p>
+
+      <h4 style="margin-top:16px">What to include (editable template)</h4>
+      <textarea id="tpl" rows="12" style="width:100%;white-space:pre-wrap;background:var(--card, #0b1220);border:1px solid var(--border, #1c263a);border-radius:8px;padding:12px;font-size:.95rem">
+DNS / Domain access
+• Registrar: (e.g., GoDaddy / Namecheap / Cloudflare)
+• Login URL:
+• Username / Account email:
+• Password (temporary):
+• MFA method on the account: (authenticator/SMS)  ← do not send codes here
+
+Website / Hosting (if applicable)
+• Provider:
+• Login URL:
+• Username:
+• Password (temporary):
+
+Notes
+• Scope: DNS-only unless otherwise agreed.
+• Please rotate passwords after our kickoff call.
+      </textarea>
+      <div class="hero-ctas" style="margin-top:10px;gap:8px;flex-wrap:wrap">
+        <button id="copyTpl" class="btn btn-primary" type="button">Copy template</button>
+        <button id="genPass" class="btn btn-ghost" type="button">Generate passphrase</button>
+        <a class="btn btn-primary" href="https://bitwarden.com/products/send/" target="_blank" rel="noopener">Open Bitwarden Send</a>
+      </div>
+      <p id="copiedMsg" class="small muted" style="margin-top:6px;"></p>
     </article>
 
     <article class="card">
-      <h3>Option B — Bitwarden Send</h3>
-      <ol>
-        <li>Open <a href="https://bitwarden.com/products/send/" target="_blank" rel="noopener">Bitwarden Send</a>.</li>
-        <li>Create a <b>Text Send</b>, set <b>Expiration</b> and <b>Max access count</b> (1), optionally add a <b>Password</b>.</li>
-        <li>Copy the link and email it to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
-      </ol>
-      <p class="small muted">Also end-to-end encrypted. Password option available.</p>
-    </article>
-
-    <article class="card">
-      <h3>For files (ID scans, contracts, etc.)</h3>
+      <h3>For files (ID scans, contracts, brand packs)</h3>
       <p>Use our encrypted file-drop instead of email attachments:</p>
       <div class="hero-ctas" style="margin-top:8px">
         <a class="btn btn-primary" href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg" target="_blank" rel="noopener">Upload files securely</a>
       </div>
-      <p class="small muted">Large files OK. Do not send passwords in documents—use a Send link above.</p>
+      <p class="small muted">Large files OK. Do not include passwords in documents—use Bitwarden Send above.</p>
     </article>
 
     <article class="card">
@@ -65,6 +97,33 @@
   <footer class="container footer">
     <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
   </footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
+  <script>
+    // year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // copy template
+    const tpl = document.getElementById('tpl');
+    const copyBtn = document.getElementById('copyTpl');
+    const msg = document.getElementById('copiedMsg');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(tpl.value);
+        msg.textContent = 'Template copied to clipboard.';
+      } catch (_) {
+        msg.textContent = 'Select the text and press Ctrl/Cmd+C to copy.';
+      }
+    });
+
+    // simple passphrase generator (4 words + number)
+    const genBtn = document.getElementById('genPass');
+    genBtn.addEventListener('click', () => {
+      const words = ['river','cedar','amber','north','granite','harbor','linen','ember','willow','copper','quartz','ocean','meadow','atlas','velvet','summit','bishop','canyon','spruce','maple'];
+      const pick = () => words[Math.floor(Math.random()*words.length)];
+      const pass = `${pick()}-${pick()}-${pick()}-${pick()}-${Math.floor(100+Math.random()*900)}`;
+      tpl.value = tpl.value.replace(/Password.*temporary.*:/i, `Password (temporary): ${pass}`);
+      msg.textContent = 'Added a sample passphrase to the Password line.';
+    });
+  </script>
 </body>
 </html>
