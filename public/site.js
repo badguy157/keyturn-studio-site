@@ -57,7 +57,7 @@
       <div class="nav-ctas">
         <a class="btn btn-primary" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Get a 2–3-min audit</a>
         <a class="btn btn-ghost"
-   href="https://calendly.com/vinnie-keyturn/15-min-intro"
+   href="https://calendly.com/vinnie-keyturn/intro"
    target="_blank" rel="noopener"
    aria-label="Book 15-minute intro on Calendly">Book 15-min intro</a>
       </div>
@@ -83,7 +83,7 @@
     <a href="/#pricing">Pricing</a>
     <a class="btn btn-primary w-full" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Get a 2–3-min audit</a>
     <a class="btn btn-ghost w-full"
-   href="https://calendly.com/vinnie-keyturn/15-min-intro"
+   href="https://calendly.com/vinnie-keyturn/intro"
    target="_blank" rel="noopener">Book 15-min intro</a>
   </nav>
 </header>
