@@ -6,13 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="One-time, expiring, encrypted link to share passwords and API keys with Keyturn Studio via Bitwarden Send.">
   <meta name="robots" content="noindex,follow">
+
+  <!-- Favicon set -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-  <!-- Minimal site header for brand consistency -->
+  <!-- Minimal header for brand consistency -->
   <header class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0">
-    <a href="/" style="font-weight:700;text-decoration:none;color:var(--fg, #e6ebf5)">Keyturn Studio</a>
+    <a href="/" style="font-weight:700;text-decoration:none;color:var(--fg,#0b1220)">Keyturn Studio</a>
     <nav style="display:flex;gap:16px;align-items:center">
       <a href="/onboarding.html#step2" class="btn btn-ghost">Back to onboarding</a>
     </nav>
@@ -21,7 +26,7 @@
   <section class="hero">
     <div class="container">
       <h1 class="hero-title">Share credentials securely</h1>
-      <p class="hero-lede">Use a one-time, expiring, encrypted link with <strong>Bitwarden Send</strong>. We’ll save to our vault and ask you to rotate later.</p>
+      <p class="hero-lede">Use a one-time, expiring, encrypted link with <strong>Bitwarden Send</strong>. We’ll store it in our vault and ask you to rotate later.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#bitwarden">Use Bitwarden Send (free)</a>
         <a class="btn btn-ghost" href="/onboarding.html#step2">Back to onboarding</a>
@@ -33,8 +38,8 @@
     <article class="card">
       <h3>Bitwarden Send (free & encrypted)</h3>
       <ol>
-        <li>Create a free account and sign in to the <a href="https://vault.bitwarden.com/" target="_blank" rel="noopener">Bitwarden Web Vault</a>.</li>
-        <li>Go to <b>Send</b> → <b>New</b> → choose <b>Text</b>.</li>
+        <li>Create a free account and sign in to the <a href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener">Bitwarden Web Vault</a>.</li>
+        <li>Go to <b>Send → New → Text</b>.</li>
         <li>Paste only what’s needed (use the template below).</li>
         <li>Click <b>Options</b> and set:
           <ul>
@@ -45,31 +50,57 @@
         </li>
         <li>Click <b>Create</b>, copy the link, and email it to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
       </ol>
-      <p class="small muted">Recipients <em>don’t</em> need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.</p>
+      <p class="small muted">Recipients don’t need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.</p>
 
-      <h4 style="margin-top:16px">What to include (editable template)</h4>
-      <textarea id="tpl" rows="12" style="width:100%;white-space:pre-wrap;background:var(--card, #0b1220);border:1px solid var(--border, #1c263a);border-radius:8px;padding:12px;font-size:.95rem">
-DNS / Domain access
+      <h4 style="margin-top:16px">DNS-only template (recommended)</h4>
+      <textarea id="tpl" style="
+        width:100%;
+        background:#fff;
+        color:#0b1220;
+        border:1px solid #e5eaf2;
+        border-radius:12px;
+        padding:12px;
+        font-size:.95rem;
+        line-height:1.6;
+        resize:none;
+        overflow:hidden;
+      ">DNS / Domain access
 • Registrar: (e.g., GoDaddy / Namecheap / Cloudflare)
 • Login URL:
-• Username / Account email:
-• Password (temporary):
+• Account email:
+• Temporary password:
 • MFA method on the account: (authenticator/SMS)  ← do not send codes here
-
-Website / Hosting (if applicable)
-• Provider:
-• Login URL:
-• Username:
-• Password (temporary):
 
 Notes
 • Scope: DNS-only unless otherwise agreed.
-• Please rotate passwords after our kickoff call.
-      </textarea>
+• We won’t change MX/email records without written approval.</textarea>
+
+      <details style="margin-top:12px">
+        <summary class="small"><strong>Optional: Hosting credentials template (only if requested)</strong></summary>
+        <textarea id="tpl2" style="
+          width:100%;
+          background:#fff;
+          color:#0b1220;
+          border:1px solid #e5eaf2;
+          border-radius:12px;
+          padding:12px;
+          font-size:.95rem;
+          line-height:1.6;
+          margin-top:8px;
+          resize:none;
+          overflow:hidden;
+        ">Website / Hosting (optional)
+• Provider:
+• Login URL:
+• Account email:
+• Temporary password:
+• Notes / scope:</textarea>
+      </details>
+
       <div class="hero-ctas" style="margin-top:10px;gap:8px;flex-wrap:wrap">
-        <button id="copyTpl" class="btn btn-primary" type="button">Copy template</button>
+        <button id="copyTpl" class="btn btn-primary" type="button">Copy DNS template</button>
         <button id="genPass" class="btn btn-ghost" type="button">Generate passphrase</button>
-        <a class="btn btn-primary" href="https://bitwarden.com/products/send/" target="_blank" rel="noopener">Open Bitwarden Send</a>
+        <a class="btn btn-primary" href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener">Open Bitwarden Send</a>
       </div>
       <p id="copiedMsg" class="small muted" style="margin-top:6px;"></p>
     </article>
@@ -80,7 +111,7 @@ Notes
       <div class="hero-ctas" style="margin-top:8px">
         <a class="btn btn-primary" href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg" target="_blank" rel="noopener">Upload files securely</a>
       </div>
-      <p class="small muted">Large files OK. Do not include passwords in documents—use Bitwarden Send above.</p>
+      <p class="small muted">Do not include passwords in documents—use Bitwarden Send above.</p>
     </article>
 
     <article class="card">
@@ -90,7 +121,7 @@ Notes
         <li><b>GoDaddy</b>: Delegate Access → share “Domains” only</li>
         <li><b>Namecheap</b>: Access Manager → share “Domain” (manage) for the specific domain</li>
       </ul>
-      <p class="small muted">We’ll remove access at the end of the project.</p>
+      <p class="small muted">Access is removed at project end.</p>
     </article>
   </main>
 
@@ -102,27 +133,27 @@ Notes
     // year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // copy template
-    const tpl = document.getElementById('tpl');
-    const copyBtn = document.getElementById('copyTpl');
+    // autosize helper for textareas (no internal scroll)
+    function autosize(el){ el.style.height='auto'; el.style.height = (el.scrollHeight + 2) + 'px'; }
+    const t1 = document.getElementById('tpl');
+    const t2 = document.getElementById('tpl2');
+    [t1,t2].forEach(el => { if (el){ autosize(el); el.addEventListener('input', () => autosize(el)); }});
+
+    // copy DNS template
     const msg = document.getElementById('copiedMsg');
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(tpl.value);
-        msg.textContent = 'Template copied to clipboard.';
-      } catch (_) {
-        msg.textContent = 'Select the text and press Ctrl/Cmd+C to copy.';
-      }
+    document.getElementById('copyTpl').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(t1.value); msg.textContent = 'DNS template copied.'; }
+      catch { msg.textContent = 'Select the text and press Ctrl/Cmd+C to copy.'; }
     });
 
-    // simple passphrase generator (4 words + number)
-    const genBtn = document.getElementById('genPass');
-    genBtn.addEventListener('click', () => {
+    // simple passphrase generator (4 words + number); inserts into DNS template line
+    document.getElementById('genPass').addEventListener('click', () => {
       const words = ['river','cedar','amber','north','granite','harbor','linen','ember','willow','copper','quartz','ocean','meadow','atlas','velvet','summit','bishop','canyon','spruce','maple'];
       const pick = () => words[Math.floor(Math.random()*words.length)];
       const pass = `${pick()}-${pick()}-${pick()}-${pick()}-${Math.floor(100+Math.random()*900)}`;
-      tpl.value = tpl.value.replace(/Password.*temporary.*:/i, `Password (temporary): ${pass}`);
-      msg.textContent = 'Added a sample passphrase to the Password line.';
+      t1.value = t1.value.replace(/Temporary password:.*/i, `Temporary password: ${pass}`);
+      autosize(t1);
+      msg.textContent = 'Added a sample passphrase to the DNS template.';
     });
   </script>
 </body>
