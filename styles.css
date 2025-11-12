@@ -169,6 +169,27 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 .trust-strip .logos{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:flex-start}
 .trust-strip img{filter:grayscale(100%);opacity:.85}
 
+/* ---- Quote card (testimonials) ---- */
+.quote-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px;
+  margin:20px 0;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+  max-width:600px;
+}
+.quote-card blockquote{
+  font-size:18px;
+  font-style:italic;
+  color:var(--muted-2);
+  margin:0 0 10px;
+  quotes:""" """;
+}
+.quote-card blockquote::before{content:open-quote}
+.quote-card blockquote::after{content:close-quote}
+.quote-card figcaption{color:var(--muted);margin:0}
+
 /* ---- Cards, grids, content blocks ---- */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .card{
