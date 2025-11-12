@@ -133,7 +133,10 @@
 
         <!-- Nice inline actions -->
         <div class="hero-ctas" style="margin-top:10px; gap:8px; flex-wrap:wrap">
-          <a id="btnAssets" class="btn btn-primary" href="#" target="_blank" rel="noopener" style="display:none">Upload brand assets</a>
+          <!-- Default href = your Dropbox request; JS can still override from /api/links -->
+          <a id="btnAssets" class="btn btn-primary"
+             href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg"
+             target="_blank" rel="noopener">Upload brand assets</a>
           <a class="btn btn-ghost" href="mailto:hello@keyturn.studio?subject=Request secure link for DNS credentials" target="_blank" rel="noopener">Request secure DNS link</a>
         </div>
 
@@ -218,12 +221,10 @@
 (function() {
   'use strict';
 
-  // --- helper to safely send GA4
   window.safeEvent = window.safeEvent || function(name, params){
     try { window.gtag && window.gtag('event', name, params); } catch(_){}
   };
 
-  // Smooth scroll for in-page anchors
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
@@ -233,7 +234,6 @@
     });
   });
 
-  // Track Step 1 view when 50% visible
   const step1 = document.getElementById('step1');
   if (step1) {
     const observer = new IntersectionObserver((entries) => {
@@ -247,7 +247,6 @@
     observer.observe(step1);
   }
 
-  // Prefill hidden meta fields
   (function prefillMeta(){
     const qsForm = document.getElementById('quickstartForm');
     if (!qsForm) return;
@@ -259,13 +258,11 @@
     qsForm.querySelector('input[name="timezone"]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
   })();
 
-  // Native Quick Start submit -> /api/quickstart
   const qsForm = document.getElementById('quickstartForm');
   if (qsForm) {
     const btn = document.getElementById('qsSubmit');
     const msg = document.getElementById('qsMsg');
 
-    // Consider interaction when user focuses any field
     qsForm.addEventListener('focusin', () => {
       if (!qsForm.dataset.interacted) {
         qsForm.dataset.interacted = '1';
@@ -282,10 +279,8 @@
       const formData = new FormData(qsForm);
       const payload = Object.fromEntries(formData.entries());
 
-      // honeypot
       if (payload.company) { btn.disabled = false; btn.textContent = 'Send & continue'; return; }
 
-      // add a tiny bit of extra context
       payload.userAgent = navigator.userAgent || '';
       payload.referrer = document.referrer || '';
 
@@ -298,7 +293,6 @@
         const data = await res.json();
         if (!res.ok || !data.ok) throw new Error(data.error || 'Failed');
 
-        // GA4 submit + move to Step 2
         window.safeEvent('onboarding_form_submit', { step: 'step1', page_path: location.pathname });
         msg.textContent = 'Thanks! Check your email for a confirmation.';
         document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -312,7 +306,6 @@
     });
   }
 
-  // Track Calendly booking completion
   window.addEventListener('message', (event) => {
     if (event.data && event.data.event === 'calendly.event_scheduled') {
       window.safeEvent('onboarding_calendly_booked', {
@@ -323,16 +316,14 @@
     }
   });
 
-  // ---- Fill dynamic links from env via /api/links ----
+  // Optional: hydrate from /api/links so env var overrides the inline default
   (async function hydrateLinks(){
     try {
       const r = await fetch('/api/links');
       if (!r.ok) return;
-      const { fullIntake, upload } = await r.json();
-
-      // If you ever add a "Full intake" button on-page, target it here.
+      const { upload } = await r.json();
       const btnAssets = document.getElementById('btnAssets');
-      if (upload && btnAssets) { btnAssets.href = upload; btnAssets.style.display = 'inline-flex'; }
+      if (upload && btnAssets) btnAssets.href = upload;
     } catch(_) {}
   })();
 })();

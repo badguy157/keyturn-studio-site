@@ -1,6 +1,6 @@
-// /api/quickstart.js
-// Sends admin + client emails via Resend (fallback SendGrid) with on-brand styling.
-// Also resolves Tally prefill (?email=&property=) whether you used placeholders or not.
+// File: /api/quickstart.js — Vercel Serverless Function
+// Sends you a notification email (via Resend or SendGrid) and a client confirmation email
+// that includes Full Intake + Upload links (prefilled) with on-brand styling.
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -31,26 +31,26 @@ export default async function handler(req, res) {
       referrer = ''
     } = body || {};
 
-    if (company) return res.status(200).json({ ok: true }); // spam honeypot
+    if (company) return res.status(200).json({ ok: true });
 
     const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if (!propertyName || !websiteUrl || !contactName || !isEmail(email) || !bookingSystem || !goal || !launchTiming) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
 
-    // --- ENV
     const TO    = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'vinnie@keyturn.studio';
     const FROM  = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
-    const TALLY = process.env.TALLY_FULL_INTAKE || '';     // e.g. https://tally.so/r/XXXX?email={email}&property={property}
-    const DROPB = process.env.DROPBOX_REQUEST || '';       // e.g. https://www.dropbox.com/request/yourRequestId
+    const TALLY = process.env.TALLY_FULL_INTAKE || '';  // e.g. https://tally.so/r/XXXX?email={email}&property={property}
+    const DROPB = process.env.DROPBOX_REQUEST || 'https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg';
 
-    // Build a clean intake URL with prefilled values regardless of how TALLY is stored.
-    const intakeUrl = resolveIntakeUrl(TALLY, email, propertyName);
+    const intakeUrl = (TALLY || '')
+      .replace('{email}', encodeURIComponent(email))
+      .replace('{property}', encodeURIComponent(propertyName));
 
     const subject = `Quick Start — ${propertyName}`;
     const htmlAdmin = `
-      <h2 style="margin:0 0 10px;font:600 18px Inter,Arial,sans-serif;color:#0a1220">Quick Start submission</h2>
-      <table cellpadding="6" cellspacing="0" style="font-family:Inter,Arial,sans-serif;font-size:14px;color:#0a1220">
+      <h2>Quick Start submission</h2>
+      <table cellpadding="6" cellspacing="0" style="font-family:Inter,Arial,sans-serif">
         ${row('Property', propertyName)}
         ${row('Website', websiteUrl)}
         ${row('Contact', contactName)}
@@ -64,71 +64,57 @@ export default async function handler(req, res) {
       </table>
       <hr style="margin:16px 0;border:0;border-top:1px solid #e5eaf2">
       <p style="font:12px/1.4 Inter,Arial,sans-serif;color:#6b7280">
-        Meta — page: ${escapeHtml(pagePath)} • utm: ${escapeHtml(utm_source)}/${escapeHtml(utm_medium)}/${escapeHtml(utm_campaign)}
-        • tz: ${escapeHtml(timezone)} • referrer: ${escapeHtml(referrer)} • UA: ${escapeHtml(userAgent)}
+        Meta — page: ${escapeHtml(pagePath)} | utm: ${escapeHtml(utm_source)}/${escapeHtml(utm_medium)}/${escapeHtml(utm_campaign)} |
+        tz: ${escapeHtml(timezone)} | referrer: ${escapeHtml(referrer)} | UA: ${escapeHtml(userAgent)}
       </p>
       ${(intakeUrl || DROPB) ? `
-      <p style="font:12px/1.4 Inter,Arial,sans-serif;color:#6b7280">
-        Links: ${intakeUrl ? `Full intake: <a href="${intakeUrl}">${intakeUrl}</a>` : ''}${intakeUrl && DROPB ? ' · ' : ''}${DROPB ? `Uploads: <a href="${DROPB}">${DROPB}</a>` : ''}
-      </p>` : '' }
+        <p style="font:12px/1.4 Inter,Arial,sans-serif;color:#6b7280">
+          Links: ${intakeUrl ? `Full intake: <a href="${intakeUrl}">${intakeUrl}</a>` : ''}${intakeUrl && DROPB ? ' · ' : ''}${DROPB ? `Uploads: <a href="${DROPB}">${DROPB}</a>` : ''}
+        </p>` : ''
+      }
     `;
 
-    // ===== Branded HTML email (keyturn.studio look & feel)
-    // Colors pulled from your site tokens: bg #0a1220 (dark), light fg, and accent ~#5aa2ff
     const COLORS = { bg: '#0a1220', text: '#0b1220', muted: '#6b7280', border: '#e5eaf2', accent: '#5aa2ff', card: '#ffffff' };
     const btn = (href, label) =>
       `<a href="${href}" target="_blank" rel="noopener"
-          style="background:${COLORS.accent};border-radius:12px;padding:12px 16px;
-                 color:#fff;text-decoration:none;font-weight:700;display:inline-block;">
-         ${label}
-       </a>`;
+         style="background:${COLORS.accent};border-radius:12px;padding:12px 16px;color:#fff;text-decoration:none;font-weight:700;display:inline-block;">${label}</a>`;
 
     const htmlClient = `
       <div style="background:${COLORS.bg};padding:24px 12px;">
-        <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:640px;margin:0 auto;">
-          <tr>
-            <td style="padding:0 8px 12px 8px;">
-              <div style="text-align:center;color:#e6ebf5;font:700 18px Inter,Arial,sans-serif;">Keyturn Studio</div>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:0 8px 24px 8px;">
-              <div style="background:${COLORS.card};border:1px solid ${COLORS.border};border-radius:16px;padding:24px;">
-                <h1 style="margin:0 0 12px;font:700 20px Inter,Arial,sans-serif;color:${COLORS.text}">Thanks — we’ve received your Quick Start</h1>
-                <p style="margin:0 0 16px;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">
-                  Hi ${escapeHtml(contactName)}, thanks for sending your details — we’ll review and follow up shortly.
-                </p>
+        <table role="presentation" width="100%" style="max-width:640px;margin:0 auto;">
+          <tr><td style="text-align:center;color:#e6ebf5;font:700 18px Inter,Arial,sans-serif;padding-bottom:12px">Keyturn Studio</td></tr>
+          <tr><td>
+            <div style="background:${COLORS.card};border:1px solid ${COLORS.border};border-radius:16px;padding:24px">
+              <h1 style="margin:0 0 12px;font:700 20px Inter,Arial,sans-serif;color:${COLORS.text}">Thanks — we’ve received your Quick Start</h1>
+              <p style="margin:0 0 16px;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">
+                Hi ${escapeHtml(contactName)}, thanks for sending your details — we’ll review and follow up shortly.
+              </p>
 
-                <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Next steps</h2>
-                <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
-                  ${intakeUrl ? `<li>Complete the full intake (5–10 min):</li>` : ''}
-                  ${intakeUrl ? `<li style="list-style:none;margin:8px 0 14px 0">${btn(intakeUrl,'Open full intake')}</li>` : ''}
-                  ${DROPB ? `<li>Upload brand assets (logos, menus, photos):</li>` : ''}
-                  ${DROPB ? `<li style="list-style:none;margin:8px 0 14px 0">${btn(DROPB,'Upload assets')}</li>` : ''}
-                  <li>Book your kickoff call in Step 3 on the onboarding page (or reply with times that work).</li>
-                </ol>
+              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Next steps</h2>
+              <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
+                ${intakeUrl ? `<li>Complete the full intake (5–10 min):</li>` : ''}
+                ${intakeUrl ? `<li style="list-style:none;margin:8px 0 14px 0">${btn(intakeUrl,'Open full intake')}</li>` : ''}
+                ${DROPB ? `<li>Upload brand assets (logos, menus, photos):</li>` : ''}
+                ${DROPB ? `<li style="list-style:none;margin:8px 0 14px 0">${btn(DROPB,'Upload assets')}</li>` : ''}
+                <li>Book your kickoff call in Step 3 on the onboarding page (or reply with times that work).</li>
+              </ol>
 
-                ${(intakeUrl || DROPB) ? `
-                <div style="margin-top:10px;padding:10px 12px;background:#f8fafc;border:1px solid ${COLORS.border};border-radius:10px">
-                  <div style="font:12px/1.5 Inter,Arial,sans-serif;color:${COLORS.muted}">
-                    Plain links:
-                    ${intakeUrl ? `<br>${intakeUrl}` : ''}${DROPB ? `<br>${DROPB}` : ''}
-                  </div>
-                </div>` : ''}
+              ${(intakeUrl || DROPB) ? `
+              <div style="margin-top:10px;padding:10px 12px;background:#f8fafc;border:1px solid ${COLORS.border};border-radius:10px">
+                <div style="font:12px/1.5 Inter,Arial,sans-serif;color:${COLORS.muted}">
+                  Plain links:${intakeUrl ? `<br>${intakeUrl}` : ''}${DROPB ? `<br>${DROPB}` : ''}
+                </div>
+              </div>` : ''}
 
-                <p style="margin:16px 0 0;font:12px/1.6 Inter,Arial,sans-serif;color:${COLORS.muted}">
-                  Security: never email passwords. We’ll request DNS access via a secure method (see Step 2 on the onboarding page).
-                </p>
-
-                <p style="margin:16px 0 0;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">— Keyturn Studio</p>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="text-align:center;color:#cdd6ea;font:12px Inter,Arial,sans-serif;">
-              © ${new Date().getFullYear()} Keyturn Studio
-            </td>
-          </tr>
+              <p style="margin:16px 0 0;font:12px/1.6 Inter,Arial,sans-serif;color:${COLORS.muted}">
+                Security: never email passwords. We’ll request DNS access via a secure method (see Step 2 on the onboarding page).
+              </p>
+              <p style="margin:16px 0 0;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">— Keyturn Studio</p>
+            </div>
+          </td></tr>
+          <tr><td style="text-align:center;color:#cdd6ea;font:12px Inter,Arial,sans-serif;padding-top:12px">
+            © ${new Date().getFullYear()} Keyturn Studio
+          </td></tr>
         </table>
       </div>
     `;
@@ -136,8 +122,9 @@ export default async function handler(req, res) {
     const used = await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient)
               || await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient);
 
-    if (!used) return res.status(500).json({ ok: false, error: 'Email provider not configured. Set RESEND_API_KEY or SENDGRID_API_KEY.' });
-
+    if (!used) {
+      return res.status(500).json({ ok: false, error: 'Email provider not configured. Set RESEND_API_KEY or SENDGRID_API_KEY.' });
+    }
     return res.status(200).json({ ok: true });
   } catch (e) {
     console.error(e);
@@ -145,39 +132,23 @@ export default async function handler(req, res) {
   }
 }
 
-/* -------------------------- helpers -------------------------- */
-
+/* ------------ helpers ------------- */
 function row(label, value){
   return `<tr><td><b>${escapeHtml(label)}</b></td><td>${escapeHtml(value || '')}</td></tr>`;
 }
 function escapeHtml(s) {
   return String(s || '').replace(/[&<>"']/g, (m) => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'" :'&#39;'
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#39;'
   }[m]));
 }
 async function readJson(req){
-  const chunks=[]; for await (const c of req) chunks.push(c);
-  const raw=Buffer.concat(chunks).toString('utf8');
+  const chunks = [];
+  for await (const c of req) chunks.push(c);
+  const raw = Buffer.concat(chunks).toString('utf8');
   try { return JSON.parse(raw); } catch { return {}; }
 }
 
-// Accepts either:
-//  - pure Tally URL (we append ?email=&property=) OR
-//  - a URL that already contains {email}/{property} placeholders.
-function resolveIntakeUrl(base, email, property){
-  if (!base) return '';
-  let url = base;
-  if (url.includes('{email}'))    url = url.replace('{email}', encodeURIComponent(email));
-  if (url.includes('{property}')) url = url.replace('{property}', encodeURIComponent(property));
-  try {
-    const u = new URL(url);
-    if (!u.searchParams.has('email'))    u.searchParams.set('email', email);
-    if (!u.searchParams.has('property')) u.searchParams.set('property', property);
-    return u.toString();
-  } catch { return url; }
-}
-
-/* ---------------------- Email providers ---------------------- */
+/* -------- Email providers ---------- */
 async function sendViaResend(from, to, subject, htmlAdmin, replyTo, htmlClient){
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
