@@ -1,6 +1,5 @@
 // File: /api/quickstart.js — Vercel Serverless Function
-// Sends you a notification email (via Resend or SendGrid) and a client confirmation email
-// that includes Full Intake + Upload links (prefilled) with on-brand styling.
+// Sends admin + client emails with brand styling and correct 1–2–3 numbering.
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -31,23 +30,27 @@ export default async function handler(req, res) {
       referrer = ''
     } = body || {};
 
-    if (company) return res.status(200).json({ ok: true });
+    if (company) return res.status(200).json({ ok: true }); // honeypot
 
     const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if (!propertyName || !websiteUrl || !contactName || !isEmail(email) || !bookingSystem || !goal || !launchTiming) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
 
+    // ENV
     const TO    = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'vinnie@keyturn.studio';
     const FROM  = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
     const TALLY = process.env.TALLY_FULL_INTAKE || '';  // e.g. https://tally.so/r/XXXX?email={email}&property={property}
     const DROPB = process.env.DROPBOX_REQUEST || 'https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg';
 
+    // Prefill Tally placeholders if present
     const intakeUrl = (TALLY || '')
       .replace('{email}', encodeURIComponent(email))
       .replace('{property}', encodeURIComponent(propertyName));
 
     const subject = `Quick Start — ${propertyName}`;
+
+    // ----- Admin email -----
     const htmlAdmin = `
       <h2>Quick Start submission</h2>
       <table cellpadding="6" cellspacing="0" style="font-family:Inter,Arial,sans-serif">
@@ -74,10 +77,21 @@ export default async function handler(req, res) {
       }
     `;
 
+    // ----- Client email (brand styling) -----
     const COLORS = { bg: '#0a1220', text: '#0b1220', muted: '#6b7280', border: '#e5eaf2', accent: '#5aa2ff', card: '#ffffff' };
     const btn = (href, label) =>
       `<a href="${href}" target="_blank" rel="noopener"
          style="background:${COLORS.accent};border-radius:12px;padding:12px 16px;color:#fff;text-decoration:none;font-weight:700;display:inline-block;">${label}</a>`;
+
+    // Helper: a single <li> that includes its button (so numbering stays 1–2–3)
+    const step = (text, href, ctaLabel) => {
+      if (!href) return '';
+      return `
+        <li style="margin:0 0 14px 0">
+          <div>${text}</div>
+          <div style="margin:8px 0 0 0">${btn(href, ctaLabel)}</div>
+        </li>`;
+    };
 
     const htmlClient = `
       <div style="background:${COLORS.bg};padding:24px 12px;">
@@ -90,13 +104,17 @@ export default async function handler(req, res) {
                 Hi ${escapeHtml(contactName)}, thanks for sending your details — we’ll review and follow up shortly.
               </p>
 
-              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Next steps</h2>
+              <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Do these three things next</h2>
+              <p style="margin:0 12px 8px 20px;font:13px/1.6 Inter,Arial,sans-serif;color:${COLORS.muted}">
+                You’re done with the 2-minute Quick Start. On the onboarding page these map to “Step 2” (access) and “Step 3” (kickoff).
+              </p>
+
               <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
-                ${intakeUrl ? `<li>Complete the full intake (5–10 min):</li>` : ''}
-                ${intakeUrl ? `<li style="list-style:none;margin:8px 0 14px 0">${btn(intakeUrl,'Open full intake')}</li>` : ''}
-                ${DROPB ? `<li>Upload brand assets (logos, menus, photos):</li>` : ''}
-                ${DROPB ? `<li style="list-style:none;margin:8px 0 14px 0">${btn(DROPB,'Upload assets')}</li>` : ''}
-                <li>Book your kickoff call in Step 3 on the onboarding page (or reply with times that work).</li>
+                ${step('Complete the full intake (5–10 min):', intakeUrl, 'Open full intake')}
+                ${step('Upload brand assets (logos, menus, photos):', DROPB, 'Upload assets')}
+                <li style="margin:0 0 14px 0">
+                  Book your kickoff call on the onboarding page (or reply with times that work).
+                </li>
               </ol>
 
               ${(intakeUrl || DROPB) ? `
@@ -119,6 +137,7 @@ export default async function handler(req, res) {
       </div>
     `;
 
+    // Send (Resend first, then SendGrid fallback)
     const used = await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient)
               || await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient);
 
