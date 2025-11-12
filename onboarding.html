@@ -120,31 +120,34 @@
     <!-- Step 2: Secure Access -->
     <article class="card" id="step2" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
       <h3>Step 2: Secure Access</h3>
-      <p class="small">Once you've submitted Step 1, provide us with secure access to your systems. This helps us set up tracking and prepare your site properly.</p>
+      <p class="small">Once you've submitted Step 1, provide us with secure access to your systems so we can set up tracking and prepare your site properly.</p>
+    
       <div class="roi-box" style="margin-top:16px">
         <h4 style="margin-top:0;font-size:1rem">What we need:</h4>
         <ul style="margin:12px 0;padding-left:1.2rem">
-          <li><strong>Google Analytics 4 (GA4):</strong> Add <code>analytics@keyturn.studio</code> as a Viewer in your GA4 property</li>
-          <li><strong>Domain/DNS Access:</strong> Credentials for your domain registrar or hosting (we'll guide you through this on a call)</li>
-          <li><strong>Booking Engine:</strong> Your direct booking link and PMS/engine name</li>
-          <li><strong>Google Business Profile:</strong> Add <code>hello@keyturn.studio</code> as Manager</li>
-          <li><strong>Brand Assets:</strong> Logo files, photos, menus (PDF), and any brand guidelines</li>
+          <li><strong>Analytics (pick one):</strong>
+            <ul style="margin:6px 0 0 18px">
+              <li><strong>GA4 (recommended):</strong> Add <code>analytics@keyturn.studio</code> as <em>Viewer</em> (temporarily <em>Editor</em> if you want us to configure events/cross-domain).</li>
+              <li><strong>Already using something else?</strong> Add read-only access in your platform (Plausible / Fathom / Matomo), or share credentials via <a href="/secure.html" target="_blank" rel="noopener">secure link</a>.</li>
+              <li><strong>No analytics yet?</strong> We’ll set up GA4 + Tag Manager for you at kickoff.</li>
+            </ul>
+          </li>
+          <li><strong>Domain/DNS access:</strong> Your registrar (GoDaddy / Namecheap / Cloudflare). Use our <a href="/secure.html" target="_blank" rel="noopener">secure link</a> or delegate DNS-only access.</li>
+          <li><strong>Booking engine:</strong> Your direct booking link and PMS/engine name (e.g., eviivo, SiteMinder).</li>
+          <li><strong>Google Business Profile:</strong> Add <code>hello@keyturn.studio</code> as <em>Manager</em> (or we’ll send a request).</li>
+          <li><strong>Brand assets:</strong> Logos, photos, menus (PDF), and any guidelines.</li>
         </ul>
-
-        <!-- Nice inline actions -->
+    
         <div class="hero-ctas" style="margin-top:10px; gap:8px; flex-wrap:wrap">
-          <!-- Assets upload (Dropbox File Request) -->
           <a id="btnAssets" class="btn btn-primary"
              href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg"
              target="_blank" rel="noopener">Upload brand assets</a>
-        
-          <!-- New: Bitwarden-first secure credentials link -->
+    
           <a class="btn btn-ghost"
              href="/secure.html"
              target="_blank" rel="noopener">Share credentials securely</a>
         </div>
-        
-
+    
         <details style="margin-top:12px">
           <summary class="small"><strong>Prefer to grant DNS-only access (no passwords)?</strong></summary>
           <ul class="small" style="margin:8px 0 0 18px">
@@ -153,14 +156,19 @@
             <li><b>Namecheap:</b> Access Manager → share “Domain” (manage) for the specific domain</li>
           </ul>
         </details>
-
+    
         <div style="margin-top:16px;padding:12px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
           <p style="margin:0;font-size:.95rem;color:var(--muted-2)">
-            <strong>🔒 Security note:</strong> Share credentials via secure channels only. We'll provide you with a one-time secure link for sensitive information. Never share passwords via email.
+            <strong>🔒 Security note:</strong> Share credentials via secure channels only. If you don’t have GA4 yet, we’ll provision GA4 + Tag Manager in your account and request the minimum access needed.
           </p>
+        </div>
+    
+        <div class="small" style="margin-top:10px;color:var(--muted-2)">
+          Tip: If you prefer a cookie-free option, we can use Cloudflare Web Analytics or Plausible instead of GA4.
         </div>
       </div>
     </article>
+    
 
     <!-- Step 3: Calendly -->
     <article class="card" id="step3" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">

@@ -124,7 +124,7 @@ export default async function handler(req, res) {
               <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
                 ${step('Complete the full intake (5–10 min):', intakeUrl, 'Open full intake')}
                 ${step('Upload brand assets (logos, menus, photos):', DROPB, 'Upload assets')}
-                ${step('Share DNS credentials securely (Bitwarden Send):', SECURE, 'Share credentials securely')}
+                ${step('Share DNS credentials or delegate access securely (Bitwarden Send):', SECURE, 'Share credentials securely')}
                 ${step('Book your kickoff call:', ONBOARD, 'Book kickoff call')}
               </ol>
               ${(intakeUrl || DROPB || SECURE || ONBOARD) ? `
