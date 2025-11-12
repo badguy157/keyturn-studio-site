@@ -1,9 +1,13 @@
-// File: /api/quickstart.js — Vercel Serverless Function
-// Sends admin + client emails with brand styling and dynamic Next Steps (Intake, Uploads, Secure, Book).
+// File: /api/quickstart.js
 
 export default async function handler(req, res) {
+  // Allow preflight just in case
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Allow', 'POST, OPTIONS');
+    return res.status(204).end();
+  }
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'POST, OPTIONS');
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
 
@@ -30,7 +34,8 @@ export default async function handler(req, res) {
       referrer = ''
     } = body || {};
 
-    if (company) return res.status(200).json({ ok: true }); // honeypot
+    // Honeypot
+    if (company) return res.status(200).json({ ok: true });
 
     const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if (!propertyName || !websiteUrl || !contactName || !isEmail(email) || !bookingSystem || !goal || !launchTiming) {
@@ -39,8 +44,11 @@ export default async function handler(req, res) {
 
     // ENV
     const TO    = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
-    const FROM  = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
-    const TALLY = process.env.TALLY_FULL_INTAKE || '';  // e.g. https://tally.so/r/XXXX?email={email}&property={property}
+    const FROME = (process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'hello@updates.keyturn.studio');
+    // If someone configured "Name <addr>" it's fine; otherwise this is already an address.
+    const FROM  = FROME;
+
+    const TALLY = process.env.TALLY_FULL_INTAKE || '';
     const DROPB = process.env.DROPBOX_REQUEST || 'https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg';
 
     // Build absolute URLs (prefer PUBLIC_BASE_URL)
@@ -97,14 +105,9 @@ export default async function handler(req, res) {
       `<a href="${href}" target="_blank" rel="noopener"
          style="background:${COLORS.accent};border-radius:12px;padding:12px 16px;color:#fff;text-decoration:none;font-weight:700;display:inline-block;">${label}</a>`;
 
-    // Helper: list item with embedded CTA (keeps ordered numbering correct)
     const step = (text, href, ctaLabel) => {
       if (!href) return '';
-      return `
-        <li style="margin:0 0 14px 0">
-          <div>${text}</div>
-          <div style="margin:8px 0 0 0">${btn(href, ctaLabel)}</div>
-        </li>`;
+      return `<li style="margin:0 0 14px 0"><div>${text}</div><div style="margin:8px 0 0 0">${btn(href, ctaLabel)}</div></li>`;
     };
 
     const htmlClient = `
@@ -117,16 +120,13 @@ export default async function handler(req, res) {
               <p style="margin:0 0 16px;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">
                 Hi ${escapeHtml(contactName)}, thanks for sending your details — we’ll review and follow up shortly.
               </p>
-
               <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Next steps</h2>
-
               <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
                 ${step('Complete the full intake (5–10 min):', intakeUrl, 'Open full intake')}
                 ${step('Upload brand assets (logos, menus, photos):', DROPB, 'Upload assets')}
                 ${step('Share DNS credentials securely (Bitwarden Send):', SECURE, 'Share credentials securely')}
                 ${step('Book your kickoff call:', ONBOARD, 'Book kickoff call')}
               </ol>
-
               ${(intakeUrl || DROPB || SECURE || ONBOARD) ? `
               <div style="margin-top:10px;padding:10px 12px;background:#f8fafc;border:1px solid ${COLORS.border};border-radius:10px">
                 <div style="font:12px/1.5 Inter,Arial,sans-serif;color:${COLORS.muted}">
@@ -137,31 +137,33 @@ export default async function handler(req, res) {
                   ${ONBOARD ? `<br>${ONBOARD}` : ''}
                 </div>
               </div>` : ''}
-
               <p style="margin:16px 0 0;font:12px/1.6 Inter,Arial,sans-serif;color:${COLORS.muted}">
                 Security: never email passwords. Use the “Share credentials securely” button above (Bitwarden Send).
               </p>
               <p style="margin:16px 0 0;font:14px/1.6 Inter,Arial,sans-serif;color:${COLORS.text}">— Keyturn Studio</p>
             </div>
           </td></tr>
-          <tr><td style="text-align:center;color:#cdd6ea;font:12px Inter,Arial,sans-serif;padding-top:12px">
-            © ${new Date().getFullYear()} Keyturn Studio
-          </td></tr>
+          <tr><td style="text-align:center;color:#cdd6ea;font:12px Inter,Arial,sans-serif;padding-top:12px">© ${new Date().getFullYear()} Keyturn Studio</td></tr>
         </table>
       </div>
     `;
 
-    // Send (Resend first, then SendGrid fallback)
-    const used = await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient)
-              || await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient);
+    // Try Resend, then SendGrid
+    const used =
+      (await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient)) ||
+      (await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient));
 
     if (!used) {
-      return res.status(500).json({ ok: false, error: 'Email provider not configured. Set RESEND_API_KEY or SENDGRID_API_KEY.' });
+      return res.status(500).json({
+        ok: false,
+        error: 'Email provider not configured. Set RESEND_API_KEY or SENDGRID_API_KEY.'
+      });
     }
     return res.status(200).json({ ok: true });
   } catch (e) {
-    console.error(e);
-    return res.status(500).json({ ok: false, error: 'Server error' });
+    console.error('Quickstart error:', e);
+    const msg = (e && e.message) ? String(e.message).slice(0, 2000) : 'Server error';
+    return res.status(500).json({ ok: false, error: msg });
   }
 }
 
@@ -186,12 +188,16 @@ async function sendViaResend(from, to, subject, htmlAdmin, replyTo, htmlClient){
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
 
+  // IMPORTANT: Resend expects reply_to as STRING
   const r1 = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to: [to], reply_to: replyTo ? [replyTo] : undefined, subject, html: htmlAdmin })
+    body: JSON.stringify({ from, to: [to], reply_to: replyTo || undefined, subject, html: htmlAdmin })
   });
-  if (!r1.ok) throw new Error(`Resend admin error: ${await r1.text()}`);
+  if (!r1.ok) {
+    const t = await r1.text();
+    throw new Error(`Resend admin error: ${t}`);
+  }
 
   if (replyTo) {
     const r2 = await fetch('https://api.resend.com/emails', {
@@ -199,7 +205,10 @@ async function sendViaResend(from, to, subject, htmlAdmin, replyTo, htmlClient){
       headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ from, to: [replyTo], subject: 'Thanks — we’ve received your Quick Start', html: htmlClient })
     });
-    if (!r2.ok) throw new Error(`Resend client error: ${await r2.text()}`);
+    if (!r2.ok) {
+      const t = await r2.text();
+      throw new Error(`Resend client error: ${t}`);
+    }
   }
   return true;
 }
@@ -218,7 +227,10 @@ async function sendViaSendGrid(from, to, subject, htmlAdmin, replyTo, htmlClient
       content: [{ type: 'text/html', value: htmlAdmin }]
     })
   });
-  if (r1.status >= 400) throw new Error(`SendGrid admin error: ${await r1.text()}`);
+  if (r1.status >= 400) {
+    const t = await r1.text();
+    throw new Error(`SendGrid admin error: ${t}`);
+  }
 
   if (replyTo) {
     const r2 = await fetch('https://api.sendgrid.com/v3/mail/send', {
@@ -230,7 +242,10 @@ async function sendViaSendGrid(from, to, subject, htmlAdmin, replyTo, htmlClient
         content: [{ type: 'text/html', value: htmlClient }]
       })
     });
-    if (r2.status >= 400) throw new Error(`SendGrid client error: ${await r2.text()}`);
+    if (r2.status >= 400) {
+      const t = await r2.text();
+      throw new Error(`SendGrid client error: ${t}`);
+    }
   }
   return true;
 }
