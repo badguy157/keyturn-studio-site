@@ -10,54 +10,9 @@
   <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
   <link rel="stylesheet" href="/styles.css">
+  <script src="/public/site.js" defer></script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-
-<!-- ===== Sticky site header (same as index) ===== -->
-<header class="site-header">
-  <div class="container header-bar">
-    <a class="brand" href="/" aria-label="Keyturn Studio home">
-      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="180" height="56" decoding="async">
-    </a>
-
-    <!-- Desktop nav -->
-    <nav class="nav-desktop" aria-label="Primary">
-      <ul class="nav-list">
-        <li><a href="#process">How it works</a></li>
-        <li><a href="/#results">Proof</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-      </ul>
-      <div class="nav-ctas">
-        <a class="btn btn-ghost" href="/audit.html">Get a 10-min audit</a>
-        <a class="btn btn-ghost" href="/tools/roi.html" aria-label="Open ROI estimate calculator">ROI estimate</a>
-        <a class="btn btn-ghost"
-   href="https://calendly.com/vinnie-keyturn/intro"
-   target="_blank" rel="noopener noreferrer"
-   aria-label="Book 15-minute intro on Calendly">Book 15-min intro</a>
-        <a class="btn btn-primary" href="/onboarding.html" aria-label="You are on onboarding">Onboarding</a>
-      </div>
-    </nav>
-
-    <!-- Mobile hamburger -->
-    <button class="menu-toggle" aria-controls="mobileMenu" aria-expanded="false" data-menu-toggle>
-      <span class="sr-only">Toggle menu</span>☰
-    </button>
-  </div>
-
-  <!-- Mobile drawer -->
-  <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
-    <a href="#process">How it works</a>
-    <a href="/#results">Proof</a>
-    <a href="/#pricing">Pricing</a>
-    <a class="btn btn-ghost w-full" href="/audit.html">Get a 10-min audit</a>
-    <a class="btn btn-ghost w-full" href="/tools/roi.html" aria-label="Open ROI estimate calculator">ROI estimate</a>
-    <a class="btn btn-ghost w-full"
-   href="https://calendly.com/vinnie-keyturn/intro"
-   target="_blank" rel="noopener noreferrer">Book 15-min intro</a>
-    <a class="btn btn-primary w-full" href="/onboarding.html">Onboarding</a>
-  </nav>
-</header>
 
 <!-- ===== Compact hero (same style) ===== -->
 <section class="hero">
@@ -65,13 +20,74 @@
     <h1 class="hero-title">Onboarding & process</h1>
     <p class="hero-lede">Simple, fast, and built around lifting <strong>website-direct</strong> share.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="/audit.html">Request your audit</a>
+      <a class="btn btn-primary" href="#step1">Start onboarding now</a>
       <a class="btn btn-ghost" href="/#results">See proof</a>
     </div>
   </div>
 </section>
 
 <main id="main">
+  <!-- ===== 3-Step Onboarding Hub ===== -->
+  <section class="container section" style="padding-top:40px">
+    <h2 style="margin-bottom:28px">3-Step Onboarding Hub</h2>
+
+    <!-- Step 1: Google Form -->
+    <article class="card" id="step1" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
+      <h3>Step 1: Share Your Details</h3>
+      <p class="small">Fill out the quick form below to get started. We'll use this to understand your property and prepare your project.</p>
+      
+      <div style="margin-top:16px">
+        <iframe 
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdExampleFormID/viewform?embedded=true" 
+          width="100%" 
+          height="800" 
+          frameborder="0" 
+          marginheight="0" 
+          marginwidth="0"
+          title="Onboarding Form"
+          loading="lazy">
+          Loading…
+        </iframe>
+      </div>
+    </article>
+
+    <!-- Step 2: Secure Access -->
+    <article class="card" id="step2" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
+      <h3>Step 2: Secure Access</h3>
+      <p class="small">Once you've submitted Step 1, provide us with secure access to your systems. This helps us set up tracking and prepare your site properly.</p>
+      
+      <div class="roi-box" style="margin-top:16px">
+        <h4 style="margin-top:0;font-size:1rem">What we need:</h4>
+        <ul style="margin:12px 0;padding-left:1.2rem">
+          <li><strong>Google Analytics 4 (GA4):</strong> Add <code>analytics@keyturn.studio</code> as a Viewer in your GA4 property</li>
+          <li><strong>Domain/DNS Access:</strong> Credentials for your domain registrar or hosting (we'll guide you through this on a call)</li>
+          <li><strong>Booking Engine:</strong> Your direct booking link and PMS/engine name</li>
+          <li><strong>Brand Assets:</strong> Logo files, photos, menus (PDF), and any brand guidelines</li>
+        </ul>
+        
+        <div style="margin-top:16px;padding:12px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
+          <p style="margin:0;font-size:.95rem;color:var(--muted-2)">
+            <strong>🔒 Security note:</strong> Share credentials via secure channels only. We'll provide you with a secure link for sensitive information. Never share passwords via email.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Step 3: Calendly -->
+    <article class="card" id="step3" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
+      <h3>Step 3: Schedule Your Kickoff Call</h3>
+      <p class="small">Book a 30-minute kickoff call to review your project scope, timeline, and answer any questions.</p>
+      
+      <div style="margin-top:16px">
+        <div 
+          class="calendly-inline-widget" 
+          data-url="https://calendly.com/vinnie-keyturn/onboarding-kickoff?hide_gdpr_banner=1" 
+          style="min-width:320px;height:700px;">
+        </div>
+      </div>
+    </article>
+  </section>
+
   <!-- ===== Process (3 cards) ===== -->
   <section id="process" class="container grid section">
     <article class="card">
@@ -193,26 +209,88 @@
 </footer>
 
 <!-- Sticky mobile CTA (same pattern as index) -->
-<a href="/audit.html#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
+<a href="#step1" class="sticky-cta" aria-label="Start onboarding">Start onboarding</a>
 
-<!-- Minimal JS: mobile drawer + year -->
+<!-- Calendly widget script -->
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+<!-- Onboarding page specific JS with GA4 events -->
 <script>
-  (function(){
-    const toggle = document.querySelector('[data-menu-toggle]');
-    const drawer = document.getElementById('mobileMenu');
-    if (toggle && drawer){
-      const closeDrawer = () => { drawer.hidden = true; toggle.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
-      toggle.addEventListener('click', () => {
-        const open = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!open));
-        drawer.hidden = open;
-        document.body.classList.toggle('no-scroll', !open);
+(function() {
+  'use strict';
+
+  // Smooth scroll for hero CTA
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '') return;
+      
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // GA4 Events for onboarding interactions
+  
+  // Track form view when Step 1 is in viewport
+  const step1 = document.getElementById('step1');
+  if (step1) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !step1.dataset.viewed) {
+          step1.dataset.viewed = 'true';
+          window.safeEvent('onboarding_form_view', {
+            step: 'step1',
+            page_path: window.location.pathname
+          });
+        }
       });
-      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    }, { threshold: 0.5 });
+    observer.observe(step1);
+  }
+
+  // Track form interactions (best effort)
+  const formIframe = document.querySelector('iframe[title="Onboarding Form"]');
+  if (formIframe) {
+    let hasInteracted = false;
+    
+    // Track when iframe gains focus (user is interacting)
+    window.addEventListener('blur', () => {
+      if (document.activeElement === formIframe && !hasInteracted) {
+        hasInteracted = true;
+        window.safeEvent('onboarding_form_interact', {
+          step: 'step1',
+          page_path: window.location.pathname
+        });
+      }
+    });
+
+    // Listen for form submission via postMessage (if Google Forms sends it)
+    window.addEventListener('message', (event) => {
+      // Google Forms sends formResponse message on submission
+      if (event.data && typeof event.data === 'string' && event.data.includes('formResponse')) {
+        window.safeEvent('onboarding_form_submit', {
+          step: 'step1',
+          page_path: window.location.pathname
+        });
+      }
+    });
+  }
+
+  // Track Calendly booking completion
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.event === 'calendly.event_scheduled') {
+      window.safeEvent('onboarding_calendly_booked', {
+        step: 'step3',
+        page_path: window.location.pathname,
+        calendly_uri: event.data.payload?.event?.uri || ''
+      });
     }
-    const y = document.getElementById('y');
-    if (y) y.textContent = new Date().getFullYear();
-  })();
+  });
+})();
 </script>
 </body>
 </html>
