@@ -105,9 +105,6 @@ export default async function handler(req, res) {
               </p>
 
               <h2 style="margin:0 0 10px;font:700 16px Inter,Arial,sans-serif;color:${COLORS.text}">Do these three things next</h2>
-              <p style="margin:0 12px 8px 20px;font:13px/1.6 Inter,Arial,sans-serif;color:${COLORS.muted}">
-                You’re done with the 2-minute Quick Start. On the onboarding page these map to “Step 2” (access) and “Step 3” (kickoff).
-              </p>
 
               <ol style="margin:0 0 16px 20px;padding:0;font:14px/1.7 Inter,Arial,sans-serif;color:${COLORS.text}">
                 ${step('Complete the full intake (5–10 min):', intakeUrl, 'Open full intake')}
