@@ -159,6 +159,9 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 .accent{color:var(--accent)}
 .chip-row{display:flex;gap:8px;overflow-x:auto; -webkit-overflow-scrolling:touch; padding:6px 0 12px}
 .chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap;color:var(--muted);font-size:14px}
+.hero-bullets{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--muted)}
+.hero-bullets li::before{content:"✓ ";color:var(--accent);margin-right:4px}
+@media (max-width:767px){.hero-bullets{flex-direction:column;gap:8px}}
 .hero-subtext{color:var(--muted);font-size:14px;margin-top:6px}
 
 /* ---- Trust strip ---- */
