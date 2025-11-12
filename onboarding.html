@@ -1,123 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Onboarding – Keyturn Studio</title>
+  <title>Onboarding & Process | Keyturn Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="styles.css" rel="stylesheet">
+  <meta name="description" content="What to expect: the 3-week makeover sprint, approvals, what we need, and how we measure results.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
+  <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <!-- Injected header -->
-  <header id="site-header"></header>
-  <script src="/public/site.js" defer></script>
-  
-  <main>
-    <!-- Hero section with CTA -->
-    <section class="onboarding-hero card-section" style="text-align:center; margin-top:2rem;">
-      <h1 class="hero-title">Quick Start Onboarding</h1>
-      <p class="hero-desc">Get set up in minutes. Complete our simple 3-step onboarding hub.</p>
-      <button id="onboarding-start-btn" class="btn btn-pill btn-primary" style="margin:1.5rem 0;" aria-label="Start onboarding">Start onboarding</button>
-    </section>
-    
-    <!-- Onboarding Hub (3 Steps) -->
-    <section class="onboarding-hub">
-      <!-- Step 1: Google Form -->
-      <div class="card-section card" id="step1" tabindex="-1" aria-label="Intake Form">
-        <h2 class="step-title">Step 1 — Intake Form</h2>
-        <div id="form-card" class="rounded-corner overflow-hidden" style="margin-bottom:1.5rem;">
-          <iframe 
-            id="onboarding-iframe"
-            src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true" 
-            width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0"
-            style="border:none; border-radius:14px; width:100%;"
-            title="Intake Form">
-            Loading&hellip;
-          </iframe>
-        </div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Sticky site header (same as index) ===== -->
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="brand" href="/" aria-label="Keyturn Studio home">
+      <img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="180" height="56" decoding="async">
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#process">How it works</a></li>
+        <li><a href="/#results">Proof</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a class="btn btn-ghost" href="/audit.html">Get a 10-min audit</a>
+        <a class="btn btn-ghost" href="/tools/roi.html" aria-label="Open ROI estimate calculator">ROI estimate</a>
+        <a class="btn btn-ghost"
+   href="https://calendly.com/vinnie-keyturn/intro"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Book 15-minute intro on Calendly">Book 15-min intro</a>
+        <a class="btn btn-primary" href="/onboarding.html" aria-label="You are on onboarding">Onboarding</a>
       </div>
-      <!-- Step 2: Secure Access panel -->
-      <div class="card-section card" id="step2" aria-label="Secure Access" style="margin-top:2.5rem;">
-        <h2 class="step-title">Step 2 — Secure Access</h2>
-        <ul class="step-bullets" style="margin-bottom:0.75rem;">
-          <li>Share a one-time link via 1Password, Bitwarden, or Proton Pass to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>
-      and paste that link in the intake form field “Secure credential link”.</li>
-          <li>Or add us as a user: GA4 (Viewer+Analyst), Search Console (Full), Domain/DNS (user or secure link), PMS/Eviivo (staff), Google Business Profile (Manager), Socials (Editor/Manager).</li>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="menu-toggle" aria-controls="mobileMenu" aria-expanded="false" data-menu-toggle>
+      <span class="sr-only">Toggle menu</span>☰
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
+    <a href="#process">How it works</a>
+    <a href="/#results">Proof</a>
+    <a href="/#pricing">Pricing</a>
+    <a class="btn btn-ghost w-full" href="/audit.html">Get a 10-min audit</a>
+    <a class="btn btn-ghost w-full" href="/tools/roi.html" aria-label="Open ROI estimate calculator">ROI estimate</a>
+    <a class="btn btn-ghost w-full"
+   href="https://calendly.com/vinnie-keyturn/intro"
+   target="_blank" rel="noopener noreferrer">Book 15-min intro</a>
+    <a class="btn btn-primary w-full" href="/onboarding.html">Onboarding</a>
+  </nav>
+</header>
+
+<!-- ===== Compact hero (same style) ===== -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Onboarding & process</h1>
+    <p class="hero-lede">Simple, fast, and built around lifting <strong>website-direct</strong> share.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="/audit.html">Request your audit</a>
+      <a class="btn btn-ghost" href="/#results">See proof</a>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <!-- ===== Process (3 cards) ===== -->
+  <section id="process" class="container grid section">
+    <article class="card">
+      <h3>1) Discovery → Audit</h3>
+      <ul>
+        <li>Quick audit request (<a href="/audit.html">form</a>)</li>
+        <li>We send a 2–3 min Loom with 3 fixes + ROI estimate</li>
+        <li>20-minute intro call (optional) to scope fit</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>2) Makeover Sprint (≈3 weeks)</h3>
+      <ul>
+        <li>Core pages: Home, Rooms, Eat &amp; Drink, What’s On, Story/FAQ</li>
+        <li>Unified “Book direct — best rate” CTAs (sticky + hero)</li>
+        <li>GA4 events (<code>book_click</code>, <code>booking_outbound</code>) + JSON-LD</li>
+        <li>Speed &amp; accessibility pass; Digital Asset Pack</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>3) Launch → Polish → Growth</h3>
+      <ul>
+        <li>Go-live + 30-day polish window for small tweaks</li>
+        <li>Optional Care/Growth plan for CRO nudge &amp; reporting</li>
+        <li>Monthly KPI line: website-direct share (weighted), booking CTR, search clicks/CTR</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ===== Requirements / Approvals / Success ===== -->
+  <section class="container section">
+    <div class="grid">
+      <article class="card">
+        <h3>What we need from you</h3>
+        <ul>
+          <li>Booking engine link (direct URL) &amp; PMS/engine name</li>
+          <li>GA4 access; optional GSC access</li>
+          <li>Logo, photos, menus (PDF), brand notes/voice</li>
+          <li>Domain/DNS access for launch</li>
+          <li>One decision-maker for weekly approvals</li>
         </ul>
-        <p class="privacy-note" style="margin-top:0.25rem; color:var(--text-muted);">We never store plain-text passwords. You can revoke access after launch.</p>
-      </div>
-      <!-- Step 3: Calendly booking -->
-      <div class="card-section card" id="step3" aria-label="Book Kickoff" style="margin-top:2.5rem;">
-        <h2 class="step-title">Step 3 — Book Kickoff Call</h2>
-        <div class="rounded-corner overflow-hidden" style="min-height:730px">
-          <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR_HANDLE/intro?hide_gdpr_banner=1&utm_source=onboarding" style="min-width:320px; height:700px;"></div>
-        </div>
-        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      </div>
-    </section>
-    
-    <!-- Existing process/approval/success cards BELOW hub (unchanged, demo only) -->
-    <section class="onboarding-context" style="margin-top:4rem;">
-      <div class="card card-section">
-        <h3 class="context-title">Process Card</h3>
-        <p>Describe onboarding process steps here.</p>
-      </div>
-      <div class="card card-section">
-        <h3 class="context-title">Approval Card</h3>
-        <p>Status, waiting for client, etc.</p>
-      </div>
-      <div class="card card-section">
-        <h3 class="context-title">Success Card</h3>
-        <p>Completion/success messaging.</p>
-      </div>
-    </section>
-  </main>
-  
-  <script>
-    // Scroll to Step 1 on CTA
-    document.getElementById('onboarding-start-btn').addEventListener('click', function() {
-      var el = document.getElementById('step1');
-      if(el) el.scrollIntoView({behavior:'smooth'});
-    });
+      </article>
 
-    // Onboarding GA4 events (safe, via site.js)
-    document.addEventListener('DOMContentLoaded', function() {
-      window.safeEvent && window.safeEvent('onboarding_form_view');
+      <article class="card">
+        <h3>Approvals cadence</h3>
+        <ul>
+          <li>Kickoff &amp; copy outline</li>
+          <li>Design review (round 1)</li>
+          <li>Build review (round 2)</li>
+          <li>Pre-launch check</li>
+        </ul>
+        <p class="tiny">Guarantees &amp; cancellation terms are listed on the homepage.</p>
+      </article>
 
-      // Interact: delegate clicks inside form card
-      document.getElementById('form-card').addEventListener('click', function() {
-        window.safeEvent && window.safeEvent('onboarding_form_interact');
+      <article class="card">
+        <h3>How we measure success</h3>
+        <ul>
+          <li><strong>Website-direct share (seasonally-weighted)</strong></li>
+          <li>Outbound booking CTR &amp; funnel events</li>
+          <li>Search clicks/CTR (GSC)</li>
+        </ul>
+        <p class="tiny">Pre-launch website-direct baseline currently: <strong>7.65%</strong>. Post-launch seasonal projection mid-case: <strong>~21.7%</strong>.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Pilot note (matches homepage language) ===== -->
+  <section class="container banner">
+    <p><strong>Founders’ Pilot (2 slots/month)</strong> — reduced setup for case-study partners (GA4 + bookings access). <strong>Includes first 2 months of Care free, then $300/mo.</strong></p>
+    <ul class="small" style="margin:8px 0 0 1.2rem">
+      <li>Allow anonymised metrics & screenshots for 18 months</li>
+      <li>Provide GA4 + booking/OTA access (for setup & reporting)</li>
+      <li>Meet any one: ≥ 1,500 sessions/mo, ≥ 10 OTA bookings/mo, or ADR ≥ $80</li>
+    </ul>
+    <div class="buttons" style="margin-top:10px">
+      <a class="btn btn-primary" href="/audit.html#pilot" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
+    </div>
+  </section>
+
+  <!-- ===== Pricing summary + CTAs ===== -->
+  <section class="container section">
+    <div class="grid">
+      <article class="card">
+        <h3>Pricing & payment</h3>
+        <ul>
+          <li><strong>Core:</strong> $7,500 <span class="tiny">or $1,875/mo × 4 (0%)</span></li>
+          <li><strong>Pro:</strong> $12,000 <span class="tiny">or $3,000/mo × 4 (0%)</span></li>
+          <li><strong>Premier:</strong> $18,000–$25,000 <span class="tiny">or $4,500–$6,250/mo × 4 (0%)</span></li>
+          <li><strong>Care/Growth:</strong> $300–$900/mo</li>
+        </ul>
+        <p class="tiny">0% 4-pay available for Core, Pro, and Premier. Work starts after first payment. You own domain, content, images, and code.</p>
+      </article>
+      
+
+      <article class="card">
+        <h3>FAQs</h3>
+        <ul>
+          <li><strong>ADR?</strong> <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">Average Daily Rate</abbr>.</li>
+          <li><strong>ALOS?</strong> <abbr title="Average Length of Stay">Average Length of Stay</abbr>.</li>
+          <li><strong>Will this change my PMS/engine?</strong> No — we link to your existing engine.</li>
+          <li><strong>Photos?</strong> Use yours or we can source/guide; we label staged/AI shots.</li>
+          <li><strong>Data?</strong> GA4 only; no resale pixels.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="buttons" style="margin-top:12px">
+      <a class="btn btn-primary" href="/audit.html">Request your audit</a>
+      <a class="btn btn-ghost" href="/#pricing">View full pricing</a>
+    </div>
+  </section>
+</main>
+
+<footer class="container footer">
+  <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
+  <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+
+<!-- Sticky mobile CTA (same pattern as index) -->
+<a href="/audit.html#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
+
+<!-- Minimal JS: mobile drawer + year -->
+<script>
+  (function(){
+    const toggle = document.querySelector('[data-menu-toggle]');
+    const drawer = document.getElementById('mobileMenu');
+    if (toggle && drawer){
+      const closeDrawer = () => { drawer.hidden = true; toggle.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        drawer.hidden = open;
+        document.body.classList.toggle('no-scroll', !open);
       });
-
-      // Try to detect Google Form submit via iframe src change (formResponse)
-      var formIframe = document.getElementById('onboarding-iframe');
-      if(formIframe) {
-        let lastSrc = formIframe.src;
-        formIframe.addEventListener('load', function() {
-          // Could be a submit; best-effort for cross-origin
-          try {
-            // Not always accessible due to cross-origin
-            var currentHref = formIframe.contentWindow.location.href;
-            if(currentHref && currentHref.includes('formResponse')) {
-              window.safeEvent && window.safeEvent('onboarding_form_submit');
-            }
-          } catch(e) {
-            // fallback: check src string for formResponse indication
-            var nowSrc = formIframe.src;
-            if (nowSrc !== lastSrc && nowSrc.includes('formResponse')) {
-              window.safeEvent && window.safeEvent('onboarding_form_submit');
-            }
-            lastSrc = nowSrc;
-          }
-        });
-      }
-
-      // Calendly widget event: onboarding_calendly_booked
-      window.addEventListener('message', function(e) {
-        if (typeof e.data === 'object' && e.data?.event === 'calendly.event_scheduled') {
-          window.safeEvent && window.safeEvent('onboarding_calendly_booked');
-        }
-      });
-    });
-  </script>
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    }
+    const y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
 </body>
 </html>
