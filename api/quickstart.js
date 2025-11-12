@@ -39,8 +39,14 @@ export default async function handler(req, res) {
         return res.status(400).json({ ok: false, error: 'Missing required fields' });
       }
   
-      const TO = process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
-      const FROM = process.env.QS_FROM_EMAIL || 'hello@keyturn.studio';
+// before
+// const TO = process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
+// const FROM = process.env.QS_FROM_EMAIL || 'hello@keyturn.studio';
+
+// after
+const TO = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'vinnie@keyturn.studio';
+const FROM = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
+
   
       const subject = `Quick Start — ${propertyName}`;
       const htmlAdmin = `
