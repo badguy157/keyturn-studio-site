@@ -202,6 +202,9 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
 .metric-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
 .metric-card h5{margin:.25rem 0;color:#e2e8f0}
+.metric-xl{font-size:clamp(32px,5vw,48px);font-weight:700;color:var(--accent);line-height:1.1;margin-bottom:8px}
+.metric-link{color:var(--muted);font-size:14px;text-decoration:none;margin-top:8px;display:inline-block}
+.metric-link:hover{color:var(--accent)}
 
 .result{
   display:grid;gap:20px;align-items:center;margin-top:16px;
