@@ -130,9 +130,25 @@
           <li><strong>Google Business Profile:</strong> Add <code>hello@keyturn.studio</code> as Manager</li>
           <li><strong>Brand Assets:</strong> Logo files, photos, menus (PDF), and any brand guidelines</li>
         </ul>
+
+        <!-- Nice inline actions -->
+        <div class="hero-ctas" style="margin-top:10px; gap:8px; flex-wrap:wrap">
+          <a id="btnAssets" class="btn btn-primary" href="#" target="_blank" rel="noopener" style="display:none">Upload brand assets</a>
+          <a class="btn btn-ghost" href="mailto:hello@keyturn.studio?subject=Request secure link for DNS credentials" target="_blank" rel="noopener">Request secure DNS link</a>
+        </div>
+
+        <details style="margin-top:12px">
+          <summary class="small"><strong>Prefer to grant DNS-only access (no passwords)?</strong></summary>
+          <ul class="small" style="margin:8px 0 0 18px">
+            <li><b>Cloudflare:</b> Members → Invite → role <i>DNS Editor</i></li>
+            <li><b>GoDaddy:</b> Delegate Access → share “Domains” only</li>
+            <li><b>Namecheap:</b> Access Manager → share “Domain” (manage) for the specific domain</li>
+          </ul>
+        </details>
+
         <div style="margin-top:16px;padding:12px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
           <p style="margin:0;font-size:.95rem;color:var(--muted-2)">
-            <strong>🔒 Security note:</strong> Share credentials via secure channels only. We'll provide you with a secure link for sensitive information. Never share passwords via email.
+            <strong>🔒 Security note:</strong> Share credentials via secure channels only. We'll provide you with a one-time secure link for sensitive information. Never share passwords via email.
           </p>
         </div>
       </div>
@@ -306,6 +322,19 @@
       });
     }
   });
+
+  // ---- Fill dynamic links from env via /api/links ----
+  (async function hydrateLinks(){
+    try {
+      const r = await fetch('/api/links');
+      if (!r.ok) return;
+      const { fullIntake, upload } = await r.json();
+
+      // If you ever add a "Full intake" button on-page, target it here.
+      const btnAssets = document.getElementById('btnAssets');
+      if (upload && btnAssets) { btnAssets.href = upload; btnAssets.style.display = 'inline-flex'; }
+    } catch(_) {}
+  })();
 })();
 </script>
 
