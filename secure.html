@@ -27,7 +27,9 @@
   <section class="hero">
     <div class="container">
       <h1 class="hero-title">Share credentials securely</h1>
-      <p class="hero-lede">Use a one-time, expiring, encrypted link with <strong>Bitwarden Send</strong>. We’ll store it in our vault and ask you to rotate later.</p>
+      <p class="hero-lede">
+        Use a one-time, expiring, encrypted link with <strong>Bitwarden Send</strong>. We’ll store it in our vault and ask you to rotate later.
+      </p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#bitwarden">Use Bitwarden Send (free)</a>
         <a class="btn btn-ghost" href="/onboarding.html#step2">Back to onboarding</a>
@@ -42,20 +44,31 @@
         <li>Create a free account and sign in to the <a href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener noreferrer">Bitwarden Web Vault</a>.</li>
         <li>Go to <b>Send → New → Text</b>.</li>
         <li>Paste only what’s needed (use the template below).</li>
-        <li>Click <b>Options</b> and set:
+        <li>
+          Click <b>Options</b> and set:
           <ul>
             <li><b>Expiration</b>: 7 days</li>
             <li><b>Max access count</b>: 1</li>
-            <li><b>Password</b>: add a simple passphrase (send that passphrase separately)</li>
+            <li>
+              <b>Password</b>: add a simple passphrase
+              <span class="small muted">— this locks the Bitwarden Send <em>message</em>, not your DNS account. Share this passphrase separately (text/phone/second email).</span>
+            </li>
           </ul>
         </li>
-        <!-- Swap this mailto to hello@keyturn.studio after you create that alias in Proton -->
         <li>Click <b>Create</b>, copy the link, and email it to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
       </ol>
-      <p class="small muted">Recipients don’t need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.</p>
+      <p class="small muted">
+        Recipients don’t need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.
+      </p>
 
       <h4 style="margin-top:16px">DNS-only template (recommended)</h4>
-      <textarea id="tpl" style="
+
+      <div id="dns-help" class="small muted" style="margin:6px 0 8px">
+        Tip: the “Temporary password” below is a short-term password for your domain registrar login so we can make DNS edits.
+        You can enter your own or click <em>Generate temporary password</em> to fill that line. We’ll ask you to change it after we confirm access.
+      </div>
+
+      <textarea id="tpl" aria-describedby="dns-help" style="
         width:100%;
         background:#fff;
         color:#0b1220;
@@ -70,12 +83,13 @@
 • Registrar: (e.g., GoDaddy / Namecheap / Cloudflare)
 • Login URL:
 • Account email:
-• Temporary password:
+• Temporary password: (create one for us to use; you can change it later)
 • MFA method on the account: (authenticator/SMS)  ← do not send codes here
 
 Notes
 • Scope: DNS-only unless otherwise agreed.
-• We won’t change MX/email records without written approval.</textarea>
+• We won’t change MX/email records without written approval.
+• Please rotate the temporary password after we confirm access.</textarea>
 
       <details style="margin-top:12px">
         <summary class="small"><strong>Optional: Hosting credentials template (only if requested)</strong></summary>
@@ -101,7 +115,7 @@ Notes
 
       <div class="hero-ctas" style="margin-top:10px;gap:8px;flex-wrap:wrap">
         <button id="copyTpl" class="btn btn-primary" type="button">Copy DNS template</button>
-        <button id="genPass" class="btn btn-ghost" type="button">Generate passphrase</button>
+        <button id="genTemp" class="btn btn-ghost" type="button" aria-describedby="dns-help">Generate temporary password</button>
         <a class="btn btn-primary" href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener noreferrer">Open Bitwarden Send</a>
       </div>
       <p id="copiedMsg" class="small muted" style="margin-top:6px;"></p>
@@ -148,14 +162,18 @@ Notes
       catch { msg.textContent = 'Select the text and press Ctrl/Cmd+C to copy.'; }
     });
 
-    // simple passphrase generator (4 words + number); inserts into DNS template line
-    document.getElementById('genPass').addEventListener('click', () => {
+    // generate a temporary password and insert it into the DNS template
+    document.getElementById('genTemp').addEventListener('click', () => {
       const words = ['river','cedar','amber','north','granite','harbor','linen','ember','willow','copper','quartz','ocean','meadow','atlas','velvet','summit','bishop','canyon','spruce','maple'];
       const pick = () => words[Math.floor(Math.random()*words.length)];
       const pass = `${pick()}-${pick()}-${pick()}-${pick()}-${Math.floor(100+Math.random()*900)}`;
-      t1.value = t1.value.replace(/Temporary password:.*/i, `Temporary password: ${pass}`);
+      if (!/Temporary password:/i.test(t1.value)) {
+        t1.value += `\nTemporary password: ${pass}`;
+      } else {
+        t1.value = t1.value.replace(/Temporary password:.*$/im, `Temporary password: ${pass}`);
+      }
       autosize(t1);
-      msg.textContent = 'Added a sample passphrase to the DNS template.';
+      msg.textContent = 'Temporary password inserted into the DNS template. Ask the client to change it after access is confirmed.';
     });
   </script>
 </body>
