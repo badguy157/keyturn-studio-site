@@ -291,3 +291,36 @@ details.tiny > summary{color:var(--muted);font-size:.9rem}
   .metric-card, .proof-card, .kpi{padding:12px}
   .metric-card h5, .proof-card h5{font-size:0.95rem}
 }
+
+/* Onboarding hub enhancements */
+.card h3{margin-top:0}
+.card h4{margin-top:0;color:var(--fg)}
+.card code{
+  background:rgba(255,255,255,.08);
+  padding:2px 6px;
+  border-radius:4px;
+  font-size:.9em;
+  color:var(--accent);
+}
+
+/* Ensure iframes are responsive */
+iframe{max-width:100%}
+
+/* Active nav state */
+[aria-current="page"]{
+  color:var(--accent) !important;
+  font-weight:600;
+}
+
+/* Screen reader only class */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border-width:0;
+}
