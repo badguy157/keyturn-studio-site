@@ -61,7 +61,7 @@
       <input type="text"   name="_gotcha" style="display:none">
 
       <button class="btn primary" type="submit" id="auditSubmit">Request audit</button>
-      <p class="tiny">Prefer email? <a href="mailto:vinnie@keyturn.studio">vinnie@keyturn.studio</a></p>
+      <p class="tiny">Prefer email? <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a></p>
       <p id="auditMsg" class="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
     </form>
   </section>
@@ -117,11 +117,11 @@ form.addEventListener('submit', async (e)=>{
           <a class="btn" href="/onboarding.html">See how onboarding works</a>
         </div>`;
     } else {
-      msg.textContent = 'Something went wrong. Please try again or email vinnie@keyturn.studio.';
+      msg.textContent = 'Something went wrong. Please try again or email hello@keyturn.studio.';
       btn.disabled = false;
     }
   } catch(err){
-    msg.textContent = 'Network error. Please try again or email vinnie@keyturn.studio.';
+    msg.textContent = 'Network error. Please try again or email hello@keyturn.studio.';
     btn.disabled = false;
   }
 });

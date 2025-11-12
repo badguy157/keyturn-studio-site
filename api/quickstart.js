@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     }
 
     // ENV
-    const TO    = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'vinnie@keyturn.studio';
+    const TO    = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
     const FROM  = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
     const TALLY = process.env.TALLY_FULL_INTAKE || '';  // e.g. https://tally.so/r/XXXX?email={email}&property={property}
     const DROPB = process.env.DROPBOX_REQUEST || 'https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg';

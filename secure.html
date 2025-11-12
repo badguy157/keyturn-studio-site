@@ -11,13 +11,14 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" sizes="512x512" href="/icon-512.png">
 
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <!-- Minimal header for brand consistency -->
   <header class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0">
-    <a href="/" style="font-weight:700;text-decoration:none;color:var(--fg,#0b1220)">Keyturn Studio</a>
+    <a href="/" style="font-weight:700;text-decoration:none;color:var(--fg,#e6ebf5)">Keyturn Studio</a>
     <nav style="display:flex;gap:16px;align-items:center">
       <a href="/onboarding.html#step2" class="btn btn-ghost">Back to onboarding</a>
     </nav>
@@ -38,7 +39,7 @@
     <article class="card">
       <h3>Bitwarden Send (free & encrypted)</h3>
       <ol>
-        <li>Create a free account and sign in to the <a href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener">Bitwarden Web Vault</a>.</li>
+        <li>Create a free account and sign in to the <a href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener noreferrer">Bitwarden Web Vault</a>.</li>
         <li>Go to <b>Send → New → Text</b>.</li>
         <li>Paste only what’s needed (use the template below).</li>
         <li>Click <b>Options</b> and set:
@@ -48,6 +49,7 @@
             <li><b>Password</b>: add a simple passphrase (send that passphrase separately)</li>
           </ul>
         </li>
+        <!-- Swap this mailto to hello@keyturn.studio after you create that alias in Proton -->
         <li>Click <b>Create</b>, copy the link, and email it to <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a>.</li>
       </ol>
       <p class="small muted">Recipients don’t need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.</p>
@@ -100,7 +102,7 @@ Notes
       <div class="hero-ctas" style="margin-top:10px;gap:8px;flex-wrap:wrap">
         <button id="copyTpl" class="btn btn-primary" type="button">Copy DNS template</button>
         <button id="genPass" class="btn btn-ghost" type="button">Generate passphrase</button>
-        <a class="btn btn-primary" href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener">Open Bitwarden Send</a>
+        <a class="btn btn-primary" href="https://vault.bitwarden.com/#/send" target="_blank" rel="noopener noreferrer">Open Bitwarden Send</a>
       </div>
       <p id="copiedMsg" class="small muted" style="margin-top:6px;"></p>
     </article>
@@ -109,7 +111,7 @@ Notes
       <h3>For files (ID scans, contracts, brand packs)</h3>
       <p>Use our encrypted file-drop instead of email attachments:</p>
       <div class="hero-ctas" style="margin-top:8px">
-        <a class="btn btn-primary" href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg" target="_blank" rel="noopener">Upload files securely</a>
+        <a class="btn btn-primary" href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg" target="_blank" rel="noopener noreferrer">Upload files securely</a>
       </div>
       <p class="small muted">Do not include passwords in documents—use Bitwarden Send above.</p>
     </article>
