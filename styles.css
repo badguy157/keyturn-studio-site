@@ -306,8 +306,8 @@ details.tiny > summary{color:var(--muted);font-size:.9rem}
 /* Ensure iframes are responsive */
 iframe{max-width:100%}
 
-/* Active nav state */
-[aria-current="page"]{
+/* Active nav state - only for non-primary buttons */
+a:not(.btn-primary)[aria-current="page"]{
   color:var(--accent) !important;
   font-weight:600;
 }
