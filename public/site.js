@@ -129,6 +129,8 @@
     const dropdown = document.querySelector('.nav-dropdown');
     
     if (dropdownToggle && dropdownMenu && dropdown) {
+      let closeTimeout = null;
+
       // Click toggle
       dropdownToggle.addEventListener('click', (e) => {
         e.preventDefault();
@@ -137,19 +139,31 @@
         dropdownMenu.hidden = isExpanded;
       });
 
-      // Hover
-      dropdown.addEventListener('mouseenter', () => {
+      // Hover - with delay on close
+      const openDropdown = () => {
+        if (closeTimeout) {
+          clearTimeout(closeTimeout);
+          closeTimeout = null;
+        }
         dropdownToggle.setAttribute('aria-expanded', 'true');
         dropdownMenu.hidden = false;
-      });
-      dropdown.addEventListener('mouseleave', () => {
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-        dropdownMenu.hidden = true;
-      });
+      };
+
+      const closeDropdown = () => {
+        closeTimeout = setTimeout(() => {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+          dropdownMenu.hidden = true;
+        }, 150);
+      };
+
+      dropdown.addEventListener('mouseenter', openDropdown);
+      dropdown.addEventListener('mouseleave', closeDropdown);
+      dropdownMenu.addEventListener('mouseenter', openDropdown);
+      dropdownMenu.addEventListener('mouseleave', closeDropdown);
 
       // Close on outside click
       document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
+        if (!dropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
           dropdownToggle.setAttribute('aria-expanded', 'false');
           dropdownMenu.hidden = true;
         }
