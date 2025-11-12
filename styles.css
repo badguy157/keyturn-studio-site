@@ -112,6 +112,32 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 .nav-list a:hover{color:var(--fg)}
 .nav-ctas{display:flex;gap:10px}
 
+/* Services dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font:inherit;white-space:nowrap;padding:0;
+}
+.nav-dropdown-toggle:hover,.nav-dropdown-toggle[aria-expanded="true"]{color:var(--fg)}
+.nav-dropdown-menu{
+  position:absolute;top:100%;left:0;margin-top:8px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:8px 0;min-width:200px;
+  box-shadow:var(--shadow);z-index:100;
+  list-style:none;
+}
+.nav-dropdown-menu li{padding:0}
+.nav-dropdown-menu a{
+  display:block;padding:10px 16px;color:var(--muted-2);
+  text-decoration:none;white-space:nowrap;
+}
+.nav-dropdown-menu a:hover{background:rgba(255,255,255,.05);color:var(--fg)}
+
+/* Mobile submenu */
+.mobile-submenu{display:grid;gap:6px;padding-left:12px}
+.mobile-submenu-label{color:var(--muted);font-size:14px;margin-bottom:4px}
+.mobile-submenu a{color:var(--muted);font-size:14px;padding:8px}
+
 /* Mobile drawer */
 .mobile-drawer{
   display:grid;gap:12px;
