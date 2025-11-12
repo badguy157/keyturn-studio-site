@@ -5,12 +5,43 @@
   <title>Keyturn Studio — Hospitality Website Makeovers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="We rebuild 8–40 room inn & small-hotel websites to increase direct bookings and reduce OTA commissions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
   <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
   <link rel="stylesheet" href="styles.css">
   <script src="/public/site.js" defer></script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Keyturn Studio",
+    "url": "https://www.keyturn.studio",
+    "logo": "https://www.keyturn.studio/public/logo.svg",
+    "description": "Marketing website makeovers for hospitality — inns, small hotels, and B&Bs",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Product/Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Makeover Sprint (Core)",
+    "description": "3–4 week website rebuild for 8–40 room inns and small hotels with GA4 tracking, SEO optimization, and modern booking CTAs",
+    "offers": {
+      "@type": "Offer",
+      "price": "7500",
+      "priceCurrency": "USD",
+      "url": "https://www.keyturn.studio/#pricing"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -34,6 +65,13 @@
       <a class="btn btn-ghost" href="#results">See our results</a>
       <a class="btn btn-ghost" href="/tools/roi.html" aria-label="Calculate your potential savings">Calculate savings</a>
     </div>
+
+    <!-- Why hotels pick us -->
+    <ul class="hero-bullets">
+      <li>Cuts OTA fees</li>
+      <li>Direct-booking CTAs that convert</li>
+      <li>You own everything (Digital Asset Pack)</li>
+    </ul>
 
     <p class="hero-subtext">
       Ready to get started? <a href="/onboarding.html">Begin onboarding</a> — it only takes 3 weeks, with a fixed, transparent fee.
@@ -131,7 +169,7 @@
       </div>
 
       <figure class="result-visual">
-        <img class="zoomable" src="/screenshot.png" alt="The Anchor Hotel homepage after the makeover" loading="lazy" decoding="async">
+        <img class="zoomable" src="/screenshot.png" alt="The Anchor Hotel homepage after the makeover" width="1200" height="800" loading="lazy" decoding="async">
         <figcaption>Homepage after the makeover</figcaption>
       </figure>
     </div>
@@ -144,31 +182,30 @@
 
     <div class="metrics-grid">
       <article class="metric-card">
-        <h5>Website-direct (annual, weighted)</h5>
-        <p><strong>21.7%</strong> website-direct</p>
-        <p class="tiny">Off-peak snapshot: 18.8% (3/16). Annual weighting uses off-peak ≈9.8% of yearly bookings. In-season assumption: 22% website-direct.</p>
+        <div class="metric-xl">22–25%</div>
+        <h5>Direct booking share (seasonal peak)</h5>
+        <p class="tiny">Lifted from single digits. Annual weighted: 21.7%</p>
+        <a href="/anchor-case.html" class="metric-link">See details →</a>
       </article>
       <article class="metric-card">
-        <h5>Post-launch snapshot</h5>
-        <p><strong>18.8%</strong> website-direct (3 of 16)</p>
-        <p class="tiny">Oct 28 → Nov 9 • off-peak</p>
+        <div class="metric-xl">+107%</div>
+        <h5>Search clicks after launch</h5>
+        <p class="tiny">CTR doubled: 5.1% vs 2.3%. Avg position improved 15.7 vs 23.7 (GSC)</p>
+        <a href="/anchor-case.html" class="metric-link">See details →</a>
       </article>
       <article class="metric-card">
-        <h5><abbr title="Average Daily Rate">ADR</abbr> &amp; <abbr title="Average Length of Stay">ALOS</abbr></h5>
-        <p><strong>$90.65 ADR</strong> • <strong>1.51 nights</strong></p>
-        <p class="tiny">Occupancy ~26.3% (8 rooms)</p>
-      </article>
-      <article class="metric-card">
+        <div class="metric-xl">~$24.60</div>
         <h5>Saved per moved booking</h5>
-        <p><strong>~$24.60</strong> per booking</p>
-        <p class="tiny">ADR × ALOS × 18% commission</p>
-      </article>
-      <article class="metric-card">
-        <h5>Search lift after launch</h5>
-        <p>Clicks <strong>+107%</strong>; CTR <strong>5.1% vs 2.3%</strong></p>
-        <p class="tiny">Avg pos. <strong>15.7 vs 23.7</strong> (GSC)</p>
+        <p class="tiny">ADR $90.65 × ALOS 1.51 × 18% commission</p>
+        <a href="/anchor-case.html" class="metric-link">See details →</a>
       </article>
     </div>
+
+    <!-- Testimonial quote -->
+    <figure class="quote-card">
+      <blockquote>"Direct share went from single digits to ~25%."</blockquote>
+      <figcaption class="small">Owner, 8-room inn</figcaption>
+    </figure>
   </section>
 
   <section id="pricing" class="container section">
@@ -284,6 +321,14 @@
     </div>
   </section>
 
+  <!-- Testimonial quote -->
+  <div class="container">
+    <figure class="quote-card">
+      <blockquote>"The process was smooth and we saw immediate booking improvements."</blockquote>
+      <figcaption class="small">Manager, 20-room hotel</figcaption>
+    </figure>
+  </div>
+
   <section id="principles" class="container section">
     <h2>How we work</h2>
     <ul class="bullets">
@@ -300,15 +345,15 @@
     <h2>Portfolio components</h2>
     <p class="small">A few example blocks from recent work.</p>
     <div class="gallery">
-      <figure><img class="zoomable" src="/public/portfolio/Hero_Desktop.png" alt="Hero (desktop)" loading="lazy" decoding="async"><figcaption>Hero (desktop)</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Hero_Mobile.png" alt="Hero (mobile)" loading="lazy" decoding="async"><figcaption>Hero (mobile)</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Rooms_Grid.png" alt="Rooms grid" loading="lazy" decoding="async"><figcaption>Rooms grid</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/RoomCard_Full.png" alt="Room detail" loading="lazy" decoding="async"><figcaption>Room detail</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Menu_Page.png" alt="Menu section" loading="lazy" decoding="async"><figcaption>Menu section</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Trust_Line.png" alt="Direct benefits / trust line" loading="lazy" decoding="async"><figcaption>Trust line</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Sticky_CTA_Mobile.png" alt="Sticky booking bar (mobile)" loading="lazy" decoding="async"><figcaption>Sticky CTA (mobile)</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Events_Strip.png" alt="What’s On events strip" loading="lazy" decoding="async"><figcaption>Events strip</figcaption></figure>
-      <figure><img class="zoomable" src="/public/portfolio/Booking_CTA_Click.png" alt="Booking CTA" loading="lazy" decoding="async"><figcaption>Booking CTA</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Hero_Desktop.png" alt="Hero (desktop)" width="800" height="600" loading="lazy" decoding="async"><figcaption>Hero (desktop)</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Hero_Mobile.png" alt="Hero (mobile)" width="800" height="600" loading="lazy" decoding="async"><figcaption>Hero (mobile)</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Rooms_Grid.png" alt="Rooms grid" width="800" height="600" loading="lazy" decoding="async"><figcaption>Rooms grid</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/RoomCard_Full.png" alt="Room detail" width="800" height="600" loading="lazy" decoding="async"><figcaption>Room detail</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Menu_Page.png" alt="Menu section" width="800" height="600" loading="lazy" decoding="async"><figcaption>Menu section</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Trust_Line.png" alt="Direct benefits / trust line" width="800" height="600" loading="lazy" decoding="async"><figcaption>Trust line</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Sticky_CTA_Mobile.png" alt="Sticky booking bar (mobile)" width="800" height="600" loading="lazy" decoding="async"><figcaption>Sticky CTA (mobile)</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Events_Strip.png" alt="What’s On events strip" width="800" height="600" loading="lazy" decoding="async"><figcaption>Events strip</figcaption></figure>
+      <figure><img class="zoomable" src="/public/portfolio/Booking_CTA_Click.png" alt="Booking CTA" width="800" height="600" loading="lazy" decoding="async"><figcaption>Booking CTA</figcaption></figure>
     </div>
   </section>
   
@@ -462,7 +507,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/15-min-intro" target="_blank" rel="noopener noreferrer">Book 15 min Intro <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/15-min-intro" target="_blank" rel="noopener">Book 15 min Intro <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>

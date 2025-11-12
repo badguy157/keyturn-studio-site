@@ -11,6 +11,19 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
   <link rel="stylesheet" href="/styles.css">
   <script src="/public/site.js" defer></script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Keyturn Studio",
+    "url": "https://www.keyturn.studio",
+    "logo": "https://www.keyturn.studio/public/logo.svg",
+    "description": "Marketing website makeovers for hospitality",
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
 
@@ -52,6 +65,26 @@
 
       <div class="form-row"><label for="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
       <div class="form-row"><label for="email">Your email</label><input id="email" type="email" name="email" required></div>
+      
+      <!-- Biggest headache -->
+      <div class="form-row">
+        <label>What's your biggest headache right now?</label>
+        <div style="display:grid;gap:8px;margin-top:8px">
+          <label class="radio-label"><input type="radio" name="headache" value="Low direct bookings"> Low direct bookings</label>
+          <label class="radio-label"><input type="radio" name="headache" value="Slow website"> Slow website</label>
+          <label class="radio-label"><input type="radio" name="headache" value="Hard to update"> Hard to update content</label>
+          <label class="radio-label"><input type="radio" name="headache" value="No tracking"> No tracking / analytics</label>
+          <label class="radio-label"><input type="radio" name="headache" value="Other"> Other</label>
+        </div>
+      </div>
+
+      <!-- Optional file upload -->
+      <div class="form-row">
+        <label for="screenshot">Screenshots or docs (optional)</label>
+        <input id="screenshot" type="file" name="screenshot" accept="image/*,.pdf" multiple>
+        <p class="tiny">Share current site screenshots, analytics snapshots, or any relevant files</p>
+      </div>
+
       <div class="form-row"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
 
       <!-- Helpful metadata for Formspree -->
@@ -89,7 +122,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/15-min-intro" target="_blank" rel="noopener noreferrer">Book 15 min Intro <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/15-min-intro" target="_blank" rel="noopener">Book 15 min Intro <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>

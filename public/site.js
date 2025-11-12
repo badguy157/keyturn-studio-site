@@ -40,17 +40,26 @@
     <nav class="nav-desktop" aria-label="Primary">
       <ul class="nav-list">
         <li><a href="/#services"${isActive('/') ? ' aria-current="page"' : ''}>How it works</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Services <span aria-hidden="true">▾</span>
+          </button>
+          <ul class="nav-dropdown-menu" hidden>
+            <li><a href="/services/inn-website-design.html">Inn Website Design</a></li>
+            <li><a href="/services/small-hotel-website-design.html">Small Hotel Design</a></li>
+            <li><a href="/services/bb-website-design.html">B&B Website Design</a></li>
+            <li><a href="/services/hotel-website-redesign.html">Hotel Redesign</a></li>
+          </ul>
+        </li>
         <li><a href="/#results"${isActive('/') ? ' aria-current="page"' : ''}>Proof</a></li>
         <li><a href="/#pricing"${isActive('/') ? ' aria-current="page"' : ''}>Pricing</a></li>
       </ul>
       <div class="nav-ctas">
-        <a class="btn btn-ghost" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Audit</a>
-        <a class="btn btn-ghost" href="/tools/roi.html" aria-label="Open ROI estimate calculator">ROI estimate</a>
+        <a class="btn btn-primary" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Get a 2–3-min audit</a>
         <a class="btn btn-ghost"
-   href="https://calendly.com/vinnie-keyturn/intro"
-   target="_blank" rel="noopener noreferrer"
+   href="https://calendly.com/vinnie-keyturn/15-min-intro"
+   target="_blank" rel="noopener"
    aria-label="Book 15-minute intro on Calendly">Book 15-min intro</a>
-        <a class="btn btn-primary" href="/onboarding.html"${isActive('/onboarding') ? ' aria-current="page"' : ''}>Onboarding</a>
       </div>
     </nav>
 
@@ -63,14 +72,19 @@
   <!-- Mobile drawer -->
   <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
     <a href="/#services">How it works</a>
+    <div class="mobile-submenu">
+      <strong class="mobile-submenu-label">Services</strong>
+      <a href="/services/inn-website-design.html">Inn Website Design</a>
+      <a href="/services/small-hotel-website-design.html">Small Hotel Design</a>
+      <a href="/services/bb-website-design.html">B&B Website Design</a>
+      <a href="/services/hotel-website-redesign.html">Hotel Redesign</a>
+    </div>
     <a href="/#results">Proof</a>
     <a href="/#pricing">Pricing</a>
-    <a class="btn btn-ghost w-full" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Audit</a>
-    <a class="btn btn-ghost w-full" href="/tools/roi.html" aria-label="Open ROI estimate calculator">ROI estimate</a>
+    <a class="btn btn-primary w-full" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Get a 2–3-min audit</a>
     <a class="btn btn-ghost w-full"
-   href="https://calendly.com/vinnie-keyturn/intro"
-   target="_blank" rel="noopener noreferrer">Book 15-min intro</a>
-    <a class="btn btn-primary w-full" href="/onboarding.html"${isActive('/onboarding') ? ' aria-current="page"' : ''}>Onboarding</a>
+   href="https://calendly.com/vinnie-keyturn/15-min-intro"
+   target="_blank" rel="noopener">Book 15-min intro</a>
   </nav>
 </header>
     `.trim();
@@ -108,6 +122,68 @@
     }
   }
 
+  // ===== Services Dropdown =====
+  function initServicesDropdown() {
+    const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+    const dropdownMenu = document.querySelector('.nav-dropdown-menu');
+    const dropdown = document.querySelector('.nav-dropdown');
+    
+    if (dropdownToggle && dropdownMenu && dropdown) {
+      let closeTimeout = null;
+
+      // Click toggle
+      dropdownToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+        dropdownToggle.setAttribute('aria-expanded', String(!isExpanded));
+        dropdownMenu.hidden = isExpanded;
+      });
+
+      // Hover - with delay on close
+      const openDropdown = () => {
+        if (closeTimeout) {
+          clearTimeout(closeTimeout);
+          closeTimeout = null;
+        }
+        dropdownToggle.setAttribute('aria-expanded', 'true');
+        dropdownMenu.hidden = false;
+      };
+
+      const closeDropdown = () => {
+        closeTimeout = setTimeout(() => {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+          dropdownMenu.hidden = true;
+        }, 150);
+      };
+
+      dropdown.addEventListener('mouseenter', openDropdown);
+      dropdown.addEventListener('mouseleave', closeDropdown);
+      dropdownMenu.addEventListener('mouseenter', openDropdown);
+      dropdownMenu.addEventListener('mouseleave', closeDropdown);
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+          dropdownMenu.hidden = true;
+        }
+      });
+
+      // Keyboard navigation
+      dropdownToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+          dropdownToggle.setAttribute('aria-expanded', String(!isExpanded));
+          dropdownMenu.hidden = isExpanded;
+          if (!isExpanded) {
+            dropdownMenu.querySelector('a')?.focus();
+          }
+        }
+      });
+    }
+  }
+
   // ===== Year Footer Update =====
   function updateYear() {
     const yearEl = document.getElementById('y');
@@ -121,11 +197,13 @@
     document.addEventListener('DOMContentLoaded', () => {
       injectHeader();
       initMobileMenu();
+      initServicesDropdown();
       updateYear();
     });
   } else {
     injectHeader();
     initMobileMenu();
+    initServicesDropdown();
     updateYear();
   }
 })();
