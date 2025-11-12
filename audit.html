@@ -65,6 +65,26 @@
 
       <div class="form-row"><label for="booking">Booking engine link</label><input id="booking" type="url" name="booking" placeholder="Direct booking URL"></div>
       <div class="form-row"><label for="email">Your email</label><input id="email" type="email" name="email" required></div>
+      
+      <!-- Biggest headache -->
+      <div class="form-row">
+        <label>What's your biggest headache right now?</label>
+        <div style="display:grid;gap:8px;margin-top:8px">
+          <label class="radio-label"><input type="radio" name="headache" value="Low direct bookings"> Low direct bookings</label>
+          <label class="radio-label"><input type="radio" name="headache" value="Slow website"> Slow website</label>
+          <label class="radio-label"><input type="radio" name="headache" value="Hard to update"> Hard to update content</label>
+          <label class="radio-label"><input type="radio" name="headache" value="No tracking"> No tracking / analytics</label>
+          <label class="radio-label"><input type="radio" name="headache" value="Other"> Other</label>
+        </div>
+      </div>
+
+      <!-- Optional file upload -->
+      <div class="form-row">
+        <label for="screenshot">Screenshots or docs (optional)</label>
+        <input id="screenshot" type="file" name="screenshot" accept="image/*,.pdf" multiple>
+        <p class="tiny">Share current site screenshots, analytics snapshots, or any relevant files</p>
+      </div>
+
       <div class="form-row"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea></div>
 
       <!-- Helpful metadata for Formspree -->

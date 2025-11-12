@@ -297,6 +297,9 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
   border-radius:12px;padding:12px 14px;font-size:1rem;outline:none
 }
 .audit-form input:focus,.audit-form textarea:focus{border-color:#334155}
+.radio-label{display:flex;align-items:center;gap:8px;color:var(--muted-2);font-size:.95rem;cursor:pointer}
+.radio-label input[type="radio"]{cursor:pointer}
+.audit-form input[type="file"]{padding:8px 12px}
 
 /* Footer */
 .footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:24px;margin-top:var(--space-7);color:var(--muted)}
