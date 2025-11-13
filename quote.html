@@ -36,75 +36,94 @@
 </section>
 
 <main id="main" class="container section">
-  <section class="card" id="quote-form">
-    <h2>Tell Us About Your Property</h2>
-    <p class="small">This 2-minute form lets us prepare your quote. You'll get a confirmation email right after.</p>
+  <section class="card premium-form-card" id="quote-form" style="max-width:720px;margin-left:auto;margin-right:auto;padding:40px 32px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="display:inline-block;padding:6px 14px;background:rgba(90,162,255,.12);border:1px solid rgba(90,162,255,.3);border-radius:20px;margin-bottom:16px">
+        <span style="font-size:0.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px">Quick Quote Request</span>
+      </div>
+      <h2 style="margin:0 0 12px;font-size:1.75rem">Tell Us About Your Property</h2>
+      <p class="small" style="color:var(--muted);margin:0">This 2-minute form lets us prepare your quote. You'll get a confirmation email right after.</p>
+    </div>
 
-    <div style="margin-top:16px">
-      <form id="quickstartForm" class="stack" novalidate>
+    <div style="margin-top:28px">
+      <form id="quickstartForm" class="premium-form" novalidate>
         <!-- Honeypot (anti-spam) -->
         <input type="text" name="company" id="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px">
 
-        <div class="grid two">
-          <label>Property name
-            <input name="propertyName" required>
-          </label>
-          <label>Website URL
-            <input name="websiteUrl" type="url" placeholder="https://…" required>
-          </label>
+        <div style="display:grid;gap:20px">
+          <div class="grid two" style="gap:16px">
+            <div class="form-field">
+              <label for="propertyName" class="form-label">Property name <span style="color:#ff6b6b">*</span></label>
+              <input id="propertyName" name="propertyName" class="form-input" required>
+            </div>
+            <div class="form-field">
+              <label for="websiteUrl" class="form-label">Website URL <span style="color:#ff6b6b">*</span></label>
+              <input id="websiteUrl" name="websiteUrl" type="url" class="form-input" placeholder="https://…" required>
+            </div>
+          </div>
+
+          <div class="grid two" style="gap:16px">
+            <div class="form-field">
+              <label for="contactName" class="form-label">Contact name <span style="color:#ff6b6b">*</span></label>
+              <input id="contactName" name="contactName" class="form-input" required>
+            </div>
+            <div class="form-field">
+              <label for="email" class="form-label">Email <span style="color:#ff6b6b">*</span></label>
+              <input id="email" name="email" type="email" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="grid two" style="gap:16px">
+            <div class="form-field">
+              <label for="phone" class="form-label">Phone <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+              <input id="phone" name="phone" type="tel" class="form-input" inputmode="tel">
+            </div>
+            <div class="form-field">
+              <label for="bookingSystem" class="form-label">Booking system <span style="color:#ff6b6b">*</span></label>
+              <select id="bookingSystem" name="bookingSystem" class="form-input" required>
+                <option value="" selected disabled>Select your system…</option>
+                <option>eviivo</option>
+                <option>Little Hotelier</option>
+                <option>SiteMinder</option>
+                <option>Cloudbeds</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid two" style="gap:16px">
+            <div class="form-field">
+              <label for="goal" class="form-label">Primary goal <span style="color:#ff6b6b">*</span></label>
+              <select id="goal" name="goal" class="form-input" required>
+                <option value="" selected disabled>What's most important?</option>
+                <option>More direct bookings</option>
+                <option>Reduce OTA fees</option>
+                <option>Refresh the look</option>
+                <option>Speed up the site</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="launchTiming" class="form-label">Ideal launch timing <span style="color:#ff6b6b">*</span></label>
+              <select id="launchTiming" name="launchTiming" class="form-input" required>
+                <option value="" selected disabled>When would you like to launch?</option>
+                <option>ASAP</option>
+                <option>2–4 weeks</option>
+                <option>1–2 months</option>
+                <option>Flexible</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="assetsLink" class="form-label">Shared folder link <span style="color:var(--muted);font-weight:400">(optional — photos/menus)</span></label>
+            <input id="assetsLink" name="assetsLink" type="url" class="form-input" placeholder="Dropbox / Google Drive / OneDrive link">
+          </div>
+
+          <div class="form-field">
+            <label for="notes" class="form-label">Additional details <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="4" class="form-input" placeholder="Anything else we should know about your property or goals?"></textarea>
+          </div>
         </div>
-
-        <div class="grid two">
-          <label>Contact name
-            <input name="contactName" required>
-          </label>
-          <label>Email
-            <input name="email" type="email" required>
-          </label>
-        </div>
-
-        <div class="grid two">
-          <label>Phone (optional)
-            <input name="phone" type="tel" inputmode="tel">
-          </label>
-          <label>Booking system
-            <select name="bookingSystem" required>
-              <option value="" selected disabled>Select…</option>
-              <option>eviivo</option>
-              <option>Little Hotelier</option>
-              <option>SiteMinder</option>
-              <option>Other</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="grid two">
-          <label>Primary goal
-            <select name="goal" required>
-              <option value="" selected disabled>Select…</option>
-              <option>More direct bookings</option>
-              <option>Reduce OTA fees</option>
-              <option>Refresh the look</option>
-              <option>Speed up the site</option>
-            </select>
-          </label>
-          <label>Ideal launch timing
-            <select name="launchTiming" required>
-              <option value="" selected disabled>Select…</option>
-              <option>ASAP</option>
-              <option>2–4 weeks</option>
-              <option>1–2 months</option>
-            </select>
-          </label>
-        </div>
-
-        <label>Shared folder link (optional — photos/menus)
-          <input name="assetsLink" type="url" placeholder="Dropbox / Drive / OneDrive link">
-        </label>
-
-        <label>Anything else? (optional)
-          <textarea name="notes" rows="3"></textarea>
-        </label>
 
         <!-- meta captured client-side -->
         <input type="hidden" name="pagePath" value="">
@@ -113,16 +132,41 @@
         <input type="hidden" name="utm_campaign" value="">
         <input type="hidden" name="timezone" value="">
 
-        <div class="hero-ctas">
-          <button class="btn btn-primary" id="qsSubmit" type="submit">Send request</button>
-          <span id="qsMsg" class="small" aria-live="polite" style="margin-left:12px"></span>
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line)">
+          <button class="btn btn-primary" id="qsSubmit" type="submit" style="width:100%;padding:16px;font-size:1rem;font-weight:700">
+            <span>Get My Quote →</span>
+          </button>
+          <p id="qsMsg" class="small" aria-live="polite" style="margin-top:12px;text-align:center;min-height:20px"></p>
         </div>
       </form>
     </div>
 
-    <p class="small" style="margin-top:20px;text-align:center;color:var(--muted)">
-      Prefer to talk first? <a target="_blank" rel="noopener" href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=quote">Book a 15-min Q&A</a>.
-    </p>
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--line);text-align:center">
+      <p class="small" style="color:var(--muted);margin:0">
+        Prefer to talk first? <a target="_blank" rel="noopener" href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=quote" style="color:var(--accent);font-weight:600;text-decoration:underline">Book a 15-min Q&A</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust indicators -->
+  <section class="container" style="margin-top:40px;padding-bottom:60px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:720px;margin:0 auto">
+      <div style="text-align:center;padding:20px">
+        <div style="font-size:1.5rem;margin-bottom:8px">⚡</div>
+        <p style="font-weight:600;margin:0 0 4px;color:var(--fg)">Fast Response</p>
+        <p class="tiny" style="color:var(--muted);margin:0">Quote within 1 business day</p>
+      </div>
+      <div style="text-align:center;padding:20px">
+        <div style="font-size:1.5rem;margin-bottom:8px">🔒</div>
+        <p style="font-weight:600;margin:0 0 4px;color:var(--fg)">100% Secure</p>
+        <p class="tiny" style="color:var(--muted);margin:0">Your data is never shared</p>
+      </div>
+      <div style="text-align:center;padding:20px">
+        <div style="font-size:1.5rem;margin-bottom:8px">💯</div>
+        <p style="font-weight:600;margin:0 0 4px;color:var(--fg)">No Obligation</p>
+        <p class="tiny" style="color:var(--muted);margin:0">Free quote, no commitment</p>
+      </div>
+    </div>
   </section>
 </main>
 
