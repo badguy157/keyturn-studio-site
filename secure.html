@@ -61,6 +61,10 @@
         Recipients don’t need a Bitwarden account to open your link. We open it once, store credentials in our encrypted vault, and confirm receipt.
       </p>
 
+      <p style="margin-top:16px;padding:12px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
+        We only use Bitwarden Send for domain / DNS and, if needed, hosting or analytics logins. We never ask for passwords to your booking system, OTAs (Booking.com, Expedia, etc.) or your Google listing.
+      </p>
+
       <h4 style="margin-top:16px">DNS-only template (recommended)</h4>
 
       <div id="dns-help" class="small muted" style="margin:6px 0 8px">
@@ -92,7 +96,8 @@ Notes
 • Please rotate the temporary password after we confirm access.</textarea>
 
       <details style="margin-top:12px">
-        <summary class="small"><strong>Optional: Hosting credentials template (only if requested)</strong></summary>
+        <summary class="small"><strong>Optional: Hosting / analytics credentials template (only if requested)</strong></summary>
+        <p class="small muted" style="margin-top:8px">Please don't send booking system or OTA passwords here—we don't need them.</p>
         <textarea id="tpl2" style="
           width:100%;
           background:#fff;
