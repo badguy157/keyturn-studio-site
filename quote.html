@@ -243,8 +243,17 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        const data = await res.json();
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed');
+        
+        let data;
+        try {
+          data = await res.json();
+        } catch (parseErr) {
+          throw new Error('Invalid server response');
+        }
+        
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || `Server error: ${res.status}`);
+        }
 
         window.safeEvent('quote_request_submit', { page_path: location.pathname });
         
@@ -258,10 +267,26 @@
           </div>
         `;
       } catch (err) {
-        console.error(err);
-        msg.textContent = 'Could not send. Please email hello@keyturn.studio';
+        console.error('Form submission error:', err);
+        
+        // Build email body with form data for fallback
+        const emailBody = `Property Name: ${payload.propertyName || ''}
+Website URL: ${payload.websiteUrl || ''}
+Contact Name: ${payload.contactName || ''}
+Email: ${payload.email || ''}
+Phone: ${payload.phone || ''}
+Booking System: ${payload.bookingSystem || ''}
+Primary Goal: ${payload.goal || ''}
+Launch Timing: ${payload.launchTiming || ''}
+Assets Link: ${payload.assetsLink || ''}
+Notes: ${payload.notes || ''}`;
+        
+        const mailtoLink = `mailto:hello@keyturn.studio?subject=${encodeURIComponent('Quote Request - ' + (payload.propertyName || 'New Property'))}&body=${encodeURIComponent(emailBody)}`;
+        
+        msg.innerHTML = `Could not send automatically. Please <a href="${mailtoLink}" style="color:var(--accent);text-decoration:underline">email us directly</a> or try again.`;
+        msg.style.color = '#e66';
         btn.disabled = false;
-        btn.textContent = 'Send request';
+        btn.textContent = 'Get My Quote →';
       }
     });
   }

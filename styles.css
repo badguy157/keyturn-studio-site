@@ -596,6 +596,12 @@ a:not(.btn-primary)[aria-current="page"]{
   padding-right: 44px;
 }
 
+/* Dropdown option text contrast */
+.premium-form select.form-input option {
+  background: #0a1220;
+  color: var(--fg);
+}
+
 .premium-form textarea.form-input {
   resize: vertical;
   min-height: 100px;
