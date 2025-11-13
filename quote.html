@@ -136,6 +136,9 @@
           <button class="btn btn-primary" id="qsSubmit" type="submit" style="width:100%;padding:16px;font-size:1rem;font-weight:700">
             <span>Get My Quote →</span>
           </button>
+          <p class="small" style="text-align:center;margin-top:14px;color:var(--muted-2)">
+            We'll reply within 1 business day. Your details are private. No obligation.
+          </p>
           <p id="qsMsg" class="small" aria-live="polite" style="margin-top:12px;text-align:center;min-height:20px"></p>
         </div>
       </form>
@@ -143,31 +146,12 @@
 
     <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--line);text-align:center">
       <p class="small" style="color:var(--muted);margin:0">
-        Prefer to talk first? <a target="_blank" rel="noopener" href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=quote" style="color:var(--accent);font-weight:600;text-decoration:underline">Book a 15-min Q&A</a>
+        Prefer to talk first? <a target="_blank" rel="noopener" href="https://calendly.com/vinnie-keyturn/intro?utm_source=quote" style="color:var(--accent);font-weight:600;text-decoration:underline">Book a 15-min Q&A</a>
       </p>
     </div>
   </section>
 
-  <!-- Trust indicators -->
-  <section class="container" style="margin-top:40px;padding-bottom:60px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:720px;margin:0 auto">
-      <div style="text-align:center;padding:20px">
-        <div style="font-size:1.5rem;margin-bottom:8px">⚡</div>
-        <p style="font-weight:600;margin:0 0 4px;color:var(--fg)">Fast Response</p>
-        <p class="tiny" style="color:var(--muted);margin:0">Quote within 1 business day</p>
-      </div>
-      <div style="text-align:center;padding:20px">
-        <div style="font-size:1.5rem;margin-bottom:8px">🔒</div>
-        <p style="font-weight:600;margin:0 0 4px;color:var(--fg)">100% Secure</p>
-        <p class="tiny" style="color:var(--muted);margin:0">Your data is never shared</p>
-      </div>
-      <div style="text-align:center;padding:20px">
-        <div style="font-size:1.5rem;margin-bottom:8px">💯</div>
-        <p style="font-weight:600;margin:0 0 4px;color:var(--fg)">No Obligation</p>
-        <p class="tiny" style="color:var(--muted);margin:0">Free quote, no commitment</p>
-      </div>
-    </div>
-  </section>
+
 </main>
 
 <footer class="site-footer">
@@ -192,7 +176,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro?utm_source=site" target="_blank" rel="noopener">Book 15-min QBook 15 min Q&AA <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>
@@ -230,6 +214,17 @@
 
     qsForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      // Validate form
+      if (!qsForm.checkValidity()) {
+        qsForm.classList.add('show-errors');
+        const firstInvalid = qsForm.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        msg.textContent = 'Please fill in all required fields.';
+        msg.style.color = '#e66';
+        return;
+      }
+      
       msg.textContent = '';
       btn.disabled = true;
       btn.textContent = 'Sending…';
@@ -248,8 +243,17 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        const data = await res.json();
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed');
+        
+        let data;
+        try {
+          data = await res.json();
+        } catch (parseErr) {
+          throw new Error('Invalid server response');
+        }
+        
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || `Server error: ${res.status}`);
+        }
 
         window.safeEvent('quote_request_submit', { page_path: location.pathname });
         
@@ -263,10 +267,26 @@
           </div>
         `;
       } catch (err) {
-        console.error(err);
-        msg.textContent = 'Could not send. Please email hello@keyturn.studio';
+        console.error('Form submission error:', err);
+        
+        // Build email body with form data for fallback
+        const emailBody = `Property Name: ${payload.propertyName || ''}
+Website URL: ${payload.websiteUrl || ''}
+Contact Name: ${payload.contactName || ''}
+Email: ${payload.email || ''}
+Phone: ${payload.phone || ''}
+Booking System: ${payload.bookingSystem || ''}
+Primary Goal: ${payload.goal || ''}
+Launch Timing: ${payload.launchTiming || ''}
+Assets Link: ${payload.assetsLink || ''}
+Notes: ${payload.notes || ''}`;
+        
+        const mailtoLink = `mailto:hello@keyturn.studio?subject=${encodeURIComponent('Quote Request - ' + (payload.propertyName || 'New Property'))}&body=${encodeURIComponent(emailBody)}`;
+        
+        msg.innerHTML = `Could not send automatically. Please <a href="${mailtoLink}" style="color:var(--accent);text-decoration:underline">email us directly</a> or try again.`;
+        msg.style.color = '#e66';
         btn.disabled = false;
-        btn.textContent = 'Send request';
+        btn.textContent = 'Get My Quote →';
       }
     });
   }

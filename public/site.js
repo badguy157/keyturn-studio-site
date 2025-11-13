@@ -192,6 +192,15 @@
     }
   }
 
+  // ===== Calendly Link Normalization =====
+  function normalizeCalendlyLinks() {
+    document.querySelectorAll('a.book-intro').forEach(a => {
+      a.href = 'https://calendly.com/vinnie-keyturn/intro';
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+  }
+
   // ===== Initialize on DOMContentLoaded =====
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
@@ -199,11 +208,13 @@
       initMobileMenu();
       initServicesDropdown();
       updateYear();
+      normalizeCalendlyLinks();
     });
   } else {
     injectHeader();
     initMobileMenu();
     initServicesDropdown();
     updateYear();
+    normalizeCalendlyLinks();
   }
 })();

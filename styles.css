@@ -219,6 +219,10 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 
 /* ---- Cards, grids, content blocks ---- */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.pricing-grid{display:grid;gap:20px}
+@media (min-width:900px){.pricing-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pricing-grid .card,.pricing-ongoing{height:100%;display:flex;flex-direction:column}
+.pricing-grid .card .btn,.pricing-ongoing .btn{margin-top:auto}
 .card{
   background:var(--card);border:1px solid var(--line);
   border-radius:var(--radius);
@@ -286,6 +290,19 @@ p{margin:.4rem 0 1rem;color:var(--muted-2);font-size:1rem}
 .switch input:checked + .slider{background:var(--brand)}
 .switch input:checked + .slider::after{transform:translateX(22px)}
 .switch-label{font-size:.95rem;color:var(--muted-2)}
+
+/* Form validation styles - neutral defaults */
+:where(input,select,textarea){box-shadow:none}
+:where(input,select,textarea):focus{outline:0;border-color:var(--accent)}
+
+/* Hide UA invalid chrome/firefox glow */
+:where(input,select,textarea):-moz-ui-invalid{box-shadow:none}
+:where(input,select,textarea):invalid{box-shadow:none}
+
+/* Show errors only after the form has .show-errors */
+form.show-errors :where(input,select,textarea):invalid{
+  border-color:#e66;
+}
 
 /* Audit form */
 .audit-form{margin-top:16px}
@@ -577,6 +594,12 @@ a:not(.btn-primary)[aria-current="page"]{
   background-repeat: no-repeat;
   background-position: right 16px center;
   padding-right: 44px;
+}
+
+/* Dropdown option text contrast */
+.premium-form select.form-input option {
+  background: #0a1220;
+  color: var(--fg);
 }
 
 .premium-form textarea.form-input {
