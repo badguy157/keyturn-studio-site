@@ -33,7 +33,7 @@
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Makeover Sprint (Core)",
-    "description": "3–4 week website rebuild for 8–40 room inns and small hotels with GA4 tracking, SEO optimization, and modern booking CTAs",
+    "description": "Website rebuild for 8–40 room inns and small hotels with clear booking CTAs and modern design",
     "offers": {
       "@type": "Offer",
       "price": "7500",
@@ -89,43 +89,7 @@
 </section>
 
 <main id="main">
-  <section id="services" class="container grid section">
-    <article class="card">
-      <h3>Makeover Sprint</h3>
-      <p>3–4 weeks to rebuild your site on modern tech with clear CTAs, GA4 tracking, and speed tuned for mobile.</p>
-      <ul>
-        <li>Home, Rooms, Food/Bar, Story/FAQ</li>
-        <li>Sticky “Best Rate” CTA + unified booking link</li>
-        <li>GA4 events + JSON-LD schema</li>
-        <li>Digital Asset Pack & handover</li>
-      </ul>
-    </article>
-    
-    <article class="card">
-      <h3>Growth Care Plan</h3>
-      <p>Keep it fast & improving: hosting, updates, monthly CRO nudge, GBP hygiene, and a simple report.</p>
-      <ul>
-        <li>Monitoring, backups, edits</li>
-        <li>Monthly report with commission-savings line</li>
-        <li>Quarterly content block</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <h3>Why it pays</h3>
-      <h2 style="margin-top:0">Why your website should be working harder for you</h2>
-      <p>Every time a guest books you through an OTA, you lose a chunk of money in commission. A better website with clear "Book Now" buttons can move more of those bookings direct.</p>
-      <p>For many small hotels, that adds up to thousands a year kept in the business instead of sent to middlemen.</p>
-      
-      <div class="roi-box" style="margin-top:20px">
-        <p style="margin:0"><strong>Example:</strong> A 12-room inn moving just 15 bookings a month from OTAs to direct can save around £5,000–£10,000 a year in commission, depending on rates and stay length.</p>
-      </div>
-      
-      <div style="margin-top:20px">
-        <a class="btn" href="/tools/roi.html">See your own numbers → Estimate Your Payback</a>
-      </div>
-    </article>
-  </section>
+  
 
 
   <section class="container specialists section" aria-labelledby="specialists-title">
@@ -135,7 +99,7 @@
     <ul class="specialist-list">
       <li><div class="spec-name">Jane D.</div><div class="spec-meta">UI/UX for hospitality — Top Rated Plus, 500+ ★ reviews</div></li>
       <li><div class="spec-name">Leo P.</div><div class="spec-meta">Next.js/Tailwind implementer — Top Rated, 300+ ★ reviews</div></li>
-      <li><div class="spec-name">Ava K.</div><div class="spec-meta">Technical SEO & schema — Top Rated, 200+ ★ reviews</div></li>
+      <li><div class="spec-name">Ava K.</div><div class="spec-meta">SEO specialist — Top Rated, 200+ ★ reviews</div></li>
     </ul>
     <p class="tiny">Partner badges and prior experience shown with permission. Listed individuals are independent collaborators, not employees.</p>
   </section>
@@ -173,7 +137,7 @@
     <div class="proof-grid">
       <article class="proof-card"><h5>Direct share ↑</h5><p>From single digits to <strong>22–25%+</strong> (seasonal).</p></article>
       <article class="proof-card"><h5>PageSpeed / <abbr title="Core Web Vitals">CWV</abbr></h5><p>Homepage into the <strong>green</strong>; faster, cleaner UX.</p></article>
-      <article class="proof-card"><h5>Tracked funnel</h5><p><code>book_click</code> &amp; <code>booking_outbound</code> GA4 events live.</p></article>
+      <article class="proof-card"><h5>Tracked booking clicks</h5><p>Simple tracking to see how many people click "Book Now".</p></article>
     </div>
 
     <div class="metrics-grid">
@@ -359,7 +323,7 @@
       <li><strong>Hospitality-first.</strong> Owner-operated inns, small hotels, and boutique stays.</li>
       <li><strong>You own everything.</strong> Domain, content, images, and code are handed over in a Digital Asset Pack.</li>
       <li><strong>Transparent fees.</strong> Fixed-fee makeover sprint + simple monthly care plan.</li>
-      <li><strong>Privacy-minded.</strong> GA4 only; no guest data resale pixels.</li>
+      <li><strong>Privacy-minded.</strong> We only use simple analytics; no guest data resale pixels.</li>
       <li><strong>Truth in imagery.</strong> Lifestyle shots may be staged or AI-assisted — we label them.</li>
     </ul>
   </section>
@@ -605,7 +569,7 @@
           const vol        = meetsVolumeBenchmarks();
 
           if (!roomsURL || !showcaseOK || !metricsOK || !ga4Email){
-            msg.textContent = 'For the Pilot, please add a rooms/OTA link, GA4 access email, and tick both attestations.';
+            msg.textContent = 'For the Pilot, please add a rooms/OTA link, analytics access email, and tick both attestations.';
             msg.style.color = '#fca5a5';
             return;
           }
