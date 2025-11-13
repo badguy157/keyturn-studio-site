@@ -39,7 +39,6 @@
     <!-- Desktop nav -->
     <nav class="nav-desktop" aria-label="Primary">
       <ul class="nav-list">
-        <li><a href="/#services"${isActive('/') ? ' aria-current="page"' : ''}>How it works</a></li>
         <li class="nav-dropdown">
           <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
             Services <span aria-hidden="true">▾</span>
@@ -51,7 +50,8 @@
             <li><a href="/services/hotel-website-redesign.html">Hotel Redesign</a></li>
           </ul>
         </li>
-        <li><a href="/#results"${isActive('/') ? ' aria-current="page"' : ''}>Proof</a></li>
+        <li><a href="/#how-it-works"${isActive('/') ? ' aria-current="page"' : ''}>How it works</a></li>
+        <li><a href="/#proof"${isActive('/') ? ' aria-current="page"' : ''}>Proof</a></li>
         <li><a href="/#pricing"${isActive('/') ? ' aria-current="page"' : ''}>Pricing</a></li>
       </ul>
       <div class="nav-ctas">
@@ -71,7 +71,6 @@
 
   <!-- Mobile drawer -->
   <nav id="mobileMenu" class="mobile-drawer" hidden aria-label="Mobile">
-    <a href="/#services">How it works</a>
     <div class="mobile-submenu">
       <strong class="mobile-submenu-label">Services</strong>
       <a href="/services/inn-website-design.html">Inn Website Design</a>
@@ -79,7 +78,8 @@
       <a href="/services/bb-website-design.html">B&B Website Design</a>
       <a href="/services/hotel-website-redesign.html">Hotel Redesign</a>
     </div>
-    <a href="/#results">Proof</a>
+    <a href="/#how-it-works">How it works</a>
+    <a href="/#proof">Proof</a>
     <a href="/#pricing">Pricing</a>
     <a class="btn btn-primary w-full" href="/quote.html"${isActive('/quote') ? ' aria-current="page"' : ''} onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'mobile-nav'})">Request a Quote</a>
     <a class="btn btn-ghost w-full"

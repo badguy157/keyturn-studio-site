@@ -104,7 +104,7 @@
     <p class="tiny">Partner badges and prior experience shown with permission. Listed individuals are independent collaborators, not employees.</p>
   </section>
 
-  <section id="results" class="container section">
+  <section id="proof" class="container section">
     <h2>Real results for a small hotel</h2>
 
     <div class="result">
@@ -168,7 +168,7 @@
     </figure>
   </section>
 
-  <section id="pricing" class="container section">
+  <section id="services" class="container section">
     <h2>Pricing</h2>
     <p class="small">Built for owner-run inns &amp; small hotels (8–40 rooms)</p>
 
@@ -289,7 +289,7 @@
       </div>
     </div>
   
-  <section class="container section">
+  <section id="how-it-works" class="container section">
     <h2 style="text-align:center;margin-bottom:32px">How working together looks</h2>
     <div class="grid" style="gap:24px">
       <article class="card">
@@ -371,14 +371,54 @@
     </article>
   </section>
 
-<section class="container section" id="quote-cta">
-    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-      <p style="margin:0">Want your website to pull its weight?</p>
-      <p style="margin:8px 0 0 0">Tell us a bit about your hotel and we'll show you what a modernised site could do for you.</p>
-      <a class="btn btn-primary" href="/quote.html">Request a Quote</a>
-      <a class="btn btn-ghost" href="/tools/roi.html">Estimate Your Payback</a>
+<section class="container section" id="quote-cta" style="padding-left:16px; padding-right:16px; padding-top:32px; padding-bottom:32px;">
+    <div class="card" style="max-width:56rem; margin:0 auto; padding:24px; border-radius:16px; background:rgba(15, 23, 42, 0.7);">
+      <div style="text-align:center;">
+        <p style="margin:0 0 8px 0; font-size:1.125rem; font-weight:600;">
+          Want your website to pull its weight?
+        </p>
+        <p style="margin:0 0 20px 0; font-size:0.875rem; color:rgba(203, 213, 225, 1);">
+          Tell us a bit about your hotel and we'll show you what a modernised site could do for you.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+        <a class="btn btn-primary" href="/quote.html" style="width:100%; text-align:center;">Request a Quote</a>
+        <a class="btn btn-ghost" href="/tools/roi.html" style="width:100%; text-align:center;">Estimate Your Payback</a>
+      </div>
     </div>
   </section>
+
+  <style>
+    @media (min-width: 768px) {
+      #quote-cta .card {
+        padding: 32px;
+      }
+      #quote-cta > .card > div:first-child {
+        text-align: left;
+      }
+      #quote-cta > .card > div:last-child {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 0;
+      }
+      #quote-cta > .card > div:last-child a {
+        width: auto;
+        min-width: 160px;
+      }
+      #quote-cta .card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      #quote-cta .card > div:first-child {
+        flex: 1;
+      }
+      #quote-cta .card > div:last-child {
+        flex-shrink: 0;
+      }
+    }
+  </style>
 </main>
 
 <footer class="site-footer">
@@ -415,12 +455,24 @@
   </div>
 </footer>
 
-<!-- Sticky mobile CTA -->
-<a href="/quote.html" class="sticky-cta" aria-label="Request a Quote" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'sticky'})">Request a Quote</a>
+<!-- Sticky mobile CTA (homepage only, centered at bottom on mobile) -->
+<div id="sticky-cta-wrapper" class="fixed inset-x-0 bottom-4 flex justify-center md:hidden z-50" style="display:none; position:fixed; left:0; right:0; bottom:1rem; justify-content:center; z-index:1001;">
+  <a href="/quote.html" class="sticky-cta" aria-label="Request a Quote" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'sticky'})" style="display:inline-flex;">Request a Quote</a>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu and year are handled by site.js
+
+    // ===== Show sticky CTA only on homepage =====
+    const stickyCTAWrapper = document.getElementById('sticky-cta-wrapper');
+    if (stickyCTAWrapper) {
+      const currentPath = window.location.pathname;
+      // Show only on homepage (/, /index.html, or empty)
+      if (currentPath === '/' || currentPath === '/index.html' || currentPath === '') {
+        stickyCTAWrapper.style.display = 'flex';
+      }
+    }
 
     // ===== Pricing toggle (works for cards that have data-upfront / data-monthly) =====
     const payToggle = document.getElementById('payToggle');
