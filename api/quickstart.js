@@ -1,7 +1,11 @@
-// /api/quickstart.js  — Quote request intake (simple confirmation to client)
+// /api/quickstart.js — Quote request intake
+// - Validates fields
+// - Emails you a detailed admin copy
+// - Emails the client a short confirmation (no onboarding steps)
+// - Soft-fails email so the UI can still show success
 
 export default async function handler(req, res) {
-  // Allow preflight
+  // Preflight + method guard
   if (req.method === 'OPTIONS') {
     res.setHeader('Allow', 'POST, OPTIONS');
     return res.status(204).end();
@@ -24,7 +28,7 @@ export default async function handler(req, res) {
       launchTiming = '',
       assetsLink = '',
       notes = '',
-      company = '',
+      company = '',          // honeypot
       pagePath = '',
       utm_source = '',
       utm_medium = '',
@@ -34,19 +38,25 @@ export default async function handler(req, res) {
       referrer = ''
     } = body || {};
 
-    // Honeypot
+    // Honeypot: bots get OK (no emails)
     if (company) return res.status(200).json({ ok: true });
 
+    // Minimal validation
     const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    if (!propertyName || !websiteUrl || !contactName || !isEmail(email) || !bookingSystem || !goal || !launchTiming) {
+    if (
+      !propertyName || !websiteUrl || !contactName ||
+      !isEmail(email) || !bookingSystem || !goal || !launchTiming
+    ) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
 
-    // ENV
+    // ---- Env
+    // Send TO your inbox. Use RESEND_NOTIFICATIONS if set; falls back to hello@keyturn.studio
     const TO   = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
+    // Verified sender on Resend (you’ve already verified updates.keyturn.studio)
     const FROM = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
 
-    // ----- Admin email (details for you) -----
+    // ---- Admin email (to you)
     const subject = `Quote request — ${propertyName}`;
     const htmlAdmin = `
       <h2>New Quote Request</h2>
@@ -69,7 +79,7 @@ export default async function handler(req, res) {
       </p>
     `;
 
-    // ----- Client email (simple confirmation only) -----
+    // ---- Client email (short confirmation only)
     const htmlClient = `
       <div style="background:#0a1220;padding:24px 12px;">
         <table role="presentation" width="100%" style="max-width:640px;margin:0 auto;">
@@ -94,14 +104,14 @@ export default async function handler(req, res) {
       </div>
     `;
 
-    // Send emails (soft-fail so UI can still show success)
+    // Try Resend, then SendGrid; soft-fail
     let emailSent = false;
     try {
       emailSent =
         (await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient)) ||
         (await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient));
     } catch (e) {
-      console.error('Email send error (continuing with ok=true):', e);
+      console.error('Email send error (continuing):', e);
     }
 
     return res.status(200).json({ ok: true, emailSent });
@@ -131,6 +141,8 @@ async function readJson(req){
 async function sendViaResend(from, to, subject, htmlAdmin, replyTo, htmlClient){
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
+
+  // Admin message → you
   const r1 = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
@@ -138,6 +150,7 @@ async function sendViaResend(from, to, subject, htmlAdmin, replyTo, htmlClient){
   });
   if (!r1.ok) throw new Error(`Resend admin error: ${await r1.text()}`);
 
+  // Client confirmation
   if (replyTo) {
     const r2 = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -153,6 +166,7 @@ async function sendViaSendGrid(from, to, subject, htmlAdmin, replyTo, htmlClient
   const key = process.env.SENDGRID_API_KEY;
   if (!key) return false;
 
+  // Admin message → you
   const r1 = await fetch('https://api.sendgrid.com/v3/mail/send', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
@@ -165,6 +179,7 @@ async function sendViaSendGrid(from, to, subject, htmlAdmin, replyTo, htmlClient
   });
   if (r1.status >= 400) throw new Error(`SendGrid admin error: ${await r1.text()}`);
 
+  // Client confirmation
   if (replyTo) {
     const r2 = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
