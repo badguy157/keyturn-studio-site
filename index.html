@@ -122,18 +122,6 @@
     </article>
   </section>
 
-  <section class="container banner">
-    <p><strong>Founders’ Pilot (2 slots/month)</strong> — reduced setup for case-study partners (GA4 + bookings access). <strong>Includes first 2 months of Care free, then $300/mo.</strong></p>
-    <ul class="small" style="margin:8px 0 0 1.2rem">
-      <li>Allow anonymised metrics & screenshots for 18 months</li>
-      <li>Provide GA4 + booking/OTA access (for setup & reporting)</li>
-      <li>Meet any one: ≥ 1,500 sessions/mo, ≥ 10 OTA bookings/mo, or ADR ≥ $80</li>
-    </ul>
-    <div class="buttons" style="margin-top:10px">
-      <a class="btn primary js-pilot" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pilot'})" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
-    </div>
-  </section>
-  
 
   <section class="container specialists section" aria-labelledby="specialists-title">
     <h2 id="specialists-title">Our Specialist Network</h2>
@@ -220,7 +208,7 @@
       </label>
     </div>
 
-    <div class="grid">
+    <div class="pricing-grid">
       <article class="card">
         <h3 class="card-title">Makeover Sprint (Core)</h3>
         <div class="price" data-upfront="$7,500" data-monthly="$1,875/mo × 4">$7,500</div>
@@ -232,7 +220,7 @@
           <li>JSON-LD: Hotel/Restaurant/FAQ • Speed &amp; accessibility pass</li>
           <li>eviivo branding/config touch-ups • 2 revision rounds</li>
         </ul>
-        <a class="btn" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-core'})">Request a Quote</a>
+        <a class="btn btn-primary" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-core'})">Request a Quote</a>
       </article>
       
       <article class="card highlight-card">
@@ -247,7 +235,7 @@
           <li>A/B-ready CTA variants &amp; experiment hooks</li>
           <li>Seasonal landing blocks (e.g., cyclists, walkers, weddings)</li>
         </ul>
-        <a class="btn" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-pro'})">Request a Quote</a>
+        <a class="btn btn-primary" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-pro'})">Request a Quote</a>
       </article>
       <!-- PREMIER CARD — insert after Pro, before Ongoing Plans -->
 <article class="card">
@@ -261,23 +249,28 @@
     <li>1 quarter of managed CRO experiments + reporting</li>
     <li>GSC/GA4 dashboards, schema & review expansion</li>
   </ul>
-  <a class="btn" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-premier'})">Request a Quote</a>
+  <a class="btn btn-primary" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-premier'})">Request a Quote</a>
 </article>
-
-      <article class="card">
-        <h3 class="card-title">Ongoing Plans</h3>
-        <div class="price">$300–$900/mo</div>
-        <p class="who small">Best for: properties investing in steady CRO/SEO momentum.</p>
-        <ul class="features">
-          <li><strong>Care ($300/mo):</strong> updates, backups, small edits, GA4 sanity checks</li>
-          <li><strong>Growth ($900/mo):</strong> 1 meaningful CRO/SEO win + GBP posts + KPI line</li>
-          <li>Monthly change log &amp; direct-booking click tracking</li>
-        </ul>
-        <p class="tiny perk">Pilot perk: <strong>first 2 months of Care free</strong>, then $300/mo.</p>
-        <a class="btn js-pilot" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-ongoing'})">Request a Quote</a>
-        <p class="tiny">Alt: $4,500 + $499/mo × 12</p>
-      </article>      
     </div>
+  </section>
+
+  <section class="container section">
+    <article class="card pricing-ongoing">
+      <h3 class="card-title">Ongoing Plans</h3>
+      <div class="price">$300–$900/mo</div>
+      <p class="who small">Best for: properties investing in steady CRO/SEO momentum.</p>
+      <ul class="features">
+        <li><strong>Care ($300/mo):</strong> updates, backups, small edits, GA4 sanity checks</li>
+        <li><strong>Growth ($900/mo):</strong> 1 meaningful CRO/SEO win + GBP posts + KPI line</li>
+        <li>Monthly change log &amp; direct-booking click tracking</li>
+      </ul>
+      <p class="tiny perk">Pilot perk: <strong>first 2 months of Care free</strong>, then $300/mo.</p>
+      <a class="btn btn-primary" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-ongoing'})">Request a Quote</a>
+      <p class="tiny">Alt: $4,500 + $499/mo × 12</p>
+    </article>
+  </section>
+
+  <section id="pricing" class="container section">
 
     <div class="card footnote">
       <p><strong>Who each tier fits</strong></p>
@@ -358,131 +351,12 @@
     </div>
   </section>
   
-  <section id="audit" class="container contact section">
-    <h2>Get a Quote</h2>
-    <p class="small">Share a few details and we’ll send a 2–3 minute Loom with 3 suggested fixes and an ROI estimate.</p>
-
-    <form id="auditForm"
-          class="audit-form"
-          action="https://formspree.io/f/mvgdpyay"
-          method="POST" novalidate>
-      <div class="form-row">
-        <label for="property">Property name</label>
-        <input id="property" type="text" name="property" required autocomplete="organization">
-      </div>
-
-      <div class="form-row">
-        <label for="website">Website URL</label>
-        <input id="website" type="url" name="website" placeholder="https://example.com" required autocomplete="url">
-      </div>
-
-      <div class="form-row two">
-        <div>
-          <label for="rooms">Rooms</label>
-          <input id="rooms" type="number" name="rooms" min="1" max="100" required inputmode="numeric" autocomplete="off">
-        </div>
-        <div>
-          <label for="adr">
-            <abbr title="Average Daily Rate — typical nightly room price before taxes/fees">ADR</abbr> (approx.)
-          </label>
-          <input id="adr" type="number" name="adr" min="40" step="1" inputmode="decimal"
-                 placeholder="e.g., 100" aria-describedby="adrHelp" required autocomplete="off">
-          <p id="adrHelp" class="tiny">Use your average nightly room price before taxes/fees.</p>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label for="booking">Booking engine link</label>
-        <input id="booking" type="url" name="booking" placeholder="Direct booking URL" autocomplete="url">
-      </div>
-
-      <div class="form-row">
-        <label for="email">Your email</label>
-        <input id="email" type="email" name="email" required autocomplete="email">
-      </div>
-
-      <!-- Pilot opt-in -->
-      <div class="form-row">
-        <label class="check">
-          <input type="checkbox"
-                 id="pilot"
-                 name="pilot"
-                 value="yes"
-                 aria-controls="pilotFields"
-                 aria-expanded="false">
-          Apply for Founders’ Pilot (case-study partner pricing)
-        </label>
-        <p class="tiny" id="pilotHelp">If selected, share a public rooms link and confirm the conditions below.</p>
-      </div>
-
-      <!-- Pilot-only fields -->
-      <fieldset id="pilotFields" class="pilot-fields" hidden aria-describedby="pilotHelp">
-        <legend class="tiny">Pilot verification (required for Pilot)</legend>
-
-        <div class="form-row">
-          <label for="rooms_url">Public rooms link (booking engine or OTA)</label>
-          <input id="rooms_url" name="rooms_url" type="url" placeholder="https://booking.example.com/property" autocomplete="url">
-        </div>
-
-        <div class="form-row">
-          <label for="ota_url">Optional: OTA listing link</label>
-          <input id="ota_url" name="ota_url" type="url" placeholder="https://www.booking.com/hotel/..." autocomplete="url">
-        </div>
-
-        <div class="form-row">
-          <label for="ga4_email">GA4/analytics access email</label>
-          <input id="ga4_email" name="ga4_email" type="email" placeholder="analytics@yourhotel.com" autocomplete="email">
-        </div>
-
-        <div class="form-row">
-          <label class="check">
-            <input type="checkbox" id="att_showcase" name="att_showcase" value="yes">
-            I allow Keyturn to publish a case study incl. anonymised metrics for 18 months.
-          </label>
-          <label class="check">
-            <input type="checkbox" id="att_metrics" name="att_metrics" value="yes">
-            I agree to share GA4 + booking/OTA metrics for setup and reporting.
-          </label>
-        </div>
-
-        <div class="form-row two">
-          <div>
-            <label for="vol_sessions">Monthly site sessions (≈)</label>
-            <input id="vol_sessions" name="vol_sessions" type="number" min="0" step="1" placeholder="e.g., 1500">
-            <p class="tiny">Benchmark: <strong>≥ 1,500</strong></p>
-          </div>
-          <div>
-            <label for="vol_ota">OTA bookings / month (≈)</label>
-            <input id="vol_ota" name="vol_ota" type="number" min="0" step="1" placeholder="e.g., 10">
-            <p class="tiny">Benchmark: <strong>≥ 10</strong></p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label for="vol_adr">ADR ($)</label>
-          <input id="vol_adr" name="vol_adr" type="number" min="0" step="1" placeholder="e.g., 80">
-          <p class="tiny">Benchmark: <strong>≥ $80</strong></p>
-        </div>
-      </fieldset>
-
-      <!-- Tag the submission type -->
-      <input type="hidden" name="program" id="program" value="Standard">
-      <input type="hidden" name="pilot_benchmarks" id="pilot_benchmarks" value="">
-
-      <div class="form-row">
-        <label for="notes">Notes (optional)</label>
-        <textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?" autocomplete="off"></textarea>
-      </div>
-
-      <!-- helper fields for Formspree -->
-      <input type="hidden" name="_subject" id="fsSubject" value="">
-      <input type="hidden" name="_replyto"  id="fsReply"   value="">
-      <input type="text"   name="_gotcha"   style="display:none">
-
-      <button class="btn primary" type="submit" id="auditSubmit">Request a Quote</button>
-      <p class="tiny">Prefer email? <a href="mailto:hello@keyturn.studio">hello@keyturn.studio</a></p>
-      <p id="auditMsg" class="tiny" role="status" aria-live="polite" style="margin-top:6px"></p>
-    </form>
+  
+  <section class="container section" id="quote-cta">
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <p style="margin:0">Ready for numbers?</p>
+      <a class="btn btn-primary" href="/quote.html">Request a Quote</a>
+    </div>
   </section>
 </main>
 
@@ -508,7 +382,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro?utm_source=site" target="_blank" rel="noopener">Book 15-min QBook 15 min Q&AA <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>
