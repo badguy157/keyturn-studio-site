@@ -1,8 +1,7 @@
 // /api/quickstart.js — Quote request intake
-// - Validates fields
-// - Emails you a detailed admin copy
-// - Emails the client a short confirmation (no onboarding steps)
-// - Soft-fails email so the UI can still show success
+// Sends you an admin copy + sends the client a short confirmation.
+// Admin email "Reply-To" = client’s email (so you can reply back).
+// Client confirmation "Reply-To" = your Proton (so their reply lands in your inbox).
 
 export default async function handler(req, res) {
   // Preflight + method guard
@@ -28,7 +27,7 @@ export default async function handler(req, res) {
       launchTiming = '',
       assetsLink = '',
       notes = '',
-      company = '',          // honeypot
+      company = '',
       pagePath = '',
       utm_source = '',
       utm_medium = '',
@@ -38,10 +37,9 @@ export default async function handler(req, res) {
       referrer = ''
     } = body || {};
 
-    // Honeypot: bots get OK (no emails)
+    // Honeypot
     if (company) return res.status(200).json({ ok: true });
 
-    // Minimal validation
     const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if (
       !propertyName || !websiteUrl || !contactName ||
@@ -50,13 +48,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
 
-    // ---- Env
-    // Send TO your inbox. Use RESEND_NOTIFICATIONS if set; falls back to hello@keyturn.studio
-    const TO   = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
-    // Verified sender on Resend (you’ve already verified updates.keyturn.studio)
-    const FROM = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
+    // Env
+    const TO            = process.env.RESEND_NOTIFICATIONS || process.env.QS_TO_EMAIL || 'hello@keyturn.studio';
+    const FROM          = process.env.RESEND_FROM || process.env.QS_FROM_EMAIL || 'Keyturn Studio <hello@updates.keyturn.studio>';
+    const BIZ_REPLY_TO  = process.env.QS_REPLY_TO || process.env.REPLY_TO || 'hello@keyturn.studio'; // Proton inbox
 
-    // ---- Admin email (to you)
+    // Admin email (to you)
     const subject = `Quote request — ${propertyName}`;
     const htmlAdmin = `
       <h2>New Quote Request</h2>
@@ -79,7 +76,7 @@ export default async function handler(req, res) {
       </p>
     `;
 
-    // ---- Client email (short confirmation only)
+    // Client confirmation (short)
     const htmlClient = `
       <div style="background:#0a1220;padding:24px 12px;">
         <table role="presentation" width="100%" style="max-width:640px;margin:0 auto;">
@@ -104,12 +101,12 @@ export default async function handler(req, res) {
       </div>
     `;
 
-    // Try Resend, then SendGrid; soft-fail
+    // Send (soft-fail)
     let emailSent = false;
     try {
       emailSent =
-        (await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient)) ||
-        (await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient));
+        (await sendViaResend(FROM, TO, subject, htmlAdmin, email, htmlClient, BIZ_REPLY_TO)) ||
+        (await sendViaSendGrid(FROM, TO, subject, htmlAdmin, email, htmlClient, BIZ_REPLY_TO));
     } catch (e) {
       console.error('Email send error (continuing):', e);
     }
@@ -138,60 +135,65 @@ async function readJson(req){
 }
 
 /* -------- Email providers ---------- */
-async function sendViaResend(from, to, subject, htmlAdmin, replyTo, htmlClient){
+async function sendViaResend(from, to, subject, htmlAdmin, clientEmail, htmlClient, bizReplyTo){
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
 
-  // Admin message → you
+  // Admin → you (reply-to = client)
   const r1 = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to: [to], reply_to: replyTo || undefined, subject, html: htmlAdmin })
+    body: JSON.stringify({ from, to: [to], reply_to: clientEmail || undefined, subject, html: htmlAdmin })
   });
   if (!r1.ok) throw new Error(`Resend admin error: ${await r1.text()}`);
 
-  // Client confirmation
-  if (replyTo) {
-    const r2 = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from, to: [replyTo], subject: 'Thanks — we’ve received your quote request', html: htmlClient })
-    });
-    if (!r2.ok) throw new Error(`Resend client error: ${await r2.text()}`);
-  }
+  // Client confirmation (reply-to = your Proton)
+  const r2 = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from,
+      to: [clientEmail],
+      subject: 'Thanks — we’ve received your quote request',
+      html: htmlClient,
+      reply_to: bizReplyTo
+    })
+  });
+  if (!r2.ok) throw new Error(`Resend client error: ${await r2.text()}`);
+
   return true;
 }
 
-async function sendViaSendGrid(from, to, subject, htmlAdmin, replyTo, htmlClient){
+async function sendViaSendGrid(from, to, subject, htmlAdmin, clientEmail, htmlClient, bizReplyTo){
   const key = process.env.SENDGRID_API_KEY;
   if (!key) return false;
 
-  // Admin message → you
+  // Admin → you (reply-to = client)
   const r1 = await fetch('https://api.sendgrid.com/v3/mail/send', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       personalizations: [{ to: [{ email: to }], subject }],
       from: { email: extractEmail(from) },
-      reply_to: replyTo ? { email: replyTo } : undefined,
+      reply_to: clientEmail ? { email: clientEmail } : undefined,
       content: [{ type: 'text/html', value: htmlAdmin }]
     })
   });
   if (r1.status >= 400) throw new Error(`SendGrid admin error: ${await r1.text()}`);
 
-  // Client confirmation
-  if (replyTo) {
-    const r2 = await fetch('https://api.sendgrid.com/v3/mail/send', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: replyTo }], subject: 'Thanks — we’ve received your quote request' }],
-        from: { email: extractEmail(from) },
-        content: [{ type: 'text/html', value: htmlClient }]
-      })
-    });
-    if (r2.status >= 400) throw new Error(`SendGrid client error: ${await r2.text()}`);
-  }
+  // Client confirmation (reply-to = your Proton)
+  const r2 = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      personalizations: [{ to: [{ email: clientEmail }], subject: 'Thanks — we’ve received your quote request' }],
+      from: { email: extractEmail(from) },
+      reply_to: { email: bizReplyTo },
+      content: [{ type: 'text/html', value: htmlClient }]
+    })
+  });
+  if (r2.status >= 400) throw new Error(`SendGrid client error: ${await r2.text()}`);
+
   return true;
 }
 function extractEmail(v){ return String(v || '').replace(/^.*<|>$/g, '') || v; }
