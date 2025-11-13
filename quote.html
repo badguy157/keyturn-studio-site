@@ -24,6 +24,56 @@
     "sameAs": []
   }
   </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When Do I Pay Anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only after you approve the proposal—deposit due on signature."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can You Help Me Choose A Package?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes—book a 15-min intro and we'll walk through what makes sense for your property."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do You Migrate My Existing Content?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we rebuild core pages and preserve what works."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who Owns The Website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do. We provide full access on launch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do You Offer Ongoing Support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Optional Care plan for CRO nudges and reporting is available."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -184,8 +234,46 @@
       </div>
     </div>
 
+  <!-- FAQ Section (beneath form) -->
+  <section class="container section" style="padding-top:40px">
+    <h2 style="text-align:center;margin-bottom:28px">Common Questions</h2>
+    <div class="faq-accordion" style="max-width:720px;margin:0 auto">
+      <details>
+        <summary>When Do I Pay Anything?</summary>
+        <div class="faq-answer">
+          <p>Only after you approve the proposal—deposit due on signature.</p>
+        </div>
+      </details>
 
+      <details>
+        <summary>Can You Help Me Choose A Package?</summary>
+        <div class="faq-answer">
+          <p>Yes—<a href="https://calendly.com/vinnie-keyturn/intro" target="_blank" rel="noopener">book a 15-min intro</a> and we'll walk through what makes sense for your property.</p>
+        </div>
+      </details>
 
+      <details>
+        <summary>Do You Migrate My Existing Content?</summary>
+        <div class="faq-answer">
+          <p>Yes, we rebuild core pages and preserve what works.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Who Owns The Website?</summary>
+        <div class="faq-answer">
+          <p>You do. We provide full access on launch.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Do You Offer Ongoing Support?</summary>
+        <div class="faq-answer">
+          <p>Optional Care plan for CRO nudges and reporting is available.</p>
+        </div>
+      </details>
+    </div>
+  </section>
 
 </main>
 

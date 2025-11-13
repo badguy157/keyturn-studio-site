@@ -967,3 +967,90 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ===== FAQ Accordion Styles ===== */
+.faq-accordion {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+}
+
+.faq-accordion details {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: border-color 0.2s ease;
+}
+
+.faq-accordion details:hover {
+  border-color: rgba(90, 162, 255, 0.3);
+}
+
+.faq-accordion details[open] {
+  border-color: rgba(90, 162, 255, 0.4);
+}
+
+.faq-accordion summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--fg);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Remove default disclosure triangle */
+.faq-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.faq-accordion details[open] summary::after {
+  content: '−';
+}
+
+/* Focus state for keyboard navigation */
+.faq-accordion summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.faq-accordion .faq-answer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--muted-2);
+  line-height: 1.6;
+}
+
+.faq-accordion .faq-answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.faq-accordion .faq-answer a:hover {
+  color: #93c5fd;
+}
+
+@media (min-width: 768px) {
+  .faq-accordion details {
+    padding: 20px 24px;
+  }
+}
