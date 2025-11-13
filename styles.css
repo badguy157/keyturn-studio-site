@@ -625,3 +625,27 @@ a:not(.btn-primary)[aria-current="page"]{
     grid-template-columns: 1fr !important;
   }
 }
+
+/* --- Quote form: show errors only after submit --- */
+.premium-form .form-input,
+.premium-form select,
+.premium-form textarea {
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+/* remove any global :invalid styling you might have */
+.premium-form .form-input:invalid,
+.premium-form select:invalid,
+.premium-form textarea:invalid {
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+/* when we explicitly show errors */
+.premium-form.show-errors .form-input:invalid,
+.premium-form.show-errors select:invalid,
+.premium-form.show-errors textarea:invalid {
+  border-color: #e66;
+  box-shadow: 0 0 0 1px #e66 inset;
+}
