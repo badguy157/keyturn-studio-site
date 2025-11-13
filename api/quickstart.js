@@ -63,7 +63,7 @@ export default async function handler(req, res) {
       .replace('{email}', encodeURIComponent(email))
       .replace('{property}', encodeURIComponent(propertyName));
 
-    const subject = `Quick Start — ${propertyName}`;
+    const subject = `Quote request — ${propertyName}`;
 
     // ----- Admin email -----
     const htmlAdmin = `

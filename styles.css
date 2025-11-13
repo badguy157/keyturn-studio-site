@@ -495,3 +495,29 @@ a:not(.btn-primary)[aria-current="page"]{
   white-space:nowrap;
   border-width:0;
 }
+
+/* Pricing card highlight (Most booked badge) */
+.highlight-card{
+  position:relative;
+  border:2px solid var(--accent) !important;
+  box-shadow:0 0 0 1px var(--accent), var(--shadow);
+}
+.card-badge{
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--accent);
+  color:#fff;
+  padding:4px 16px;
+  border-radius:20px;
+  font-size:0.75rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  white-space:nowrap;
+}
+
+/* Onboarding readability */
+.card ul li + li { margin-top: 6px; }
+.card ul ul li + li { margin-top: 4px; }

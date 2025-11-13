@@ -130,7 +130,7 @@
       <li>Meet any one: ≥ 1,500 sessions/mo, ≥ 10 OTA bookings/mo, or ADR ≥ $80</li>
     </ul>
     <div class="buttons" style="margin-top:10px">
-      <a class="btn primary js-pilot" href="#audit" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
+      <a class="btn primary js-pilot" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pilot'})" aria-label="Apply for Founders’ Pilot">Apply for Pilot</a>
     </div>
   </section>
   
@@ -232,10 +232,11 @@
           <li>JSON-LD: Hotel/Restaurant/FAQ • Speed &amp; accessibility pass</li>
           <li>eviivo branding/config touch-ups • 2 revision rounds</li>
         </ul>
-        <a class="btn primary" href="#audit">Get a 10-min audit</a>
+        <a class="btn primary" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-core'})">Request a quote</a>
       </article>
       
-      <article class="card">
+      <article class="card highlight-card">
+        <div class="card-badge">Most booked</div>
         <h3 class="card-title">Makeover + CRO (Pro)</h3>
         <div class="price" data-upfront="$12,000" data-monthly="$3,000/mo × 4">$12,000</div>
         <p class="who small">Best for: 20–40 rooms or high-demand boutique stays.</p>
@@ -246,7 +247,7 @@
           <li>A/B-ready CTA variants &amp; experiment hooks</li>
           <li>Seasonal landing blocks (e.g., cyclists, walkers, weddings)</li>
         </ul>
-        <a class="btn" href="#audit">Book discovery</a>
+        <a class="btn" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-pro'})">Request a quote</a>
       </article>
       <!-- PREMIER CARD — insert after Pro, before Ongoing Plans -->
 <article class="card">
@@ -260,7 +261,7 @@
     <li>1 quarter of managed CRO experiments + reporting</li>
     <li>GSC/GA4 dashboards, schema & review expansion</li>
   </ul>
-  <a class="btn" href="#audit">Book discovery</a>
+  <a class="btn" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-premier'})">Request a quote</a>
 </article>
 
       <article class="card">
@@ -273,7 +274,7 @@
           <li>Monthly change log &amp; direct-booking click tracking</li>
         </ul>
         <p class="tiny perk">Pilot perk: <strong>first 2 months of Care free</strong>, then $300/mo.</p>
-        <a class="btn js-pilot" href="#audit">See plan details</a>
+        <a class="btn js-pilot" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'pricing-ongoing'})">Request a quote</a>
         <p class="tiny">Alt: $4,500 + $499/mo × 12</p>
       </article>      
     </div>
@@ -497,7 +498,7 @@
         <h4>Resources</h4>
         <ul>
           <li><a href="/tools/roi.html">ROI Estimate</a></li>
-          <li><a href="/audit.html">Request Audit</a></li>
+          <li><a href="/quote.html">Request Quote</a></li>
           <li><a href="/onboarding.html">Onboarding</a></li>
         </ul>
       </div>
@@ -507,7 +508,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/intro" target="_blank" rel="noopener">Book 15 min Intro <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>
@@ -519,8 +520,8 @@
   </div>
 </footer>
 
-<!-- Sticky mobile CTA (kept as audit request) -->
-<a href="#audit" class="sticky-cta" aria-label="Request an audit">Request audit</a>
+<!-- Sticky mobile CTA -->
+<a href="/quote.html" class="sticky-cta" aria-label="Request a quote" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'sticky'})">Request a quote</a>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

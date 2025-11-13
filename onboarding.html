@@ -31,109 +31,23 @@
 <section class="hero">
   <div class="container">
     <h1 class="hero-title">Welcome! Let's get you started.</h1>
-    <p class="hero-lede">Our simple 3-step process is designed to get your new website up and running quickly, with everything you need to boost direct bookings.</p>
+    <p class="hero-lede">After requesting a quote, complete these 2 simple steps to get your new website up and running quickly.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="#step1">Start step 1</a>
+      <a class="btn btn-primary" href="#step2">Start onboarding</a>
       <a class="btn btn-ghost" href="/#results">See our results</a>
     </div>
   </div>
 </section>
 
 <main id="main">
-  <!-- ===== 3-Step Onboarding Hub ===== -->
+  <!-- ===== Post-Quote Onboarding Steps ===== -->
   <section class="container section" style="padding-top:40px">
-    <h2 style="margin-bottom:28px">Your Simple 3-Step Journey</h2>
+    <h2 style="margin-bottom:28px">Your Onboarding Steps</h2>
 
-    <!-- Step 1: Native Quick Start (no third-party embed) -->
-    <article class="card" id="step1" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
-      <h3>Step 1: Tell Us About Your Property</h3>
-      <p class="small">This 2-minute Quick Start lets us prep your project. You’ll get a confirmation email right after.</p>
-
-      <div style="margin-top:16px">
-        <form id="quickstartForm" class="stack" novalidate>
-          <!-- Honeypot (anti-spam) -->
-          <input type="text" name="company" id="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px">
-
-          <div class="grid two">
-            <label>Property name
-              <input name="propertyName" required>
-            </label>
-            <label>Website URL
-              <input name="websiteUrl" type="url" placeholder="https://…" required>
-            </label>
-          </div>
-
-          <div class="grid two">
-            <label>Contact name
-              <input name="contactName" required>
-            </label>
-            <label>Email
-              <input name="email" type="email" required>
-            </label>
-          </div>
-
-          <div class="grid two">
-            <label>Phone (optional)
-              <input name="phone" type="tel" inputmode="tel">
-            </label>
-            <label>Booking system
-              <select name="bookingSystem" required>
-                <option value="" selected disabled>Select…</option>
-                <option>eviivo</option>
-                <option>Little Hotelier</option>
-                <option>SiteMinder</option>
-                <option>Other</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="grid two">
-            <label>Primary goal
-              <select name="goal" required>
-                <option value="" selected disabled>Select…</option>
-                <option>More direct bookings</option>
-                <option>Reduce OTA fees</option>
-                <option>Refresh the look</option>
-                <option>Speed up the site</option>
-              </select>
-            </label>
-            <label>Ideal launch timing
-              <select name="launchTiming" required>
-                <option value="" selected disabled>Select…</option>
-                <option>ASAP</option>
-                <option>2–4 weeks</option>
-                <option>1–2 months</option>
-              </select>
-            </label>
-          </div>
-
-          <label>Shared folder link (optional — photos/menus)
-            <input name="assetsLink" type="url" placeholder="Dropbox / Drive / OneDrive link">
-          </label>
-
-          <label>Anything else? (optional)
-            <textarea name="notes" rows="3"></textarea>
-          </label>
-
-          <!-- meta captured client-side -->
-          <input type="hidden" name="pagePath" value="">
-          <input type="hidden" name="utm_source" value="">
-          <input type="hidden" name="utm_medium" value="">
-          <input type="hidden" name="utm_campaign" value="">
-          <input type="hidden" name="timezone" value="">
-
-          <div class="hero-ctas">
-            <button class="btn btn-primary" id="qsSubmit" type="submit">Send & continue</button>
-            <span id="qsMsg" class="small" aria-live="polite" style="margin-left:12px"></span>
-          </div>
-        </form>
-      </div>
-    </article>
-
-    <!-- Step 2: Secure Access -->
+    <!-- Step 1: Secure Access (formerly Step 2) -->
     <article class="card" id="step2" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
-      <h3>Step 2: Share Your Access (Securely)</h3>
-      <p class="small">Once you've submitted Step 1, we'll need secure access to a few systems (like your website and analytics). Don't worry—we'll guide you through everything and keep it all secure!</p>
+      <h3>Step 1: Share Your Access (Securely)</h3>
+      <p class="small">After receiving your quote, we'll need secure access to a few systems (like your website and analytics). Don't worry—we'll guide you through everything and keep it all secure!</p>
     
       <div class="roi-box" style="margin-top:16px">
         <h4 style="margin-top:0;font-size:1rem">What we need:</h4>
@@ -183,9 +97,9 @@
     </article>
     
 
-    <!-- Step 3: Calendly -->
+    <!-- Step 2: Calendly -->
     <article class="card" id="step3" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
-      <h3>Step 3: Let's Talk! Schedule Your Kickoff</h3>
+      <h3>Step 2: Let's Talk! Schedule Your Kickoff</h3>
       <p class="small">Book a friendly 30-minute call where we'll walk through your project together, answer all your questions, and make sure you feel comfortable with the next steps.</p>
       <div style="margin-top:16px">
         <div class="calendly-inline-widget"
@@ -204,8 +118,8 @@
     <article class="card">
       <h3>1) Let's Get Acquainted</h3>
       <ul>
-        <li>Fill out our quick <a href="/audit.html">audit request</a></li>
-        <li>We'll send you a 2–3 minute video with 3 personalized improvements + savings estimate</li>
+        <li>Fill out our quick <a href="/quote.html">quote request</a></li>
+        <li>We'll send you a 1-page quote within 1 business day</li>
         <li>Optional 20-minute friendly chat to make sure we're a great fit</li>
       </ul>
     </article>
@@ -243,7 +157,7 @@
         <h4>Resources</h4>
         <ul>
           <li><a href="/tools/roi.html">ROI Estimate</a></li>
-          <li><a href="/audit.html">Request Audit</a></li>
+          <li><a href="/quote.html">Request Quote</a></li>
           <li><a href="/onboarding.html">Onboarding</a></li>
         </ul>
       </div>
@@ -253,7 +167,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/intro" target="_blank" rel="noopener">Book 15 min Intro <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>
@@ -266,12 +180,12 @@
 </footer>
 
 <!-- Sticky mobile CTA (same pattern as index) -->
-<a href="#step1" class="sticky-cta" aria-label="Start onboarding">Start onboarding</a>
+<a href="#step2" class="sticky-cta" aria-label="Start onboarding">Start onboarding</a>
 
 <!-- Calendly widget script (already included above for inline, harmless to keep here too) -->
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
-<!-- Onboarding page specific JS with GA4 events + native form submit -->
+<!-- Onboarding page specific JS -->
 <script>
 (function() {
   'use strict';
@@ -280,6 +194,7 @@
     try { window.gtag && window.gtag('event', name, params); } catch(_){}
   };
 
+  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
@@ -289,82 +204,11 @@
     });
   });
 
-  const step1 = document.getElementById('step1');
-  if (step1) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !step1.dataset.viewed) {
-          step1.dataset.viewed = 'true';
-          window.safeEvent('onboarding_form_view', { step: 'step1', page_path: window.location.pathname });
-        }
-      });
-    }, { threshold: 0.5 });
-    observer.observe(step1);
-  }
-
-  (function prefillMeta(){
-    const qsForm = document.getElementById('quickstartForm');
-    if (!qsForm) return;
-    const params = new URLSearchParams(location.search);
-    qsForm.querySelector('input[name="pagePath"]').value = location.pathname;
-    qsForm.querySelector('input[name="utm_source"]').value = params.get('utm_source') || '';
-    qsForm.querySelector('input[name="utm_medium"]').value = params.get('utm_medium') || '';
-    qsForm.querySelector('input[name="utm_campaign"]').value = params.get('utm_campaign') || '';
-    qsForm.querySelector('input[name="timezone"]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-  })();
-
-  const qsForm = document.getElementById('quickstartForm');
-  if (qsForm) {
-    const btn = document.getElementById('qsSubmit');
-    const msg = document.getElementById('qsMsg');
-
-    qsForm.addEventListener('focusin', () => {
-      if (!qsForm.dataset.interacted) {
-        qsForm.dataset.interacted = '1';
-        window.safeEvent('onboarding_form_interact', { step: 'step1', page_path: location.pathname });
-      }
-    });
-
-    qsForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      msg.textContent = '';
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-
-      const formData = new FormData(qsForm);
-      const payload = Object.fromEntries(formData.entries());
-
-      if (payload.company) { btn.disabled = false; btn.textContent = 'Send & continue'; return; }
-
-      payload.userAgent = navigator.userAgent || '';
-      payload.referrer = document.referrer || '';
-
-      try {
-        const res = await fetch('/api/quickstart', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed');
-
-        window.safeEvent('onboarding_form_submit', { step: 'step1', page_path: location.pathname });
-        msg.textContent = 'Thanks! Check your email for a confirmation.';
-        document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch (err) {
-        console.error(err);
-        msg.textContent = 'Could not send. Please email hello@keyturn.studio';
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Send & continue';
-      }
-    });
-  }
-
+  // Track Calendly bookings
   window.addEventListener('message', (event) => {
     if (event.data && event.data.event === 'calendly.event_scheduled') {
       window.safeEvent('onboarding_calendly_booked', {
-        step: 'step3',
+        step: 'step2',
         page_path: window.location.pathname,
         calendly_uri: event.data.payload?.event?.uri || ''
       });
@@ -382,6 +226,7 @@
     } catch(_) {}
   })();
 })();
+</script>
 </script>
 
 </body>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Request a Quote | Keyturn Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tell us about your property—we'll send a 1-page quote within 1 business day.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
+  <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/public/site.js" defer></script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Keyturn Studio",
+    "url": "https://www.keyturn.studio",
+    "logo": "https://www.keyturn.studio/public/logo.svg",
+    "description": "Marketing website makeovers for hospitality",
+    "sameAs": []
+  }
+  </script>
+</head>
+<body>
+
+<!-- ===== Page hero ===== -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Request a quote</h1>
+    <p class="hero-lede">Tell us about your property—we'll send a <strong>1-page quote within 1 business day</strong>.</p>
+  </div>
+</section>
+
+<main id="main" class="container section">
+  <section class="card" id="quote-form">
+    <h2>Tell Us About Your Property</h2>
+    <p class="small">This 2-minute form lets us prepare your quote. You'll get a confirmation email right after.</p>
+
+    <div style="margin-top:16px">
+      <form id="quickstartForm" class="stack" novalidate>
+        <!-- Honeypot (anti-spam) -->
+        <input type="text" name="company" id="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px">
+
+        <div class="grid two">
+          <label>Property name
+            <input name="propertyName" required>
+          </label>
+          <label>Website URL
+            <input name="websiteUrl" type="url" placeholder="https://…" required>
+          </label>
+        </div>
+
+        <div class="grid two">
+          <label>Contact name
+            <input name="contactName" required>
+          </label>
+          <label>Email
+            <input name="email" type="email" required>
+          </label>
+        </div>
+
+        <div class="grid two">
+          <label>Phone (optional)
+            <input name="phone" type="tel" inputmode="tel">
+          </label>
+          <label>Booking system
+            <select name="bookingSystem" required>
+              <option value="" selected disabled>Select…</option>
+              <option>eviivo</option>
+              <option>Little Hotelier</option>
+              <option>SiteMinder</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid two">
+          <label>Primary goal
+            <select name="goal" required>
+              <option value="" selected disabled>Select…</option>
+              <option>More direct bookings</option>
+              <option>Reduce OTA fees</option>
+              <option>Refresh the look</option>
+              <option>Speed up the site</option>
+            </select>
+          </label>
+          <label>Ideal launch timing
+            <select name="launchTiming" required>
+              <option value="" selected disabled>Select…</option>
+              <option>ASAP</option>
+              <option>2–4 weeks</option>
+              <option>1–2 months</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Shared folder link (optional — photos/menus)
+          <input name="assetsLink" type="url" placeholder="Dropbox / Drive / OneDrive link">
+        </label>
+
+        <label>Anything else? (optional)
+          <textarea name="notes" rows="3"></textarea>
+        </label>
+
+        <!-- meta captured client-side -->
+        <input type="hidden" name="pagePath" value="">
+        <input type="hidden" name="utm_source" value="">
+        <input type="hidden" name="utm_medium" value="">
+        <input type="hidden" name="utm_campaign" value="">
+        <input type="hidden" name="timezone" value="">
+
+        <div class="hero-ctas">
+          <button class="btn btn-primary" id="qsSubmit" type="submit">Send request</button>
+          <span id="qsMsg" class="small" aria-live="polite" style="margin-left:12px"></span>
+        </div>
+      </form>
+    </div>
+
+    <p class="small" style="margin-top:20px;text-align:center;color:var(--muted)">
+      Prefer to talk first? <a target="_blank" rel="noopener" href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=quote">Book a 15-min Q&A</a>.
+    </p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <img src="/public/logo.svg" alt="Keyturn Studio" class="footer-logo">
+      <p class="footer-tagline">Marketing websites for hospitality</p>
+    </div>
+    
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/tools/roi.html">ROI Estimate</a></li>
+          <li><a href="/quote.html">Request Quote</a></li>
+          <li><a href="/onboarding.html">Onboarding</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Use</a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  
+  <div class="container footer-bottom">
+    <p class="footer-copyright">© <span id="y"></span> Keyturn Studio. All rights reserved.</p>
+    <p class="footer-meta">Operated by Ridgeway Labs LLC</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  window.safeEvent = window.safeEvent || function(name, params){
+    try { window.gtag && window.gtag('event', name, params); } catch(_){}
+  };
+
+  (function prefillMeta(){
+    const qsForm = document.getElementById('quickstartForm');
+    if (!qsForm) return;
+    const params = new URLSearchParams(location.search);
+    qsForm.querySelector('input[name="pagePath"]').value = location.pathname;
+    qsForm.querySelector('input[name="utm_source"]').value = params.get('utm_source') || '';
+    qsForm.querySelector('input[name="utm_medium"]').value = params.get('utm_medium') || '';
+    qsForm.querySelector('input[name="utm_campaign"]').value = params.get('utm_campaign') || '';
+    qsForm.querySelector('input[name="timezone"]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+  })();
+
+  const qsForm = document.getElementById('quickstartForm');
+  if (qsForm) {
+    const btn = document.getElementById('qsSubmit');
+    const msg = document.getElementById('qsMsg');
+
+    qsForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = '';
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const formData = new FormData(qsForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      if (payload.company) { btn.disabled = false; btn.textContent = 'Send request'; return; }
+
+      payload.userAgent = navigator.userAgent || '';
+      payload.referrer = document.referrer || '';
+
+      try {
+        const res = await fetch('/api/quickstart', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed');
+
+        window.safeEvent('quote_request_submit', { page_path: location.pathname });
+        
+        // Replace form with success message
+        qsForm.innerHTML = `
+          <h3>Thanks! We'll email your quote shortly. 🎉</h3>
+          <p>We've received your details and will prepare your 1-page quote. Expect to hear from us within 1 business day.</p>
+          <div class="hero-ctas" style="margin-top:20px">
+            <a class="btn btn-primary" href="/">Back to home</a>
+            <a class="btn btn-ghost" href="/onboarding.html">See onboarding process</a>
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+        msg.textContent = 'Could not send. Please email hello@keyturn.studio';
+        btn.disabled = false;
+        btn.textContent = 'Send request';
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
