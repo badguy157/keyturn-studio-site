@@ -667,3 +667,290 @@ a:not(.btn-primary)[aria-current="page"]{
 .premium-form select:invalid{
   border-color: var(--line) !important;
 }
+
+/* ===== Enhanced Focus Rings & Hover Animations ===== */
+
+/* Enhanced focus ring for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Enhanced button focus rings with animation */
+.btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(90, 162, 255, 0.15);
+  animation: focusPulse 0.3s ease-out;
+}
+
+@keyframes focusPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(90, 162, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 6px rgba(90, 162, 255, 0.15);
+  }
+}
+
+/* Enhanced button hover animations */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+  transition: all 0.1s;
+}
+
+.btn-primary:hover,
+.btn.primary:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 8px 25px rgba(230, 235, 245, 0.25);
+}
+
+.btn-ghost:hover,
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Link hover animations */
+a:not(.btn) {
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+a:not(.btn):hover {
+  color: var(--accent);
+}
+
+/* Card hover effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(90, 162, 255, 0.3);
+}
+
+/* ===== Page Animations ===== */
+
+/* Fade in animation for page load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply animations to key sections */
+.hero {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.hero-title {
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.hero-lede {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-ctas {
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.hero-bullets {
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+/* Animate sections on scroll */
+.section {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Stagger card animations */
+.card {
+  animation: scaleIn 0.6s ease-out both;
+}
+
+.pricing-grid .card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.pricing-grid .card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.pricing-grid .card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Animate grid items */
+.grid > * {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.grid > *:nth-child(1) { animation-delay: 0.1s; }
+.grid > *:nth-child(2) { animation-delay: 0.2s; }
+.grid > *:nth-child(3) { animation-delay: 0.3s; }
+.grid > *:nth-child(4) { animation-delay: 0.4s; }
+.grid > *:nth-child(5) { animation-delay: 0.5s; }
+.grid > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Animate metrics and proof cards */
+.metric-card,
+.proof-card {
+  animation: scaleIn 0.6s ease-out both;
+}
+
+.metrics-grid .metric-card:nth-child(1) { animation-delay: 0.1s; }
+.metrics-grid .metric-card:nth-child(2) { animation-delay: 0.2s; }
+.metrics-grid .metric-card:nth-child(3) { animation-delay: 0.3s; }
+
+.proof-grid .proof-card:nth-child(1) { animation-delay: 0.1s; }
+.proof-grid .proof-card:nth-child(2) { animation-delay: 0.2s; }
+.proof-grid .proof-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Animate images */
+img {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Gallery animations */
+.gallery figure {
+  animation: scaleIn 0.6s ease-out both;
+}
+
+.gallery figure:nth-child(1) { animation-delay: 0.1s; }
+.gallery figure:nth-child(2) { animation-delay: 0.15s; }
+.gallery figure:nth-child(3) { animation-delay: 0.2s; }
+.gallery figure:nth-child(4) { animation-delay: 0.25s; }
+.gallery figure:nth-child(5) { animation-delay: 0.3s; }
+.gallery figure:nth-child(6) { animation-delay: 0.35s; }
+.gallery figure:nth-child(7) { animation-delay: 0.4s; }
+.gallery figure:nth-child(8) { animation-delay: 0.45s; }
+.gallery figure:nth-child(9) { animation-delay: 0.5s; }
+
+/* Quote card animation */
+.quote-card {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Form field animations */
+.premium-form .form-field {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.premium-form .form-field:nth-child(1) { animation-delay: 0.05s; }
+.premium-form .form-field:nth-child(2) { animation-delay: 0.1s; }
+.premium-form .form-field:nth-child(3) { animation-delay: 0.15s; }
+.premium-form .form-field:nth-child(4) { animation-delay: 0.2s; }
+.premium-form .form-field:nth-child(5) { animation-delay: 0.25s; }
+
+/* Sticky CTA animation */
+.sticky-cta {
+  animation: slideInUp 0.5s ease-out 0.5s both;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header animation */
+.site-header {
+  animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
