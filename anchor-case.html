@@ -1,37 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Case Study — The Anchor Hotel | Keyturn Studio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="How a 3–4 week makeover lifted website-direct bookings for The Anchor Hotel with unified CTAs, GA4 tracking, and a faster mobile experience.">
-    <link rel="stylesheet" href="/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  
-    <!-- Favicons (match index) -->
-    <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
-    <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
-    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
-    
-    <div class="brand"><a href="/"><img src="/public/logo.svg?v=2" alt="Keyturn Studio" width="220" height="70"></a></div>
+<head>
+  <meta charset="utf-8">
+  <title>Case Study — The Anchor Hotel | Keyturn Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How a 3–4 week makeover lifted website-direct bookings for The Anchor Hotel with unified CTAs, GA4 tracking, and a faster mobile experience.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
+  <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png?v=2">
+  <link rel="stylesheet" href="styles.css">
+  <script src="/public/site.js" defer></script>
 
-  </head>
-  
-  <main>
-    <section class="container">
-      <h1>The Anchor Hotel — Haydon Bridge</h1>
-      <p class="small">Makeover Sprint · CRO · GA4</p>
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Keyturn Studio",
+    "url": "https://www.keyturn.studio",
+    "logo": "https://www.keyturn.studio/public/logo.svg",
+    "description": "Marketing website makeovers for hospitality",
+    "sameAs": []
+  }
+  </script>
+</head>
+<body>
 
-      <div class="card" style="margin-top:12px">
-        <h2>Goals</h2>
+<!-- Hero section for case study -->
+<section class="hero">
+  <div class="container">
+    <p class="small" style="color:var(--accent);margin-bottom:8px;font-weight:600">CASE STUDY</p>
+    <h1 class="hero-title">The Anchor Hotel — Haydon Bridge</h1>
+    <p class="hero-lede">How a 3–4 week <strong>Makeover Sprint</strong> lifted website-direct bookings with unified CTAs, GA4 tracking, and a faster mobile experience.</p>
+    <div class="chip-row" aria-label="Project highlights" style="margin-top:20px">
+      <span class="chip">Makeover Sprint</span>
+      <span class="chip">CRO Optimization</span>
+      <span class="chip">GA4 Events</span>
+      <span class="chip">+107% Clicks</span>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <!-- Website Screenshot -->
+  <section class="container section" style="padding-top:40px">
+    <div class="card" style="padding:0;overflow:hidden;background:var(--card);border:2px solid var(--line)">
+      <a href="/screenshot.png" target="_blank" rel="noopener" style="display:block;position:relative;cursor:zoom-in">
+        <img src="/screenshot.png" 
+             alt="The Anchor Hotel website homepage screenshot" 
+             style="width:100%;height:auto;display:block;border-radius:14px"
+             loading="lazy"
+             decoding="async">
+        <div style="position:absolute;top:16px;right:16px;background:rgba(10,18,32,.92);backdrop-filter:blur(8px);padding:8px 16px;border-radius:8px;font-size:0.85rem;font-weight:600;color:var(--accent);border:1px solid var(--line)">
+          Click to enlarge →
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Goals Section -->
+  <section class="container section">
+    <div class="card">
+      <h2>Project Goals</h2>
         <ul>
           <li>Lift <strong>website-direct booking share</strong> and reduce OTA commission</li>
           <li>Clarify “Book direct — best rate” CTAs across pages</li>
           <li>Add GA4 events to track booking-outbound clicks</li>
         </ul>
-      </div>
+    </div>
+  </section>
 
-      <div class="card" style="margin-top:12px">
+  <!-- Before/After & Metrics Grid -->
+  <section class="container section">
+    <div class="grid">
+      <article class="card">
         <h2>Before → After</h2>
         <ul>
           <li>No sticky CTA → unified sticky bar + hero button</li>
@@ -39,41 +84,49 @@
           <li>No GA4 events → <code>booking_outbound</code> & <code>book_click</code></li>
           <li>Unstructured FAQs → Hotel / Restaurant / FAQ JSON-LD</li>
         </ul>
-      </div>
+      </article>
 
-      <div class="card" style="margin-top:12px">
-        <h2>Early metrics</h2>
+      <article class="card">
+        <h2>Early Metrics</h2>
         <ul>
           <li>Website-direct snapshot (off-peak): <strong>18.8%</strong> (3 of 16)</li>
           <li>Seasonally-weighted annual website-direct: <strong>21.7%</strong></li>
           <li>Outbound booking CTR increased with sticky CTA</li>
         </ul>
         <p class="small"><em>Off-peak snapshot: 18.8% (3/16). Annual weighting uses off-peak ≈9.8% of yearly bookings. In-season assumption: 22% website-direct.</em></p>
-      </div>
+      </article>
+    </div>
+  </section>
 
-      <!-- Traffic → bookings (GSC) -->
-      <div class="card" style="margin-top:12px">
-        <h2>Traffic → bookings</h2>
+  <!-- Traffic Impact -->
+  <section class="container section">
+    <div class="card">
+      <h2>Traffic → Bookings Impact</h2>
         <ul>
           <li>Clicks <strong>+107%</strong> (85 vs 41) after launch</li>
           <li>CTR <strong>5.1% vs 2.3%</strong>; average position <strong>15.7 vs 23.7</strong></li>
         </ul>
         <p class="small">Window: launch → yesterday vs prior period; mostly branded immediately post-launch (expected).</p>
-      </div>
+    </div>
+  </section>
 
-      <!-- What it's worth (site-specific math) -->
-      <div class="card worth" style="margin-top:12px">
-        <h2>What this uplift is worth</h2>
+  <!-- ROI Impact -->
+  <section class="container section">
+    <div class="card roi-box">
+      <h2>What This Uplift Is Worth</h2>
         <p>Each booking moved off OTAs saves ~<strong>$24.60</strong> (<abbr title="Average Daily Rate">ADR</abbr> $90.65 × <abbr title="Average Length of Stay">ALOS</abbr> 1.51 × 18%).</p>
         <details class="tiny">
           <summary>Show the math</summary>
           <p>Saved per moved booking = 90.65 × 1.51 × 0.18 ≈ $24.60.</p>
         </details>
         <p class="small">Pre-launch website-direct baseline (last 12 months): <strong>7.65%</strong>. We track the increase monthly.</p>
-      </div>
+    </div>
+  </section>
 
-      <div class="card" style="margin-top:12px">
-        <h2>What we delivered</h2>
+  <!-- Deliverables -->
+  <section class="container section">
+    <div class="card">
+      <h2>What We Delivered</h2>
         <ul>
           <li>Core pages rebuild + consolidated booking link</li>
           <li>GA4 events + lightweight dashboard snippet</li>
@@ -105,17 +158,64 @@
       </div>
     </section>
 
-    <section id="audit" class="container contact">
-      <h2>Get a quick audit</h2>
-      <p class="small">Share your website, rooms count, ADR, and booking engine link. We’ll send a 2–3 minute Loom with 3 fixes and an ROI estimate.</p>
-      <p class="small"><a class="btn" href="/#audit">Open audit form</a></p>
-    </section>
-  </main>
+</body>
+</html>
 
-  <footer class="container footer">
-    <p>© <span id="y"></span> Keyturn Studio • Marketing websites for hospitality</p>
-    <p class="small"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
-  </footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  <!-- Disclaimer -->
+  <section class="container" style="padding-bottom:40px">
+    <div style="padding:20px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;text-align:center">
+      <p class="small" style="margin:0;color:var(--muted)">
+        <em>Independent studio. "The Anchor Hotel" case study shown with permission. <strong>No affiliation or ownership.</strong></em>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container section">
+    <div class="card" style="text-align:center;padding:40px 24px">
+      <h2 style="margin-top:0">Ready for similar results?</h2>
+      <p class="hero-lede" style="margin-bottom:24px">Get a 1-page quote within 1 business day showing how we can boost your direct bookings.</p>
+      <div class="hero-ctas" style="justify-content:center">
+        <a class="btn btn-primary" href="/quote.html" onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'case-study'})">Request a Quote</a>
+        <a class="btn btn-ghost" href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=case-study" target="_blank" rel="noopener">Book 15-min Q&A</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <img src="/public/logo.svg" alt="Keyturn Studio" class="footer-logo">
+      <p class="footer-tagline">Marketing websites for hospitality</p>
+    </div>
+    
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/tools/roi.html">ROI Estimate</a></li>
+          <li><a href="/quote.html">Request Quote</a></li>
+          <li><a href="/onboarding.html">Onboarding</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Use</a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  
+  <div class="container footer-bottom">
+    <p class="footer-copyright">© <span id="y"></span> Keyturn Studio. All rights reserved.</p>
+    <p class="footer-meta">Operated by Ridgeway Labs LLC</p>
+  </div>
+</footer>
+
 </body>
 </html>

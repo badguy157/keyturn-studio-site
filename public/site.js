@@ -55,11 +55,11 @@
         <li><a href="/#pricing"${isActive('/') ? ' aria-current="page"' : ''}>Pricing</a></li>
       </ul>
       <div class="nav-ctas">
-        <a class="btn btn-primary" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Get a 2–3-min audit</a>
+        <a class="btn btn-primary" href="/quote.html"${isActive('/quote') ? ' aria-current="page"' : ''} onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'nav'})">Request a Quote</a>
         <a class="btn btn-ghost"
-   href="https://calendly.com/vinnie-keyturn/intro"
+   href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site"
    target="_blank" rel="noopener"
-   aria-label="Book 15-minute intro on Calendly">Book 15-min intro</a>
+   aria-label="Book 15-minute Q&A on Calendly">Book 15-min Q&A</a>
       </div>
     </nav>
 
@@ -81,10 +81,10 @@
     </div>
     <a href="/#results">Proof</a>
     <a href="/#pricing">Pricing</a>
-    <a class="btn btn-primary w-full" href="/audit.html"${isActive('/audit') ? ' aria-current="page"' : ''}>Get a 2–3-min audit</a>
+    <a class="btn btn-primary w-full" href="/quote.html"${isActive('/quote') ? ' aria-current="page"' : ''} onclick="window.safeEvent && window.safeEvent('quote_request_click', {location: 'mobile-nav'})">Request a Quote</a>
     <a class="btn btn-ghost w-full"
-   href="https://calendly.com/vinnie-keyturn/intro"
-   target="_blank" rel="noopener">Book 15-min intro</a>
+   href="https://calendly.com/vinnie-keyturn/intro-15?utm_source=site"
+   target="_blank" rel="noopener">Book 15-min Q&A</a>
   </nav>
 </header>
     `.trim();

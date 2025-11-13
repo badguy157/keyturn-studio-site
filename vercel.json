@@ -1,5 +1,11 @@
 {
     "cleanUrls": true,
-    "rewrites": [{ "source": "/", "destination": "/index.html" }]
+    "rewrites": [{ "source": "/", "destination": "/index.html" }],
+    "redirects": [
+      { "source": "/audit", "destination": "/quote", "permanent": true },
+      { "source": "/audit.html", "destination": "/quote.html", "permanent": true },
+      { "source": "/proposal", "destination": "/quote", "permanent": true },
+      { "source": "/proposal.html", "destination": "/quote.html", "permanent": true }
+    ]
   }
   
