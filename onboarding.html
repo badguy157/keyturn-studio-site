@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Onboarding & Process | Keyturn Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="What to expect: the 3-week makeover sprint, approvals, what we need, and how we measure results.">
+  <meta name="description" content="How we'll get your new website live in about 3 weeks - the simple, step-by-step process.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/public/logo-mark.svg?v=2">
   <link rel="icon" sizes="32x32" href="/public/favicon-32.png?v=2">
@@ -27,122 +27,173 @@
 </head>
 <body>
 
-<!-- ===== Compact hero (same style) ===== -->
+<!-- ===== Hero ===== -->
 <section class="hero">
   <div class="container">
-    <h1 class="hero-title">Welcome! Let's get you started.</h1>
-    <p class="hero-lede">After requesting a quote, complete these 2 simple steps to get your new website up and running quickly.</p>
+    <h1 class="hero-title">How we'll get your new website live in about 3 weeks</h1>
+    <p class="hero-lede">Once you approve your quote, we follow a simple, step-by-step process. You'll always know what we're doing and what we need from you.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="#step2">Start onboarding</a>
+      <a class="btn btn-primary" href="/quote.html">Start Onboarding</a>
       <a class="btn btn-ghost" href="/#results">See our results</a>
     </div>
   </div>
 </section>
 
 <main id="main">
-  <!-- ===== Post-Quote Onboarding Steps ===== -->
-  <section class="container section" style="padding-top:40px">
-    <h2 style="margin-bottom:28px">Your Onboarding Steps</h2>
+  <!-- ===== Step-by-step timeline ===== -->
+  <h2 class="section-title" style="margin:40px 0 28px;text-align:center">Step-by-step, start to finish</h2>
+  <section id="process" class="container grid section" style="padding-top:0">
+    <article class="card">
+      <h3>Step 1 – Confirm &amp; schedule</h3>
+      <p>You approve the quote, choose a start date that suits you, and pay the first instalment.</p>
+    </article>
 
-    <!-- Step 1: Secure Access (formerly Step 2) -->
-    <article class="card" id="step2" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
+    <article class="card">
+      <h3>Step 2 – Access &amp; kickoff</h3>
+      <p>We ask for access to your domain name, booking system, analytics (if you have it), and any photos or menus. Then we have a short kickoff call to agree priorities and make sure we understand your hotel.</p>
+    </article>
+
+    <article class="card">
+      <h3>Step 3 – Design &amp; build (about 2 weeks)</h3>
+      <p>We design and build your new website pages (home, rooms, food &amp; drink, what's on, and key story/FAQ sections). You'll get a private link to review it.</p>
+    </article>
+
+    <article class="card">
+      <h3>Step 4 – Review &amp; launch</h3>
+      <p>You give feedback, we make refinements, and once you're happy, we launch the new site and keep an eye on it.</p>
+    </article>
+  </section>
+
+  <!-- ===== Step 1: Share Your Access card ===== -->
+  <section class="container section">
+    <article class="card" id="access" style="scroll-margin-top:calc(var(--header-h, 60px) + 12px)">
       <h3>Step 1: Share Your Access (Securely)</h3>
-      <p class="small">After receiving your quote, we'll need secure access to a few systems (like your website and analytics). Don't worry—we'll guide you through everything and keep it all secure!</p>
+      <p>After you approve your quote, we'll need access to a few things so we can connect your new site properly. We use a secure link for any logins and never ask you to send passwords by email. We don't need login access to your existing website or to your Google listing – just the items below.</p>
     
-      <div class="roi-box" style="margin-top:16px">
+      <div class="roi-box" style="margin-top:20px">
         <h4 style="margin-top:0;font-size:1rem">What we need:</h4>
         <ul style="margin:16px 0;padding-left:1.2rem;line-height:1.7">
-          <li style="margin-bottom:14px"><strong>Analytics (pick one):</strong>
-            <ul style="margin:8px 0 0 18px;line-height:1.8">
-              <li style="margin-bottom:8px"><strong>GA4 (recommended):</strong> Add <code>analytics@keyturn.studio</code> as <em>Viewer</em> (temporarily <em>Editor</em> if you want us to configure events/cross-domain).</li>
-              <li style="margin-bottom:8px"><strong>Already using something else?</strong> Add read-only access in your platform (Plausible / Fathom / Matomo), or share credentials via <a href="/secure.html" target="_blank" rel="noopener">secure link</a>.</li>
-              <li style="margin-bottom:8px"><strong>No analytics yet?</strong> We’ll set up GA4 + Tag Manager for you at kickoff.</li>
+          <li style="margin-bottom:14px"><strong>Analytics (if you have it)</strong>
+            <ul style="margin:8px 0 0 18px;line-height:1.7">
+              <li style="margin-bottom:8px">If you already use Google Analytics, add <code>analytics@keyturn.studio</code> as a Viewer (or temporary Editor if you'd like us to tidy the setup).</li>
+              <li style="margin-bottom:8px">If you use another tool, give us read-only access or send the details through our secure link.</li>
+              <li style="margin-bottom:8px">If you don't have analytics yet, we'll set up Google Analytics for you at kickoff.</li>
             </ul>
           </li>
-          <li style="margin-bottom:10px"><strong>Domain/DNS access:</strong> Your registrar (GoDaddy / Namecheap / Cloudflare). Use our <a href="/secure.html" target="_blank" rel="noopener">secure link</a> or delegate DNS-only access.</li>
-          <li style="margin-bottom:10px"><strong>Booking engine:</strong> Your direct booking link and PMS/engine name (e.g., eviivo, SiteMinder).</li>
-          <li style="margin-bottom:10px"><strong>Google Business Profile:</strong> Add <code>hello@keyturn.studio</code> as <em>Manager</em> (or we’ll send a request).</li>
-          <li style="margin-bottom:10px"><strong>Brand assets:</strong> Logos, photos, menus (PDF), and any guidelines.</li>
+          <li style="margin-bottom:10px"><strong>Domain / DNS</strong><br>
+          Access to your domain provider (for example GoDaddy, Namecheap or Cloudflare) so we can point your web address to the new site. You can use our secure link or delegate DNS-only access if you prefer not to share the main login.</li>
+          <li style="margin-bottom:10px"><strong>Booking engine</strong><br>
+          Your direct booking link and the name of your booking system (e.g. eviivo, SiteMinder).</li>
+          <li style="margin-bottom:10px"><strong>Brand assets</strong><br>
+          Logos, photos, menus and any style guidelines. You can upload these through our "Upload brand assets" link.</li>
         </ul>
     
-        <div class="hero-ctas" style="margin-top:10px; gap:8px; flex-wrap:wrap">
-          <a id="btnAssets" class="btn btn-primary"
+        <div class="hero-ctas" style="margin-top:20px; gap:10px; flex-wrap:wrap">
+          <a class="btn btn-primary"
              href="https://www.dropbox.com/request/OOsRAkmpSTVmnnAX6jJg"
-             target="_blank" rel="noopener">Upload brand assets</a>
+             target="_blank" rel="noopener">Upload Brand Assets</a>
     
           <a class="btn btn-ghost"
              href="/secure.html"
-             target="_blank" rel="noopener">Share credentials securely</a>
+             target="_blank" rel="noopener">Share Credentials Securely</a>
         </div>
     
-        <details style="margin-top:12px">
-          <summary class="small"><strong>Prefer to grant DNS-only access (no passwords)?</strong></summary>
-          <ul class="small" style="margin:8px 0 0 18px">
-            <li><b>Cloudflare:</b> Members → Invite → role <i>DNS Editor</i></li>
-            <li><b>GoDaddy:</b> Delegate Access → share “Domains” only</li>
-            <li><b>Namecheap:</b> Access Manager → share “Domain” (manage) for the specific domain</li>
-          </ul>
-        </details>
-    
-        <div style="margin-top:16px;padding:12px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
+        <div style="margin-top:20px;padding:14px;background:rgba(90,162,255,.08);border-radius:8px;border:1px solid rgba(90,162,255,.2)">
           <p style="margin:0;font-size:.95rem;color:var(--muted-2)">
-            <strong>🔒 Security note:</strong> Share credentials via secure channels only. If you don’t have GA4 yet, we’ll provision GA4 + Tag Manager in your account and request the minimum access needed.
+            <strong>Security note</strong><br>
+            Share credentials via secure channels only. Use our secure link for any passwords or sensitive details. You can remove our access once the project is finished.
           </p>
         </div>
     
-        <div class="small" style="margin-top:10px;color:var(--muted-2)">
-          Tip: If you prefer a cookie-free option, we can use Cloudflare Web Analytics or Plausible instead of GA4.
+        <div class="small" style="margin-top:14px;color:var(--muted-2)">
+          <strong>Tip:</strong> If you'd prefer to avoid cookie pop-ups, ask us about a simple privacy-friendly analytics option instead of Google Analytics.
         </div>
-      </div>
-    </article>
-    
-
-    <!-- Step 2: Calendly -->
-    <article class="card" id="step3" style="margin-bottom:24px;scroll-margin-top:calc(var(--header-h) + 12px)">
-      <h3>Step 2: Let's Talk! Schedule Your Kickoff</h3>
-      <p class="small">Book a friendly 30-minute call where we'll walk through your project together, answer all your questions, and make sure you feel comfortable with the next steps.</p>
-      <div style="margin-top:16px">
-        <div class="calendly-inline-widget"
-          data-url="https://calendly.com/vinnie-keyturn/onboarding-kickoff?hide_gdpr_banner=1&utm_source=onboarding"
-          style="min-width:320px;height:700px;"></div>
-        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-        <p class="small" style="margin-top:8px">
-          Prefer a new tab? <a href="https://calendly.com/vinnie-keyturn/onboarding-kickoff?utm_source=onboarding" target="_blank" rel="noopener">Open Calendly</a>.
-        </p>
       </div>
     </article>
   </section>
 
-  <!-- ===== Process (3 cards) ===== -->
-  <h2 class="section-title" style="margin:16px 0 12px;text-align:center">What happens after you request a quote</h2>
-  <section id="process" class="container grid section">
+  <!-- ===== What we'll ask for section ===== -->
+  <section class="container section">
     <article class="card">
-      <h3>1) Let's Get Acquainted</h3>
-      <ul>
-        <li>Fill out our quick <a href="/quote.html">quote request</a></li>
-        <li>We'll review your site and email a tailored quote with high-impact recommendations and a savings estimate.</li>
-        <li>Optional 20-minute friendly chat to make sure we're a great fit</li>
+      <h3>What we'll ask for</h3>
+      <ul style="line-height:1.8">
+        <li style="margin-bottom:12px"><strong>Domain / DNS access</strong><br>
+        <span class="small" style="color:var(--muted)">So we can connect the new site to your existing web address without fuss.</span></li>
+        
+        <li style="margin-bottom:12px"><strong>Booking system details</strong><br>
+        <span class="small" style="color:var(--muted)">So we can make sure all "Book Now" buttons go to the right place and work smoothly.</span></li>
+        
+        <li style="margin-bottom:12px"><strong>Analytics (optional)</strong><br>
+        <span class="small" style="color:var(--muted)">If you already use Google Analytics or another tool, we'll ask for read-only access so you can see how the new site is doing.</span></li>
+        
+        <li style="margin-bottom:12px"><strong>Photos &amp; logo</strong><br>
+        <span class="small" style="color:var(--muted)">So we can show your rooms and spaces in the best light. If you don't have many photos, we'll discuss options.</span></li>
+        
+        <li style="margin-bottom:12px"><strong>Menus &amp; key information (if applicable)</strong><br>
+        <span class="small" style="color:var(--muted)">So we can keep your food and drink pages up to date and accurate.</span></li>
       </ul>
+      
+      <p class="small" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted)">
+        If you're not sure how to grant access to something, don't worry—we'll walk you through it step by step.
+      </p>
+    </article>
+  </section>
+
+  <!-- ===== What we handle ===== -->
+  <section class="container section">
+    <article class="card">
+      <h3>What we handle for you</h3>
+      <ul style="line-height:1.8">
+        <li>Planning the layout of your new site</li>
+        <li>Writing and polishing the wording so it speaks to your ideal guests</li>
+        <li>Making sure the site looks good on phones, tablets and laptops</li>
+        <li>Setting up simple tracking so you can see how many people click "Book Now"</li>
+        <li>Checking that pages load quickly and are easy to use</li>
+      </ul>
+      
+      <p style="margin-top:16px;color:var(--muted)">
+        You don't have to understand the technical details. That's our job.
+      </p>
+    </article>
+  </section>
+
+  <!-- ===== After launch ===== -->
+  <section class="container section">
+    <article class="card">
+      <h3>After your new site goes live</h3>
+      <ul style="line-height:1.8">
+        <li>We fix small issues that come up in the first 30 days</li>
+        <li>We show you how to request simple changes (text, photos, offers)</li>
+        <li>If you'd like, you can add an ongoing care plan so we keep an eye on performance and suggest improvements over time</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="container section">
+    <h2 style="margin-bottom:24px">Common questions</h2>
+    
+    <article class="card" style="margin-bottom:16px">
+      <h4 style="margin-top:0">What if I can't find a password or login?</h4>
+      <p style="margin-bottom:0">This happens all the time. We'll help you track down or reset what's needed.</p>
+    </article>
+
+    <article class="card" style="margin-bottom:16px">
+      <h4 style="margin-top:0">Do we have to change booking systems?</h4>
+      <p style="margin-bottom:0">Usually not. In most cases, we work with what you already use.</p>
     </article>
 
     <article class="card">
-      <h3>2) We Build Your New Site (About 3 Weeks)</h3>
-      <ul>
-        <li>Core pages: Home, Rooms, Eat &amp; Drink, What’s On, Story/FAQ</li>
-        <li>Unified “Book direct — best rate” CTAs (sticky + hero)</li>
-        <li>GA4 events (<code>book_click</code>, <code>booking_outbound</code>) + JSON-LD</li>
-        <li>Speed &amp; accessibility pass; Digital Asset Pack</li>
-      </ul>
+      <h4 style="margin-top:0">What if we're too busy during the project?</h4>
+      <p style="margin-bottom:0">We designed the process so you only need to be involved at a few key moments: sending access, joining the kickoff call, and reviewing the draft site.</p>
     </article>
+  </section>
 
-    <article class="card">
-      <h3>3) Launch Day & Ongoing Support</h3>
-      <ul>
-        <li>Go-live + 30-day polish window for small tweaks</li>
-        <li>Optional Care/Growth plan for CRO nudge &amp; reporting</li>
-        <li>Monthly KPI line: website-direct share (weighted), booking CTR, search clicks/CTR</li>
-      </ul>
-    </article>
+  <section class="container section">
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <p style="margin:0;font-size:1.1rem"><strong>Ready to get started?</strong></p>
+      <a class="btn btn-primary" href="/quote.html">Request a Quote</a>
+    </div>
   </section>
 </main>
 
@@ -168,7 +219,7 @@
         <ul>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="https://calendly.com/vinnie-keyturn/intro?utm_source=site" target="_blank" rel="noopener">Book 15-min Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
+          <li><a href="https://calendly.com/vinnie-keyturn/intro?utm_source=site" target="_blank" rel="noopener">Book 15 min Q&A <span aria-label="Opens in new tab">↗</span></a></li>
         </ul>
       </div>
     </nav>
@@ -180,55 +231,8 @@
   </div>
 </footer>
 
-<!-- Sticky mobile CTA (same pattern as index) -->
-<a href="#step2" class="sticky-cta" aria-label="Start onboarding">Start onboarding</a>
-
-<!-- Calendly widget script (already included above for inline, harmless to keep here too) -->
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
-<!-- Onboarding page specific JS -->
-<script>
-(function() {
-  'use strict';
-
-  window.safeEvent = window.safeEvent || function(name, params){
-    try { window.gtag && window.gtag('event', name, params); } catch(_){}
-  };
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (!href || href === '#') return;
-      const target = document.querySelector(href);
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    });
-  });
-
-  // Track Calendly bookings
-  window.addEventListener('message', (event) => {
-    if (event.data && event.data.event === 'calendly.event_scheduled') {
-      window.safeEvent('onboarding_calendly_booked', {
-        step: 'step2',
-        page_path: window.location.pathname,
-        calendly_uri: event.data.payload?.event?.uri || ''
-      });
-    }
-  });
-
-  // Optional: hydrate from /api/links so env var overrides the inline default
-  (async function hydrateLinks(){
-    try {
-      const r = await fetch('/api/links');
-      if (!r.ok) return;
-      const { upload } = await r.json();
-      const btnAssets = document.getElementById('btnAssets');
-      if (upload && btnAssets) btnAssets.href = upload;
-    } catch(_) {}
-  })();
-})();
-</script>
-</script>
+<!-- Sticky mobile CTA -->
+<a href="/quote.html" class="sticky-cta" aria-label="Start onboarding">Start Onboarding</a>
 
 </body>
 </html>
