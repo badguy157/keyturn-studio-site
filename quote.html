@@ -189,33 +189,42 @@
 </footer>
 
 <script>
-(function() {
-  'use strict';
-
-  window.safeEvent = window.safeEvent || function(name, params){
-    try { window.gtag && window.gtag('event', name, params); } catch(_){}
-  };
-
-  (function prefillMeta(){
+  (function() {
+    'use strict';
+  
+    window.safeEvent = window.safeEvent || function(name, params){
+      try { window.gtag && window.gtag('event', name, params); } catch(_){}
+    };
+  
+    // Prefill meta + hard-clear honeypot
+    (function prefillMeta(){
+      const qsForm = document.getElementById('quickstartForm');
+      if (!qsForm) return;
+      const params = new URLSearchParams(location.search);
+      qsForm.querySelector('input[name="pagePath"]').value = location.pathname;
+      qsForm.querySelector('input[name="utm_source"]').value = params.get('utm_source') || '';
+      qsForm.querySelector('input[name="utm_medium"]').value = params.get('utm_medium') || '';
+      qsForm.querySelector('input[name="utm_campaign"]').value = params.get('utm_campaign') || '';
+      qsForm.querySelector('input[name="timezone"]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      const hp = document.getElementById('company');
+      if (hp){ hp.value = ''; hp.setAttribute('autocomplete','new-password'); }
+    })();
+  
     const qsForm = document.getElementById('quickstartForm');
     if (!qsForm) return;
-    const params = new URLSearchParams(location.search);
-    qsForm.querySelector('input[name="pagePath"]').value = location.pathname;
-    qsForm.querySelector('input[name="utm_source"]').value = params.get('utm_source') || '';
-    qsForm.querySelector('input[name="utm_medium"]').value = params.get('utm_medium') || '';
-    qsForm.querySelector('input[name="utm_campaign"]').value = params.get('utm_campaign') || '';
-    qsForm.querySelector('input[name="timezone"]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-  })();
-
-  const qsForm = document.getElementById('quickstartForm');
-  if (qsForm) {
+  
     const btn = document.getElementById('qsSubmit');
     const msg = document.getElementById('qsMsg');
-
+  
+    // If user types, hide red borders until submit again
+    qsForm.addEventListener('input', () => {
+      qsForm.classList.remove('show-errors');
+      msg.textContent = '';
+    });
+  
     qsForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      // Validate form
+  
       if (!qsForm.checkValidity()) {
         qsForm.classList.add('show-errors');
         const firstInvalid = qsForm.querySelector(':invalid');
@@ -224,74 +233,52 @@
         msg.style.color = '#e66';
         return;
       }
-      
+  
       msg.textContent = '';
       btn.disabled = true;
       btn.textContent = 'Sending…';
-
+  
       const formData = new FormData(qsForm);
       const payload = Object.fromEntries(formData.entries());
-
-      if (payload.company) { btn.disabled = false; btn.textContent = 'Send request'; return; }
-
+  
+      // Do NOT stop on honeypot here; backend will silently ignore bots
       payload.userAgent = navigator.userAgent || '';
       payload.referrer = document.referrer || '';
-
+  
       try {
         const res = await fetch('/api/quickstart', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        
-        let data;
-        try {
-          data = await res.json();
-        } catch (parseErr) {
-          throw new Error('Invalid server response');
-        }
-        
+        const data = await res.json().catch(() => ({}));
+  
         if (!res.ok || !data.ok) {
           throw new Error(data.error || `Server error: ${res.status}`);
         }
-
+  
         window.safeEvent('quote_request_submit', { page_path: location.pathname });
-        
-        // Replace form with success message
+  
         qsForm.innerHTML = `
-          <h3>Thanks! We'll email your quote shortly. 🎉</h3>
-          <p>We've received your details and will prepare your 1-page quote. Expect to hear from us within 1 business day.</p>
+          <h3>Thanks — we’ve got your request.</h3>
+          <p>We’ll email your 1-page quote within 1 business day.</p>
           <div class="hero-ctas" style="margin-top:20px">
             <a class="btn btn-primary" href="/">Back to home</a>
-            <a class="btn btn-ghost" href="/onboarding.html">See onboarding process</a>
+            <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://calendly.com/vinnie-keyturn/intro?utm_source=quote_success">Book a 15-min Q&A</a>
           </div>
         `;
       } catch (err) {
         console.error('Form submission error:', err);
-        
-        // Build email body with form data for fallback
-        const emailBody = `Property Name: ${payload.propertyName || ''}
-Website URL: ${payload.websiteUrl || ''}
-Contact Name: ${payload.contactName || ''}
-Email: ${payload.email || ''}
-Phone: ${payload.phone || ''}
-Booking System: ${payload.bookingSystem || ''}
-Primary Goal: ${payload.goal || ''}
-Launch Timing: ${payload.launchTiming || ''}
-Assets Link: ${payload.assetsLink || ''}
-Notes: ${payload.notes || ''}`;
-        
-        const mailtoLink = `mailto:hello@keyturn.studio?subject=${encodeURIComponent('Quote Request - ' + (payload.propertyName || 'New Property'))}&body=${encodeURIComponent(emailBody)}`;
-        
-        msg.innerHTML = `Could not send automatically. Please <a href="${mailtoLink}" style="color:var(--accent);text-decoration:underline">email us directly</a> or try again.`;
+        const mailto = `mailto:hello@keyturn.studio?subject=${encodeURIComponent('Quote Request (fallback)')}`;
+        msg.innerHTML = `Could not send automatically. Please <a href="${mailto}" style="color:var(--accent);text-decoration:underline">email us directly</a> or try again.`;
         msg.style.color = '#e66';
         btn.disabled = false;
         btn.textContent = 'Get My Quote →';
       }
     });
-  }
-})();
-</script>
+  })();
+  </script>
+  
 
 </body>
 </html>

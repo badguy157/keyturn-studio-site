@@ -612,9 +612,6 @@ a:not(.btn-primary)[aria-current="page"]{
   border-color: var(--line);
 }
 
-.premium-form .form-input:invalid:not(:placeholder-shown) {
-  border-color: #ff6b6b;
-}
 
 @media (max-width: 640px) {
   .premium-form-card {
@@ -648,4 +645,25 @@ a:not(.btn-primary)[aria-current="page"]{
 .premium-form.show-errors textarea:invalid {
   border-color: #e66;
   box-shadow: 0 0 0 1px #e66 inset;
+}
+
+/* Quote form validation: neutral by default; only red after .show-errors */
+.premium-form :is(input,select,textarea){
+  border-color: var(--line) !important;
+  box-shadow: none !important;
+}
+.premium-form :is(input,select,textarea):focus{
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(90,162,255,.15) !important;
+}
+
+/* Only show errors after we add .show-errors on submit */
+.premium-form.show-errors :is(input,select,textarea):invalid{
+  border-color: #e66 !important;
+  box-shadow: 0 0 0 1px #e66 inset !important;
+}
+
+/* Selects don’t support :placeholder-shown, keep them neutral until .show-errors */
+.premium-form select:invalid{
+  border-color: var(--line) !important;
 }
